@@ -18,7 +18,10 @@ struct TextView: UIViewRepresentable {
         textView.font = UIFont.preferredFont(forTextStyle: textStyle)
         textView.autocapitalizationType = .sentences
         textView.isSelectable = true
+        textView.isEditable = true
         textView.isUserInteractionEnabled = true
+
+        textView.delegate = context.coordinator
 
         return textView
     }

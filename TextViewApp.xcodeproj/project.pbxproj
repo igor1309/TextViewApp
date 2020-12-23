@@ -28,6 +28,7 @@
 		2AF21AA02593D4310057A5CD /* TextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewModel.swift; sourceTree = "<group>"; };
 		2AF21AA32593D4690057A5CD /* ReportImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportImportView.swift; sourceTree = "<group>"; };
 		2AF21AA62593D61A0057A5CD /* Ory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ory.swift; sourceTree = "<group>"; };
+		2AF21AAC2593DE590057A5CD /* attributedString README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "attributedString README.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 				2AF21AA32593D4690057A5CD /* ReportImportView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
+				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
 				2AF21A912593CF030057A5CD /* Assets.xcassets */,
 				2AF21A962593CF030057A5CD /* Info.plist */,

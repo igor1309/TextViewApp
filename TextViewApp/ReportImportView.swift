@@ -12,11 +12,17 @@ struct ReportImportView: View {
 
     var body: some View {
         NavigationView {
-            TextView(text: $model.text, textStyle: $model.textStyle)
-                .navigationTitle("Report")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar(content: toolbar)
-                .padding()
+            ZStack(alignment: .bottom) {
+                TextView(text: $model.text, textStyle: $model.textStyle)
+
+                Text(model.text.string)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .navigationTitle("Report")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: toolbar)
         }
     }
 
@@ -35,7 +41,6 @@ struct ReportImportView: View {
             Button {
                 Ory.withHapticsAndAnimation {
                     model.highlight.toggle()
-                    print(model.text)
                 }
             } label: {
                 Image(systemName: model.highlight ? "lightbulb.fill" : "lightbulb")
