@@ -23,7 +23,7 @@ struct ReportImportView: View {
 
                 TextView(attributedText: $model.attributedText, textStyle: $model.textStyle)
 
-                //if model.hasError {
+                // if model.hasError {
                 //    Text(model.errorMessage)
                 //        .font(.footnote)
                 //        .foregroundColor(Color(UIColor.systemRed))
@@ -34,7 +34,7 @@ struct ReportImportView: View {
                 //                .fill(Color(UIColor.secondarySystemBackground))
                 //                .shadow(radius: 6)
                 //        )
-                //}
+                // }
             }
             .padding()
             .navigationTitle("Report")
@@ -133,7 +133,7 @@ struct ReportImportView: View {
 
         UIPasteboard.general.string = test
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: model.pasteClipboard)
-        
+
         // model.attributedText = NSAttributedString(string: test)
     }
 }

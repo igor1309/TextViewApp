@@ -81,17 +81,18 @@ final class TextViewModel: ObservableObject {
         showingReportStructure = true
     }
 
-
     func highlightText(regex: NSRegularExpression) {
         let attributedTextCopy = attributedText.mutableCopy() as! NSMutableAttributedString
-        let attributedTextRange = NSMakeRange(0, attributedTextCopy.length)
+        let attributedTextRange = NSRange(location: 0, length: attributedTextCopy.length)
         attributedTextCopy.removeAttribute(NSAttributedString.Key.backgroundColor, range: attributedTextRange)
 
         let range = NSRange(attributedTextCopy.string.startIndex..., in: attributedTextCopy.string)
         let matches = regex.matches(in: attributedTextCopy.string, options: [], range: range)
         for match in matches {
             let matchRange = match.range
-            attributedTextCopy.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.yellow.withAlphaComponent(0.2), range: matchRange)
+            attributedTextCopy.addAttribute(NSAttributedString.Key.backgroundColor,
+                                            value: UIColor.yellow.withAlphaComponent(0.2),
+                                            range: matchRange)
         }
 
         self.attributedText = (attributedTextCopy.copy() as! NSAttributedString)
