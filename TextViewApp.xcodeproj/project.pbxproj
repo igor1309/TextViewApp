@@ -15,6 +15,11 @@
 		2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AA02593D4310057A5CD /* TextViewModel.swift */; };
 		2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AA32593D4690057A5CD /* ReportImportView.swift */; };
 		2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AA62593D61A0057A5CD /* Ory.swift */; };
+		2AF21AB0259456A50057A5CD /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AAF259456A50057A5CD /* String+Ext.swift */; };
+		2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AB225946E690057A5CD /* ReportStructureView.swift */; };
+		2AF21AB625946EA50057A5CD /* ParsedReportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */; };
+		2AF21AB925946EE10057A5CD /* ParsedReportGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */; };
+		2AF21ABC25946F4E0057A5CD /* ParsedReportFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		2AF21AA32593D4690057A5CD /* ReportImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportImportView.swift; sourceTree = "<group>"; };
 		2AF21AA62593D61A0057A5CD /* Ory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ory.swift; sourceTree = "<group>"; };
 		2AF21AAC2593DE590057A5CD /* attributedString README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "attributedString README.md"; sourceTree = "<group>"; };
+		2AF21AAF259456A50057A5CD /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		2AF21AB225946E690057A5CD /* ReportStructureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStructureView.swift; sourceTree = "<group>"; };
+		2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportHeaderView.swift; sourceTree = "<group>"; };
+		2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportGroupView.swift; sourceTree = "<group>"; };
+		2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +74,12 @@
 				2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */,
 				2AF21A8F2593CF020057A5CD /* ContentView.swift */,
 				2AF21AA32593D4690057A5CD /* ReportImportView.swift */,
+				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
+				2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */,
+				2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */,
+				2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
+				2AF21AAF259456A50057A5CD /* String+Ext.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
 				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
@@ -152,9 +167,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF21ABC25946F4E0057A5CD /* ParsedReportFooterView.swift in Sources */,
+				2AF21AB625946EA50057A5CD /* ParsedReportHeaderView.swift in Sources */,
 				2AF21A9E2593CF2D0057A5CD /* TextView.swift in Sources */,
+				2AF21AB0259456A50057A5CD /* String+Ext.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
 				2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */,
+				2AF21AB925946EE10057A5CD /* ParsedReportGroupView.swift in Sources */,
+				2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
 				2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */,
 				2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */,

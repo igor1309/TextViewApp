@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TextView: UIViewRepresentable {
 
-    @Binding var text: NSMutableAttributedString
+    @Binding var attributedText: NSAttributedString
     @Binding var textStyle: UIFont.TextStyle
 
     func makeUIView(context: Context) -> UITextView {
@@ -27,23 +27,23 @@ struct TextView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.attributedText = text
+        uiView.attributedText = attributedText
         uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator($text)
+        Coordinator($attributedText)
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
-        var text: Binding<NSMutableAttributedString>
+        var text: Binding<NSAttributedString>
 
-        init(_ text: Binding<NSMutableAttributedString>) {
+        init(_ text: Binding<NSAttributedString>) {
             self.text = text
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            self.text.wrappedValue = NSMutableAttributedString(attributedString: textView.attributedText)
+            self.text.wrappedValue = NSAttributedString(attributedString: textView.attributedText)
         }
     }
 }

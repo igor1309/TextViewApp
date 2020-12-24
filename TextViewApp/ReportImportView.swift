@@ -12,12 +12,29 @@ struct ReportImportView: View {
 
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
-                TextView(text: $model.text, textStyle: $model.textStyle)
+            ZStack(alignment: .top) {
 
-                    // Text(model.text.string)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                NavigationLink(
+                    "Report Structure",
+                    destination: ReportStructureView(model: model),
+                    tag: true,
+                    selection: $model.showingReportStructure
+                )
+
+                TextView(attributedText: $model.attributedText, textStyle: $model.textStyle)
+
+                //if model.hasError {
+                //    Text(model.errorMessage)
+                //        .font(.footnote)
+                //        .foregroundColor(Color(UIColor.systemRed))
+                //        .padding(.horizontal)
+                //        .padding(.vertical, 6)
+                //        .background(
+                //            Capsule()
+                //                .fill(Color(UIColor.secondarySystemBackground))
+                //                .shadow(radius: 6)
+                //        )
+                //}
             }
             .padding()
             .navigationTitle("Report")
@@ -40,9 +57,9 @@ struct ReportImportView: View {
 
         ToolbarItem(placement: .primaryAction) {
             Button {
-                Ory.withHapticsAndAnimation(action: model.toggleHighlight)
+                Ory.withHapticsAndAnimation(action: model.splitReportContent)
             } label: {
-                Image(systemName: model.highlight ? "lightbulb.fill" : "lightbulb")
+                Image(systemName: "chevron.forward")
                     .frame(width: 44, height: 44, alignment: .trailing)
             }
         }
@@ -65,7 +82,7 @@ struct ReportImportView: View {
 ИТОГ:    218.500
 Зарплата:        20%    43.4%
 1.ФОТ     960.056( за вторую часть августа и первую  часть сентября)
-2.ФОТ Бренд, логистика, бухгалтерия    99.000
+ФОТ Бренд, логистика, бухгалтерия    99.000
 
 ИТОГ:    1.059.056
 Фактический приход товара и оплата товара:    946.056р    25%
@@ -114,7 +131,10 @@ struct ReportImportView: View {
 
 """
 
-        model.text = NSMutableAttributedString(string: test)
+        UIPasteboard.general.string = test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: model.pasteClipboard)
+        
+        // model.attributedText = NSAttributedString(string: test)
     }
 }
 
