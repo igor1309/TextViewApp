@@ -6,89 +6,7 @@
 //
 
 import SwiftUI
-
-final class ParsedReportGroupViewModel: ObservableObject {
-    @Published var group: String
-
-    init(group: String) {
-        self.group = group
-    }
-
-    var listWithNumbers: [String] {
-        let itemFullLineWithDigitsPattern = #"(?m)^[1-9][0-9]?\.[^\d\n]+\d+.*"#
-        return group.listMatches(for: itemFullLineWithDigitsPattern)
-    }
-
-    enum Token: Hashable {
-        case item(String, Double, String?)
-    }
-
-    var items: [Token] {
-        listWithNumbers.compactMap(transformLineToItem)
-    }
-
-    var total: Double {
-        items
-            .compactMap { token -> Double? in
-                if case let .item(_, number, _) = token {
-                    return number
-                } else {
-                    return nil
-                }
-            }
-            .reduce(0, +)
-    }
-
-    let itemTitleWithPercentagePattern = #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
-    let itemTitleWithParenthesesPattern = #"^[1-9][0-9]?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
-    let itemTitlePattern = #"^[1-9][0-9]?\.[^\d\n]+"#
-    let rublesIKopeksPattern = #"^\d+(\.\d+)*р( *\d+к)?"#
-    let itemNumberPattern = #"\d+(\.\d{3})*"#
-
-
-    private func transformLineToItem(line: String) -> Token? {
-        var title: String = ""
-        var tail: String = ""
-        var number: Double = 0
-
-        let itemTitlePatterns = [itemTitleWithPercentagePattern, itemTitleWithParenthesesPattern, itemTitlePattern]
-        line.getHeadAndTail(patterns: itemTitlePatterns) { (headString, tailString) in
-            guard let headString = headString,
-                  let tailString = tailString else { return }
-            title = headString
-            tail = tailString
-        }
-
-        guard !title.isEmpty && !tail.isEmpty else { return nil }
-
-        tail.getHeadAndTail(patterns: [rublesIKopeksPattern]) { (numberString, tailString) in
-            guard let numberString = numberString,
-                  let rubliIKopeiki = numberString.rubliIKopeikiToDouble(),
-                  let tailString = tailString
-            else {
-                // MARK: - NOT 'RETURN' HERE!! TRY TO PARSE ANOTHER NUMBER PATTERN
-                guard let numberString = tail.listMatches(for: itemNumberPattern).first else { return }
-                let cleanNumberString = numberString.replacingOccurrences(of: ".", with: "")
-                guard let double = Double(cleanNumberString) else { return }
-                number = double
-
-                if let finalTail = tail
-                    .replaceMatches(for: itemNumberPattern, withString: "")?
-                    .trimmingCharacters(in: .whitespaces) {
-                    tail = finalTail
-                }
-
-                return
-            }
-            number = rubliIKopeiki
-            tail = tailString
-        }
-
-        let comment: String? = tail.isEmpty ? nil : tail
-
-        return Token.item(title, number, comment)
-    }
-}
+import Combine
 
 struct ParsedReportGroupView: View {
     @StateObject private var model: ParsedReportGroupViewModel
@@ -115,38 +33,47 @@ struct ParsedReportGroupView: View {
                 }
             }
 
+            Section(header: Text("Parsed header")) {
+                Text("TBD")
+            }
+
             Section(
-                header: Text("Parsed (\(model.items.count))"),
-                footer: footer()
+                header: Text("Parsed rows (\(model.items.count))"),
+                footer: itemsSectionFooter()
             ) {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(model.items, id: \.self) { token in
-                    if case let .item(title, number, comment) = token {
-                        VStack(alignment: .leading, spacing: 6) {
-                            HStack {
-                                Text(title)
-                                Spacer()
-                                Text("\(number, specifier: "%.2f")")
-                            }
+                        if case let .item(title, number, comment) = token {
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack(alignment: .firstTextBaseline) {
+                                    Text(title)
+                                    Spacer()
+                                    Text("\(number, specifier: "%.2f")")
+                                }
 
-                            if let comment = comment,
-                               !comment.isEmpty {
-                                Text(comment)
-                                    .foregroundColor(.secondary)
-                                    .font(.footnote)
+                                if let comment = comment,
+                                   !comment.isEmpty {
+                                    Text(comment)
+                                        .foregroundColor(.secondary)
+                                        .font(.footnote)
+                                }
                             }
                         }
                     }
                 }
-                }
             }
+
+            Section(header: Text("Parsed footer")) {
+                Text("TBD")
+            }
+
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
         .navigationTitle("Parsed Group")
     }
 
-    private func footer() -> some View {
+    private func itemsSectionFooter() -> some View {
         HStack {
             Text("Group Total".uppercased())
                 .font(.subheadline)
@@ -178,6 +105,6 @@ struct ParsedReportGroupView_Previews: PreviewProvider {
 ИТОГ:    402.520
 """
         )
-        .previewLayout(.fixed(width: 350, height: 900))
+        .previewLayout(.fixed(width: 350, height: 1000))
     }
 }

@@ -57,4 +57,5 @@ struct TextView: UIViewRepresentable {
             self.text.wrappedValue = NSAttributedString(attributedString: textView.attributedText)
         }
     }
+
 }

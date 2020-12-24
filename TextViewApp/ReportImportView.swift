@@ -49,21 +49,27 @@ struct ReportImportView: View {
 
     @ToolbarContentBuilder
     private func toolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button {
-                Ory.withHapticsAndAnimation(action: model.pasteClipboard)
-            } label: {
-                Image(systemName: "doc.on.clipboard")
-                    .frame(width: 44, height: 44, alignment: .trailing)
+        ToolbarItem(placement: .navigationBarLeading) {
+            HStack(spacing: 0) {
+                Button {
+                    Ory.withHapticsAndAnimation(action: model.pasteClipboard)
+                } label: {
+                    Image(systemName: "doc.on.clipboard")
+                        .frame(width: 44, height: 44, alignment: .leading)
+                }
+
+                Button {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                } label: {
+                    Image(systemName: "keyboard.chevron.compact.down")
+                        .frame(width: 44, height: 44, alignment: .leading)
+                }
             }
         }
 
-        ToolbarItem(placement: .primaryAction) {
-            Button {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Next") {
                 Ory.withHapticsAndAnimation(action: model.splitReportContent)
-            } label: {
-                Image(systemName: "chevron.forward")
-                    .frame(width: 44, height: 44, alignment: .trailing)
             }
         }
     }

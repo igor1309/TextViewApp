@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A481FA625955DCF009C585F /* ParsedReportGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */; };
 		2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */; };
 		2AF21A902593CF020057A5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8F2593CF020057A5CD /* ContentView.swift */; };
 		2AF21A922593CF030057A5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF21A912593CF030057A5CD /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportGroupViewModel.swift; sourceTree = "<group>"; };
 		2AF21A8A2593CF020057A5CD /* TextViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAppApp.swift; sourceTree = "<group>"; };
 		2AF21A8F2593CF020057A5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
 				2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */,
 				2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */,
+				2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */,
 				2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
 				2AF21AAF259456A50057A5CD /* String+Ext.swift */,
@@ -173,6 +176,7 @@
 				2AF21AB0259456A50057A5CD /* String+Ext.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
 				2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */,
+				2A481FA625955DCF009C585F /* ParsedReportGroupViewModel.swift in Sources */,
 				2AF21AB925946EE10057A5CD /* ParsedReportGroupView.swift in Sources */,
 				2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
