@@ -12,6 +12,8 @@ struct TextView: UIViewRepresentable {
     @Binding var attributedText: NSAttributedString
     @Binding var textStyle: UIFont.TextStyle
 
+    let colorScheme: ColorScheme
+
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
 
@@ -28,7 +30,16 @@ struct TextView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.attributedText = attributedText
+
         uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
+
+        switch colorScheme {
+            case .dark:
+                uiView.textColor = .white
+                uiView.backgroundColor = .clear
+
+            default: break
+        }
     }
 
     func makeCoordinator() -> Coordinator {

@@ -90,9 +90,11 @@ final class TextViewModel: ObservableObject {
         let matches = regex.matches(in: attributedTextCopy.string, options: [], range: range)
         for match in matches {
             let matchRange = match.range
-            attributedTextCopy.addAttribute(NSAttributedString.Key.backgroundColor,
-                                            value: UIColor.yellow.withAlphaComponent(0.2),
-                                            range: matchRange)
+            attributedTextCopy.addAttribute(
+                NSAttributedString.Key.backgroundColor,
+                value: UIColor.yellow.withAlphaComponent(0.2),
+                range: matchRange
+            )
         }
 
         self.attributedText = (attributedTextCopy.copy() as! NSAttributedString)

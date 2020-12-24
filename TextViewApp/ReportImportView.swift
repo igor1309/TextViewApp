@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ReportImportView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @StateObject private var model = TextViewModel()
 
     var body: some View {
@@ -20,8 +22,9 @@ struct ReportImportView: View {
                     tag: true,
                     selection: $model.showingReportStructure
                 )
+                .hidden()
 
-                TextView(attributedText: $model.attributedText, textStyle: $model.textStyle)
+                TextView(attributedText: $model.attributedText, textStyle: $model.textStyle, colorScheme: colorScheme)
 
                 // if model.hasError {
                 //    Text(model.errorMessage)
@@ -65,6 +68,8 @@ struct ReportImportView: View {
         }
     }
 
+    // swiftlint:disable function_body_length
+    // swiftlint:disable line_length
     private func testText() {
         let test = """
 Название объекта: Саперави Аминьевка
@@ -140,6 +145,14 @@ struct ReportImportView: View {
 
 struct ReportImportView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportImportView()
+        Group {
+            ReportImportView()
+                .previewLayout(.fixed(width: 350, height: 400))
+                .environment(\.colorScheme, .light)
+
+            ReportImportView()
+                .previewLayout(.fixed(width: 350, height: 400))
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

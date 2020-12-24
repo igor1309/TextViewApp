@@ -1,0 +1,56 @@
+# swiftlint does't like default Xcode indentation for switch
+disabled_rules:
+    - switch_case_alignment
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - Carthage
+    - Pods
+    - Source/ExcludedFolder
+    - Source/ExcludedFile.swift
+
+# http://ootips.org/yonat/useful-custom-rules-for-swiftlint/
+custom_rules:
+    already_true:
+        regex: "== true"
+        message: "Don't compare to true, just use the bool value."
+    already_bool:
+        regex: "== false"
+        message: "Don't compare to false, just use !value."
+
+    # https://habr.com/ru/post/481666/
+    final_class:
+        included: ".*.swift"
+        name: "Final class requrement"
+        regex: '^class'
+        message: "All classes must be final or nonfinal"
+        saverity: error
+
+    print_using:
+        regex: 'print'
+        message: "Print decrease performance of the app"
+        severity: error
+
+vertical_whitespace:
+    warning: 2
+
+# https://www.donnywals.com/enforcing-code-consistency-with-swiftlint/
+line_length:
+    warning: 140
+    error: 240
+    ignores_comments: true
+    ignores_urls: true
+
+type_name:
+    allowed_symbols: "_"
+
+# additionally they can set excluded names
+identifier_name:
+    min_length: # only min_length
+        error: 2 # only error
+    excluded: # excluded via string array
+    - id
+    # - *_Testing
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+
+
