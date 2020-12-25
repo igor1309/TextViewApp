@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct ParsedReportGroupView: View {
+    
     @StateObject private var model: ParsedReportGroupViewModel
 
     init(groupString: String) {

@@ -182,4 +182,66 @@ extension String {
             return headerItems
         }
     }
+
+    #warning("move to seperate namespace enum?")
+    static let rublesIKopeksPattern = #"\d+(\.\d+)*р( *\d+к)?"#
+    static let itemNumberPattern = #"\d+(\.\d{3})*"#
+    static let matchingPercentagePattern = #"\d+(\.\d+)*%"#
+    static let minusPattern = #"[М|м]инус"#
+
+    #warning("code of this func used a lot - change to func call")
+    func getNumberNoRemains() -> Double? {
+        var sign: Double = 1
+        if let _ = self.firstMatch(for: String.minusPattern) {
+            sign = -1
+        }
+
+        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern),
+           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
+            return sign * rubliIKopeiki
+        } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
+                  let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+            return sign * double
+        }
+
+        return nil
+    }
+
+    func parseReportFooter() -> [ParsedReportFooterViewModel.Token] {
+        let lines = self.components(separatedBy: "\n").filter { !$0.isEmpty }
+
+        return lines.compactMap { line -> ParsedReportFooterViewModel.Token? in
+
+            if let _ = line.firstMatch(for: #"ИТОГ:"#),
+               let number = line.getNumberNoRemains() {
+                return .total("ИТОГ:",  number)
+            }
+
+            if let _ = line.firstMatch(for: #"ИТОГ всех расходов за месяц"#),
+               let number = line.getNumberNoRemains() {
+                return .expensesTotal("ИТОГ всех расходов за месяц", number)
+            }
+
+            if let _ = line.firstMatch(for: #"переходит"#),
+               let number = line.getNumberNoRemains() {
+                return .openingBalance(line.trimmingCharacters(in: .whitespaces), number)
+            }
+
+            if let _ = line.firstMatch(for: #"Фактический остаток:"#) {
+                // get percentage and remains (replace percentage with "")
+                guard let percentageString = line.firstMatch(for: String.matchingPercentagePattern),
+                      let percentage = percentageString.percentageStringToDouble(),
+                      let remains = line.replaceMatches(for: String.matchingPercentagePattern, withString: "")
+                else { return .error }
+
+                // get number
+                if let number = remains.getNumberNoRemains() {
+                    return .balance("Фактический остаток", number, percentage)
+                }
+            }
+
+            return .tbd(line)
+        }
+    }
+
 }

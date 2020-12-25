@@ -18,6 +18,7 @@ final class TextViewModel: ObservableObject {
      var hasError: Bool { !errorMessage.isEmpty }
 
     private var groupRegex: NSRegularExpression {
+        #warning("move to seperate namespace enum?")
         let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
         let regex = try! NSRegularExpression(pattern: groupPattern, options: [])
         return regex
@@ -52,6 +53,7 @@ final class TextViewModel: ObservableObject {
         // use delimiter to seperate header from footer
 
         //  (?m) - MULTILINE mode on
+        #warning("move to seperate namespace enum?")
         let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
         let groupRegex = try! NSRegularExpression(pattern: groupPattern, options: [])
         let groups = attributedText.string.listMatches(for: groupRegex)

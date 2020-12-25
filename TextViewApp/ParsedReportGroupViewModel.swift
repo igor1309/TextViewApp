@@ -57,6 +57,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
         return false
     }
 
+    #warning("move to seperate namespace enum?")
     private let itemFullLineWithDigitsPattern = #"(?m)^[1-9][0-9]?\.[^\d\n]+\d+.*"#
     private let itemTitleWithPercentagePattern = #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
     private let itemTitleWithParenthesesPattern = #"^[1-9][0-9]?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
@@ -66,6 +67,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
     private let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+:"#
     private let matchingPercentagePattern = #"\d+(\.\d+)*%"#
 
+    #warning("move to String extension")
     private func getGroupHeader(from groupHeaderString: String) -> Token? {
         guard let title = groupHeaderString.firstMatch(for: groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
@@ -87,6 +89,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
         return Token.header(cleanTitle, firstPercentage, secondPercentage)
     }
 
+    #warning("move to String extension")
     private func getGroupFooter(from groupFooterString: String) -> Token? {
         guard let title = groupFooterString.firstMatch(for: groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
@@ -96,19 +99,24 @@ final class ParsedReportGroupViewModel: ObservableObject {
             return Token.footer(cleanTitle, nil)
         }
 
-        if let numberString = tail.firstMatch(for: rublesIKopeksPattern),
-           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
-            return Token.footer(cleanTitle, rubliIKopeiki)
-        }
+//        if let numberString = tail.firstMatch(for: rublesIKopeksPattern),
+//           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
+//            return Token.footer(cleanTitle, rubliIKopeiki)
+//        }
+//
+//        if let numberString = tail.firstMatch(for: itemNumberPattern),
+//           let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+//            return .footer(cleanTitle, double)
+//        }
 
-        if let numberString = tail.firstMatch(for: itemNumberPattern),
-           let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
-            return Token.footer(cleanTitle, double)
+        if let number = tail.getNumberNoRemains() {
+            return .footer(cleanTitle, number)
         }
 
         return Token.footer(cleanTitle, nil)
     }
 
+    #warning("move to String extension")
     private func transformLineToItem(line: String) -> Token? {
         var title: String = ""
         var remains: String = ""
@@ -124,6 +132,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
 
         guard !title.isEmpty && !remains.isEmpty else { return nil }
 
+        #warning("repeating - make func")
         if let numberString = remains.firstMatch(for: rublesIKopeksPattern),
            let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
             number = rubliIKopeiki

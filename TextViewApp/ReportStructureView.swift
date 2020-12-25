@@ -32,7 +32,7 @@ struct ReportStructureView: View {
                     }
                 }
                 Section(header: Text("footer")) {
-                    NavigationLink(destination: ParsedReportFooterView(footer: reportContent.footer)) {
+                    NavigationLink(destination: ParsedReportFooterView(footerString: reportContent.footer)) {
                         Text(reportContent.footer)
                     }
                 }
@@ -41,7 +41,7 @@ struct ReportStructureView: View {
             .listStyle(GroupedListStyle())
             .navigationTitle("Report Structure")
         } else {
-            Text("Error: no repoprt structure")
+            Text("Error: no Report Structure")
                 .foregroundColor(.red)
         }
     }
