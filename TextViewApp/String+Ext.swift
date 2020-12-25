@@ -8,18 +8,22 @@
 import Foundation
 
 extension String {
-    func replaceMatches(for regex: NSRegularExpression, withString replacementString: String) -> String? {
-        let range = NSRange(self.startIndex..., in: self)
-        return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
-    }
 
     func replaceMatches(for pattern: String, withString replacementString: String) -> String? {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
             return self
         }
+        return replaceMatches(for: regex, withString: replacementString)
+    }
 
+    func replaceMatches(for regex: NSRegularExpression, withString replacementString: String) -> String? {
         let range = NSRange(self.startIndex..., in: self)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
+    }
+
+    func listMatches(for pattern: String) -> [String] {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return [] }
+        return listMatches(for: regex)
     }
 
     func listMatches(for regex: NSRegularExpression) -> [String] {
@@ -32,15 +36,38 @@ extension String {
         }
     }
 
-    func listMatches(for pattern: String) -> [String] {
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return [] }
+    func firstMatch(for pattern: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+        return firstMatch(for: regex)
+    }
 
+    func firstMatch(for regex: NSRegularExpression) -> String? {
         let range = NSRange(self.startIndex..., in: self)
-        let matches = regex.matches(in: self, options: [], range: range)
+        let match = regex.firstMatch(in: self, options: [], range: range)
 
-        return matches.map {
-            let range = Range($0.range, in: self)!
+        if let match = match {
+            let range = Range(match.range, in: self)!
             return String(self[range])
+        } else {
+            return nil
+        }
+    }
+
+    func replaceFirstMatch(for pattern: String, withString replacementString: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+        return replaceFirstMatch(for: regex, withString: replacementString)
+    }
+
+    func replaceFirstMatch(for regex: NSRegularExpression, withString replacementString: String) -> String? {
+        let range = NSRange(self.startIndex..., in: self)
+        let match = regex.firstMatch(in: self, options: [], range: range)
+
+        if let match = match {
+            let range = match.range
+            return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
+
+        } else {
+            return nil
         }
     }
 
@@ -56,46 +83,51 @@ extension String {
         return clean ?? cleanContent
     }
 
-    /// Get first match from string and cut match from string to give tail
+    /// Get first match from string and cut match from string to give remains
     /// Handle head (match) and tail in closure
     /// - Parameters:
     ///   - patterns: array of regular expression patterns to apple to string (order matters!)
     ///   - completion: closure to work with non empty head and tail
-    func getHeadAndTail(patterns: [String], completion: (_ head: String?, _ tail: String?) -> Void) {
-    var head: String?
-    var tail: String?
+    func getFirstMatchAndRemains(patterns: [String], completion: (String?, String?) -> Void) {
+        var match: String?
+        var remains: String?
 
-    for pattern in patterns {
-    guard let regex = try? NSRegularExpression(pattern: pattern, options: []),
-    let headString = self.listMatches(for: regex).first,
-    let tailString = self.replaceMatches(for: regex, withString: "") else { continue }
+        for pattern in patterns {
+            guard let regex = try? NSRegularExpression(pattern: pattern, options: []),
+                  let headString = self.firstMatch(for: regex),
+                  let tailString = self.replaceFirstMatch(for: regex, withString: "") else { continue }
 
-    head = headString.trimmingCharacters(in: .whitespaces)
-    tail = tailString.trimmingCharacters(in: .whitespaces)
-    break
-    }
+            match = headString.trimmingCharacters(in: .whitespaces)
+            remains = tailString.trimmingCharacters(in: .whitespaces)
+            break
+        }
 
-    completion(head, tail)
+        completion(match, remains)
     }
 
     func rubliIKopeikiToDouble() -> Double? {
-    guard let spacedDelete = self.replaceMatches(for: " *", withString: ""),
-    let dotDelete = spacedDelete.replaceMatches(for: #"\."#, withString: ""),
-    let kopekDelete = dotDelete.replaceMatches(for: "к", withString: "") else { return nil }
+        guard let spacedDelete = self.replaceMatches(for: " *", withString: ""),
+              let dotDelete = spacedDelete.replaceMatches(for: #"\."#, withString: ""),
+              let kopekDelete = dotDelete.replaceMatches(for: "к", withString: "") else { return nil }
 
-    let components = kopekDelete.split(separator: "р")
-    let integerPart = components.first ?? ""
-    let integer = Double(integerPart) ?? 0
+        let components = kopekDelete.split(separator: "р")
+        let integerPart = components.first ?? ""
+        let integer = Double(integerPart) ?? 0
 
-    let decimal: Double
-    if components.count == 2 {
-    let decimalPart = components[1]
-    decimal = (Double(decimalPart) ?? 0) / 100
-    } else {
-    decimal = 0
+        let decimal: Double
+        if components.count == 2 {
+            let decimalPart = components[1]
+            decimal = (Double(decimalPart) ?? 0) / 100
+        } else {
+            decimal = 0
+        }
+
+        return integer + decimal
     }
 
-    return integer + decimal
+    func percentageStringToDouble() -> Double? {
+        guard self.last == "%",
+              let percentage = Double(self.dropLast()) else { return nil }
+        return percentage / 100
     }
-
 }

@@ -97,7 +97,7 @@ final class TextViewModel: ObservableObject {
             )
         }
 
-        self.attributedText = (attributedTextCopy.copy() as! NSAttributedString)
+        self.attributedText = attributedTextCopy.copy() as! NSAttributedString
     }
 
     func pasteClipboard() {

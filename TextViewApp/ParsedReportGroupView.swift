@@ -11,8 +11,8 @@ import Combine
 struct ParsedReportGroupView: View {
     @StateObject private var model: ParsedReportGroupViewModel
 
-    init(group: String) {
-        _model = StateObject(wrappedValue: ParsedReportGroupViewModel(group: group))
+    init(groupString: String) {
+        _model = StateObject(wrappedValue: ParsedReportGroupViewModel(groupString: groupString))
     }
 
     var body: some View {
@@ -33,15 +33,42 @@ struct ParsedReportGroupView: View {
                 }
             }
 
-            Section(header: Text("Parsed header")) {
-                Text("TBD")
+            Section(header: Text("Group header")) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(model.groupHeaderString)
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+
+                    if case let .header(title, plan, fact) = model.groupHeader {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(title)
+
+                            Spacer()
+
+                            if let plan = plan {
+                                Text("\(plan * 100, specifier: "%.2f%%")")
+                            } else {
+                                Text("no plan")
+                                    .foregroundColor(Color(UIColor.systemRed))
+                            }
+
+                            if let fact = fact {
+                                Text("\(fact * 100, specifier: "%.2f%%")")
+                            } else {
+                                Text("no fact")
+                                    .foregroundColor(Color(UIColor.systemRed))
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 3)
             }
 
             Section(
                 header: Text("Parsed rows (\(model.items.count))"),
                 footer: itemsSectionFooter()
             ) {
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     ForEach(model.items, id: \.self) { token in
                         if case let .item(title, number, comment) = token {
                             VStack(alignment: .leading, spacing: 6) {
@@ -61,12 +88,32 @@ struct ParsedReportGroupView: View {
                         }
                     }
                 }
+                .padding(.vertical, 3)
             }
 
-            Section(header: Text("Parsed footer")) {
-                Text("TBD")
-            }
+            Section(header: Text("Group footer")) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(model.groupFooterString)
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
 
+                    if case let .footer(title, total) = model.groupFooter {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(title)
+
+                            Spacer()
+
+                            if let total = total {
+                                Text("\(total, specifier: "%.2f")")
+                            } else {
+                                Text("no total")
+                                    .foregroundColor(Color(UIColor.systemRed))
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 3)
+            }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
@@ -78,8 +125,11 @@ struct ParsedReportGroupView: View {
             Text("Group Total".uppercased())
                 .font(.subheadline)
             Spacer()
-            Text("\(model.total, specifier: "%.2f")")
+            Text("\(model.itemsTotal, specifier: "%.2f")")
                 .font(.subheadline)
+                .if(!model.isTotalsMatch) {
+                    $0.foregroundColor(Color(UIColor.systemRed))
+                }
         }
         .foregroundColor(.primary)
     }
@@ -87,7 +137,7 @@ struct ParsedReportGroupView: View {
 
 struct ParsedReportGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        ParsedReportGroupView(group: """
+        ParsedReportGroupView(groupString: """
 Прочие расходы:        15%    16.5%
 1.Налоговые платежи     26.964
 2.Банковское обслуживание    6.419

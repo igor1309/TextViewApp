@@ -26,7 +26,7 @@ struct ReportStructureView: View {
                 }
                 Section(header: Text("Groups (\(reportContent.groups.count))")) {
                     ForEach(reportContent.groups, id: \.self) { group in
-                        NavigationLink(destination: ParsedReportGroupView(group: group)) {
+                        NavigationLink(destination: ParsedReportGroupView(groupString: group)) {
                             Text(group)
                         }
                     }
