@@ -9,7 +9,7 @@ import SwiftUI
 
 final class ParsedReportGroupViewModel: ObservableObject {
 
-    @Published var group: String
+    @Published var groupString: String
     @Published var groupHeaderString: String = ""
     @Published var groupHeader: Token = .empty
     @Published var listWithNumbers: [String]
@@ -18,7 +18,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
     @Published var groupFooter: Token = .empty
 
     init(groupString: String) {
-        self.group = groupString
+        self.groupString = groupString
 
         self.listWithNumbers = groupString.listMatches(for: self.itemFullLineWithDigitsPattern)
         self.items = listWithNumbers.compactMap(self.transformLineToItem)
@@ -124,27 +124,30 @@ final class ParsedReportGroupViewModel: ObservableObject {
 
         guard !title.isEmpty && !remains.isEmpty else { return nil }
 
-        remains.getFirstMatchAndRemains(patterns: [rublesIKopeksPattern]) { (match, remainsString) in
-            guard let numberString = match,
-                  let rubliIKopeiki = numberString.rubliIKopeikiToDouble(),
-                  let tailString = remainsString
-            else {
-                // MARK: - NOT 'RETURN' HERE!! TRY TO PARSE ANOTHER NUMBER PATTERN
-                guard let numberString = remains.firstMatch(for: itemNumberPattern) else { return }
-                let cleanNumberString = numberString.replacingOccurrences(of: ".", with: "")
-                guard let double = Double(cleanNumberString) else { return }
-                number = double
-
-                if let finalTail = remains
-                    .replaceMatches(for: itemNumberPattern, withString: "")?
-                    .trimmingCharacters(in: .whitespaces) {
-                    remains = finalTail
-                }
-
-                return
-            }
+        if let numberString = remains.firstMatch(for: rublesIKopeksPattern),
+           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
             number = rubliIKopeiki
-            remains = tailString
+            remains = remains.replaceFirstMatch(for: rublesIKopeksPattern, withString: "") ?? ""
+        } else if let numberString = remains.firstMatch(for: itemNumberPattern),
+                  let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+            number = double
+            remains = remains.replaceFirstMatch(for: itemNumberPattern, withString: "") ?? ""
+        }
+
+        // special case when number after item title is not a number for item
+        // for example in 1. Приход товара по накладным     946.056р (оплаты фактические: 475.228р 52к -переводы; 157.455р 85к-корпоративная карта; 0-наличные из кассы; Итого-632.684р 37к)
+        let itemWithItogoPattern = #"(.*)?Итого"#
+        if let afterItogo = remains.replaceFirstMatch(for: itemWithItogoPattern,
+                                                      withString: "") {
+
+            if let numberString = afterItogo.firstMatch(for: rublesIKopeksPattern),
+               let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
+                number = rubliIKopeiki
+            } else if let numberString = afterItogo.firstMatch(for: itemNumberPattern),
+                      let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+                number = double
+            }
+
         }
 
         let comment: String? = remains.isEmpty ? nil : remains

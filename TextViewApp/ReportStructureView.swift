@@ -20,7 +20,7 @@ struct ReportStructureView: View {
                 }
 
                 Section(header: Text("header")) {
-                    NavigationLink(destination: ParsedReportHeaderView(header: reportContent.header)) {
+                    NavigationLink(destination: ParsedReportHeaderView(headerString: reportContent.header)) {
                         Text(reportContent.header)
                     }
                 }

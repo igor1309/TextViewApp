@@ -130,4 +130,56 @@ extension String {
               let percentage = Double(self.dropLast()) else { return nil }
         return percentage / 100
     }
+
+    func extractNumber() -> Double? {
+        let itemNumberPattern = #"\d+(\.\d{3})*"#
+        if let numberString = self.firstMatch(for: itemNumberPattern),
+           let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+            return double
+        }
+
+        return nil
+    }
+
+    func parseReportHeader() -> [ParsedReportHeaderViewModel.Token] {
+
+        let headerItemPatterns = #"[А-Яа-я ]+:[А-Яа-я ]*\d+(\.\d{3})*"#
+        let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
+        let headerItemCompanyPattern = #"Название объекта: (.*)"#
+        let headerItemMonthPattern = #"(.*)?\d{4}"#
+
+        let company: ParsedReportHeaderViewModel.Token? = {
+            guard let companyString = self.firstMatch(for: headerItemCompanyPattern),
+                  let company = companyString
+                    .replaceMatches(for: #"Название объекта:"#, withString: "")?
+                    .trimmingCharacters(in: .whitespaces)
+            else { return nil }
+
+            return .company(company)
+        }()
+
+        let headerItems: [ParsedReportHeaderViewModel.Token] = self
+            .listMatches(for: headerItemPatterns)
+            .compactMap {
+                guard let title = $0.firstMatch(for: headerItemTitlePatterns),
+                      let tail = $0.replaceMatches(for: headerItemTitlePatterns,
+                                                   withString: "")
+                else { return nil }
+
+                let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title).trimmingCharacters(in: .whitespaces)
+
+                if let month = tail.firstMatch(for: headerItemMonthPattern) {
+                    return .month(month.trimmingCharacters(in: .whitespaces))
+                }
+
+                guard let number = tail.extractNumber() else { return nil }
+                return .headerItem(cleanTitle, number)
+            }
+
+        if let company = company {
+            return [company] + headerItems
+        } else {
+            return headerItems
+        }
+    }
 }

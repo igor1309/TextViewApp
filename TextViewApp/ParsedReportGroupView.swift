@@ -18,19 +18,9 @@ struct ParsedReportGroupView: View {
     var body: some View {
         List {
             Section(header: Text("Original Text")) {
-                Text(model.group)
+                Text(model.groupString)
                     .foregroundColor(.secondary)
                     .font(.footnote)
-            }
-
-            Section(header: Text("Rows with numbers (\(model.listWithNumbers.count))")) {
-                VStack(alignment: .leading, spacing: 3) {
-                    ForEach(model.listWithNumbers, id: \.self) { row in
-                        Text(row)
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                    }
-                }
             }
 
             Section(header: Text("Group header")) {
@@ -62,6 +52,16 @@ struct ParsedReportGroupView: View {
                     }
                 }
                 .padding(.vertical, 3)
+            }
+
+            Section(header: Text("Rows with numbers (\(model.listWithNumbers.count))")) {
+                VStack(alignment: .leading, spacing: 3) {
+                    ForEach(model.listWithNumbers, id: \.self) { row in
+                        Text(row)
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
+                    }
+                }
             }
 
             Section(

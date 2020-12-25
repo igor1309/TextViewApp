@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A481FA625955DCF009C585F /* ParsedReportGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */; };
 		2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B8E25957B54009DB6FC /* View+Ext.swift */; };
+		2AE08B9225964FD8009DB6FC /* ParsedReportHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9125964FD8009DB6FC /* ParsedReportHeaderViewModel.swift */; };
 		2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */; };
 		2AF21A902593CF020057A5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8F2593CF020057A5CD /* ContentView.swift */; };
 		2AF21A922593CF030057A5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF21A912593CF030057A5CD /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportGroupViewModel.swift; sourceTree = "<group>"; };
 		2AE08B8E25957B54009DB6FC /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		2AE08B9125964FD8009DB6FC /* ParsedReportHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportHeaderViewModel.swift; sourceTree = "<group>"; };
 		2AF21A8A2593CF020057A5CD /* TextViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAppApp.swift; sourceTree = "<group>"; };
 		2AF21A8F2593CF020057A5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,14 +82,15 @@
 				2AF21AA32593D4690057A5CD /* ReportImportView.swift */,
 				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
 				2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */,
+				2AE08B9125964FD8009DB6FC /* ParsedReportHeaderViewModel.swift */,
 				2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */,
 				2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */,
 				2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
-				2AF21AAF259456A50057A5CD /* String+Ext.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
 				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
+				2AF21AAF259456A50057A5CD /* String+Ext.swift */,
 				2AE08B8E25957B54009DB6FC /* View+Ext.swift */,
 				2AF21A912593CF030057A5CD /* Assets.xcassets */,
 				2AF21A962593CF030057A5CD /* Info.plist */,
@@ -175,6 +178,7 @@
 			files = (
 				2AF21ABC25946F4E0057A5CD /* ParsedReportFooterView.swift in Sources */,
 				2AF21AB625946EA50057A5CD /* ParsedReportHeaderView.swift in Sources */,
+				2AE08B9225964FD8009DB6FC /* ParsedReportHeaderViewModel.swift in Sources */,
 				2AF21A9E2593CF2D0057A5CD /* TextView.swift in Sources */,
 				2AF21AB0259456A50057A5CD /* String+Ext.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
