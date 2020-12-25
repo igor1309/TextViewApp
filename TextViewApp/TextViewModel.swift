@@ -12,17 +12,16 @@ final class TextViewModel: ObservableObject {
     @Published var attributedText = NSAttributedString()
     @Published var textStyle = UIFont.TextStyle.subheadline
     @Published var showingReportStructure: Bool?
-    @Published var reportContent: (header: String, groups: [String], footer: String)?
+    @Published var reportContent: ReportContent?
 
-     @Published var errorMessage = ""
-     var hasError: Bool { !errorMessage.isEmpty }
-
-    private var groupRegex: NSRegularExpression {
-        #warning("move to seperate namespace enum?")
-        let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
-        let regex = try! NSRegularExpression(pattern: groupPattern, options: [])
-        return regex
+    struct ReportContent {
+        var header: String
+        var groups: [String]
+        var footer: String
     }
+
+    @Published var errorMessage = ""
+    var hasError: Bool { !errorMessage.isEmpty }
 
     init() {
         // create subscription to update highlight if text was edited
@@ -33,7 +32,7 @@ final class TextViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 if let self = self {
-                    self.highlightText(regex: self.groupRegex)
+                    self.highlightText(pattern: String.groupPattern)
                 }
             }
             .store(in: &cancellableSet)
@@ -48,21 +47,17 @@ final class TextViewModel: ObservableObject {
     }
 
     func splitReportContent() {
-        // using regex extract arrya of text for groups
+        // using regex extract array of text for groups
         // replace extracted text with special delimiter
         // use delimiter to seperate header from footer
 
-        //  (?m) - MULTILINE mode on
-        #warning("move to seperate namespace enum?")
-        let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
-        let groupRegex = try! NSRegularExpression(pattern: groupPattern, options: [])
-        let groups = attributedText.string.listMatches(for: groupRegex)
+        let groups = attributedText.string.listMatches(for: String.groupPattern)
 
         let delimiter = "#####"
         var header = ""
         var footer = ""
 
-        if let copy = attributedText.string.replaceMatches(for: groupPattern, withString: delimiter) {
+        if let copy = attributedText.string.replaceMatches(for: String.groupPattern, withString: delimiter) {
             let components = copy
                 .components(separatedBy: delimiter)
                 .compactMap { $0 == "\n" ? nil : $0 }
@@ -79,27 +74,30 @@ final class TextViewModel: ObservableObject {
             }
         }
 
-        reportContent = (header, groups, footer)
+        reportContent = ReportContent(header: header, groups: groups, footer: footer)
         showingReportStructure = true
     }
 
-    func highlightText(regex: NSRegularExpression) {
+    func highlightText(pattern: String) {
+        // swiftlint:disable:next force_cast
         let attributedTextCopy = attributedText.mutableCopy() as! NSMutableAttributedString
         let attributedTextRange = NSRange(location: 0, length: attributedTextCopy.length)
         attributedTextCopy.removeAttribute(NSAttributedString.Key.backgroundColor, range: attributedTextRange)
 
         let range = NSRange(attributedTextCopy.string.startIndex..., in: attributedTextCopy.string)
-        let matches = regex.matches(in: attributedTextCopy.string, options: [], range: range)
-        for match in matches {
-            let matchRange = match.range
-            attributedTextCopy.addAttribute(
-                NSAttributedString.Key.backgroundColor,
-                value: UIColor.yellow.withAlphaComponent(0.2),
-                range: matchRange
-            )
+        if let regex = try? NSRegularExpression(pattern: pattern, options: []) {
+            let matches = regex.matches(in: attributedTextCopy.string, options: [], range: range)
+            for match in matches {
+                let matchRange = match.range
+                attributedTextCopy.addAttribute(
+                    NSAttributedString.Key.backgroundColor,
+                    value: UIColor.yellow.withAlphaComponent(0.2),
+                    range: matchRange
+                )
+            }
+            // swiftlint:disable:next force_cast
+            self.attributedText = attributedTextCopy.copy() as! NSAttributedString
         }
-
-        self.attributedText = attributedTextCopy.copy() as! NSAttributedString
     }
 
     func pasteClipboard() {
@@ -110,7 +108,7 @@ final class TextViewModel: ObservableObject {
             let cleanContent = content.clearWhitespacesAndNewlines()
 
             self.attributedText = NSAttributedString(string: cleanContent)
-            self.highlightText(regex: self.groupRegex)
+            self.highlightText(pattern: String.groupPattern)
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct ParsedReportGroupView: View {
-    
+
     @StateObject private var model: ParsedReportGroupViewModel
 
     init(groupString: String) {
@@ -25,34 +25,7 @@ struct ParsedReportGroupView: View {
             }
 
             Section(header: Text("Group header")) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(model.groupHeaderString)
-                        .foregroundColor(.secondary)
-                        .font(.footnote)
-
-                    if case let .header(title, plan, fact) = model.groupHeader {
-                        HStack(alignment: .firstTextBaseline) {
-                            Text(title)
-
-                            Spacer()
-
-                            if let plan = plan {
-                                Text("\(plan * 100, specifier: "%.2f%%")")
-                            } else {
-                                Text("no plan")
-                                    .foregroundColor(Color(UIColor.systemRed))
-                            }
-
-                            if let fact = fact {
-                                Text("\(fact * 100, specifier: "%.2f%%")")
-                            } else {
-                                Text("no fact")
-                                    .foregroundColor(Color(UIColor.systemRed))
-                            }
-                        }
-                    }
-                }
-                .padding(.vertical, 3)
+                headerView()
             }
 
             Section(header: Text("Rows with numbers (\(model.listWithNumbers.count))")) {
@@ -69,56 +42,94 @@ struct ParsedReportGroupView: View {
                 header: Text("Parsed rows (\(model.items.count))"),
                 footer: itemsSectionFooter()
             ) {
-                VStack(alignment: .leading, spacing: 8) {
-                    ForEach(model.items, id: \.self) { token in
-                        if case let .item(title, number, comment) = token {
-                            VStack(alignment: .leading, spacing: 6) {
-                                HStack(alignment: .firstTextBaseline) {
-                                    Text(title)
-                                    Spacer()
-                                    Text("\(number, specifier: "%.2f")")
-                                }
-
-                                if let comment = comment,
-                                   !comment.isEmpty {
-                                    Text(comment)
-                                        .foregroundColor(.secondary)
-                                        .font(.footnote)
-                                }
-                            }
-                        }
-                    }
-                }
-                .padding(.vertical, 3)
+                // VStack(alignment: .leading, spacing: 8) {
+                ForEach(model.items, id: \.self, content: tokenView)
+                // }
+                // .padding(.vertical, 3)
             }
 
             Section(header: Text("Group footer")) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(model.groupFooterString)
-                        .foregroundColor(.secondary)
-                        .font(.footnote)
-
-                    if case let .footer(title, total) = model.groupFooter {
-                        HStack(alignment: .firstTextBaseline) {
-                            Text(title)
-
-                            Spacer()
-
-                            if let total = total {
-                                Text("\(total, specifier: "%.2f")")
-                            } else {
-                                Text("no total")
-                                    .foregroundColor(Color(UIColor.systemRed))
-                            }
-                        }
-                    }
-                }
-                .padding(.vertical, 3)
+                footerView()
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
         .navigationTitle("Parsed Group")
+    }
+
+    private func headerView() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(model.groupHeaderString)
+                .foregroundColor(.secondary)
+                .font(.footnote)
+
+            if case let .header(title, plan, fact) = model.groupHeader {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+
+                    Spacer()
+
+                    if let plan = plan {
+                        Text("\(plan * 100, specifier: "%.2f%%")")
+                    } else {
+                        Text("no plan")
+                            .foregroundColor(Color(UIColor.systemRed))
+                    }
+
+                    if let fact = fact {
+                        Text("\(fact * 100, specifier: "%.2f%%")")
+                    } else {
+                        Text("no fact")
+                            .foregroundColor(Color(UIColor.systemRed))
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 3)
+    }
+
+    @ViewBuilder
+    private func tokenView(token: ParsedReportGroupViewModel.Token) -> some View {
+        if case let .item(title, number, comment) = token {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                    Spacer()
+                    Text("\(number, specifier: "%.2f")")
+                }
+
+                if let comment = comment,
+                   !comment.isEmpty {
+                    Text(comment)
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+                }
+            }
+        }
+    }
+
+    private func footerView() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(model.groupFooterString)
+                .foregroundColor(.secondary)
+                .font(.footnote)
+
+            if case let .footer(title, total) = model.groupFooter {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+
+                    Spacer()
+
+                    if let total = total {
+                        Text("\(total, specifier: "%.2f")")
+                    } else {
+                        Text("no total")
+                            .foregroundColor(Color(UIColor.systemRed))
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 3)
     }
 
     private func itemsSectionFooter() -> some View {

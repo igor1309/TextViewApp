@@ -24,35 +24,38 @@ struct ParsedReportHeaderView: View {
             }
 
             Section(header: Text("Parsed Header")) {
-                ForEach(model.items, id: \.self) { item in
-                    switch item {
-                        case let .company(company):
-                            HStack(alignment: .firstTextBaseline) {
-                                Text("Company")
-                                    .foregroundColor(.secondary)
-                                Spacer()
-                                Text(company)
-                            }
-                        case let .month(month):
-                            HStack(alignment: .firstTextBaseline) {
-                                Text("Month")
-                                    .foregroundColor(.secondary)
-                                Spacer()
-                                Text(month)
-                            }
-                        case let .headerItem(title, number):
-                            HStack(alignment: .firstTextBaseline) {
-                                Text(title)
-                                Spacer()
-                                Text("\(number, specifier: "%.2f")")
-                            }
-                    }
-                }
+                ForEach(model.items, id: \.self, content: itemView)
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
         .navigationTitle("Parsed Header")
+    }
+
+    @ViewBuilder
+    private func itemView(item: ParsedReportHeaderViewModel.Token) -> some View {
+        switch item {
+            case let .company(company):
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Company")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(company)
+                }
+            case let .month(month):
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Month")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(month)
+                }
+            case let .headerItem(title, number):
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                    Spacer()
+                    Text("\(number, specifier: "%.2f")")
+                }
+        }
     }
 }
 

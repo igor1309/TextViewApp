@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReportImportView: View {
+
     @Environment(\.colorScheme) private var colorScheme
 
     @StateObject private var model = TextViewModel()

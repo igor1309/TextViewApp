@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-final class ParsedReportFooterViewModel: ObservableObject {
-
-    @Published var footerString: String
-    @Published var items: [Token]
-
-    init(footerString: String) {
-        self.footerString = footerString
-        self.items = footerString.parseReportFooter()
-    }
-
-    enum Token: Hashable {
-        case total(String, Double)
-        case expensesTotal(String, Double)
-        case openingBalance(String, Double)
-        case balance(String, Double, Double)
-        case tbd(String)
-        case error
-    }
-}
-
 struct ParsedReportFooterView: View {
 
     @StateObject private var model: ParsedReportFooterViewModel
@@ -43,36 +23,42 @@ struct ParsedReportFooterView: View {
                     .font(.footnote)
             }
 
-            Section(header: Text("Parsed (\("TBD"))")) {
-                ForEach(model.items, id: \.self) { item in
-                    switch item {
-                        case let .total(title, number),
-                             let .expensesTotal(title, number),
-                             let .openingBalance(title, number):
-                            HStack(alignment: .firstTextBaseline) {
-                                Text(title)
-                                Spacer()
-                                Text("\(number, specifier: "%.2f")")
-                            }
-                        case let .balance(title, number, percentage):
-                            HStack(alignment: .firstTextBaseline) {
-                                Text(title)
-                                Spacer()
-                                Text("\(number, specifier: "%.2f")")
-                                Text("\(percentage * 100, specifier: "%.2f%%")")
-                            }
-                        case let .tbd(line):
-                            Text("TBD: \(line)")
-                        case .error:
-                            Text("Error parcing line")
-                                .foregroundColor(Color(UIColor.systemRed))
-                    }
-                }
+            Section(header: Text("Parsed (\(model.items.count))")) {
+                ForEach(model.items, id: \.self, content: itemView)
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
         .navigationTitle("Parsed Footer")
+    }
+
+    @ViewBuilder
+    private func itemView(item: ParsedReportFooterViewModel.Token) -> some View {
+        switch item {
+            case let .total(title, number),
+                 let .expensesTotal(title, number),
+                 let .openingBalance(title, number):
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                    Spacer()
+                    Text("\(number, specifier: "%.2f")")
+                }
+
+            case let .balance(title, number, percentage):
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                    Spacer()
+                    Text("\(number, specifier: "%.2f")")
+                    Text("\(percentage * 100, specifier: "%.2f%%")")
+                }
+
+            case let .tbd(line):
+                Text("TBD: \(line)")
+
+            case .error:
+                Text("Error parcing line")
+                    .foregroundColor(Color(UIColor.systemRed))
+        }
     }
 }
 
