@@ -61,7 +61,7 @@ final class ParsedReportGroupViewModel: ObservableObject {
     private let itemTitleWithPercentagePattern = #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
     private let itemTitleWithParenthesesPattern = #"^[1-9][0-9]?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
     private let itemTitlePattern = #"^[1-9][0-9]?\.[^\d\n]+"#
-    private let rublesIKopeksPattern = #"^\d+(\.\d+)*р( *\d+к)?"#
+    private let rublesIKopeksPattern = #"\d+(\.\d+)*р( *\d+к)?"#
     private let itemNumberPattern = #"\d+(\.\d{3})*"#
     private let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+:"#
     private let matchingPercentagePattern = #"\d+(\.\d+)*%"#
@@ -91,50 +91,22 @@ final class ParsedReportGroupViewModel: ObservableObject {
         guard let title = groupFooterString.firstMatch(for: groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
 
-        var tail = groupFooterString.replaceFirstMatch(for: groupHeaderFooterTitlePattern, withString: "")
-        var total: Double?
-
-        if let localTail = tail {
-            localTail.getFirstMatchAndRemains(patterns: [rublesIKopeksPattern]) { (numberString, tailString) in
-                guard let numberString = numberString,
-                      // MARK: - ОТРЕЗАЮТСЯ КОПЕЙКИ!!!
-                      let rubliIKopeiki = numberString.rubliIKopeikiToDouble(),
-                      let tailString = tailString
-                else {
-                    guard let numberString = localTail.firstMatch(for: itemNumberPattern) else { return }
-
-                    let cleanNumberString = numberString
-                        .replacingOccurrences(of: ".", with: "")
-                        .trimmingCharacters(in: .whitespaces)
-                    guard let double = Double(cleanNumberString) else { return }
-                    total = double
-
-                    if let finalTail = localTail
-                        .replaceMatches(for: itemNumberPattern, withString: "")?
-                        .trimmingCharacters(in: .whitespaces) {
-                        tail = finalTail
-                    }
-
-                    return
-                }
-                total = rubliIKopeiki
-                tail = tailString
-            }
+        guard let tail = groupFooterString.replaceFirstMatch(for: groupHeaderFooterTitlePattern,
+                                                             withString: "") else {
+            return Token.footer(cleanTitle, nil)
         }
 
-/*
-        // MARK: - rubliIKopeiki!!!!
-        // MARK: - SAME CODE USED IN transformLineToItem MAKE FUNC @ Strinf extension
-        if let numberString = tail?.firstMatch(for: itemNumberPattern) {
-            let cleanNumberString = numberString.replacingOccurrences(of: ".", with: "")
-            let trimmedNumberString = cleanNumberString.trimmingCharacters(in: .whitespaces)
-            total = Double(trimmedNumberString)
-        } else {
-            total = nil
+        if let numberString = tail.firstMatch(for: rublesIKopeksPattern),
+           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
+            return Token.footer(cleanTitle, rubliIKopeiki)
         }
-*/
-        //  FIXME: FINISH THIS: 0????
-        return Token.footer(cleanTitle, total)
+
+        if let numberString = tail.firstMatch(for: itemNumberPattern),
+           let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+            return Token.footer(cleanTitle, double)
+        }
+
+        return Token.footer(cleanTitle, nil)
     }
 
     private func transformLineToItem(line: String) -> Token? {
