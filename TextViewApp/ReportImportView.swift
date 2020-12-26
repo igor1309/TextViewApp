@@ -13,6 +13,8 @@ struct ReportImportView: View {
 
     @StateObject private var model = TextViewModel()
 
+    @State private var showingFileImporter = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
@@ -44,7 +46,24 @@ struct ReportImportView: View {
             .navigationTitle("Report")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: toolbar)
-            .onAppear(perform: testText)
+            //.onAppear(perform: testText)
+            .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.plainText], onCompletion: handleFileImporter)
+
+        }
+    }
+
+    private func handleFileImporter(result: Result<URL, Error>) {
+        switch result {
+            case let .success(url):
+                if url.startAccessingSecurityScopedResource(),
+                   let content = try? String(contentsOf: url) {
+                    defer { url.stopAccessingSecurityScopedResource() }
+                    model.changeText(to: content)
+                } else {
+                    model.changeText(to: "Error reading contents of \(url.absoluteString)")
+                }
+            case let .failure(error):
+                model.changeText(to: error.localizedDescription)
         }
     }
 
@@ -52,6 +71,13 @@ struct ReportImportView: View {
     private func toolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             HStack(spacing: 0) {
+                Button {
+                    showingFileImporter = true
+                } label: {
+                    Image(systemName: "arrow.down.doc")
+                        .frame(width: 44, height: 44, alignment: .leading)
+                }
+
                 Button {
                     Ory.withHapticsAndAnimation(action: model.pasteClipboard)
                 } label: {

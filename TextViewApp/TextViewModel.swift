@@ -101,14 +101,24 @@ final class TextViewModel: ObservableObject {
     }
 
     func pasteClipboard() {
-        Ory.withHapticsAndAnimation {
-            guard let content = UIPasteboard.general.string else { return }
+        guard let content = UIPasteboard.general.string else { return }
 
-            // clean whitespaces and empty lines
-            let cleanContent = content.clearWhitespacesAndNewlines()
+        // clean whitespaces and empty lines
+        changeText(to: content)
+    }
 
-            self.attributedText = NSAttributedString(string: cleanContent)
-            self.highlightText(pattern: String.groupPattern)
+    func changeText(to content: String) {
+        // make some file cleaning
+        var cleanContent = content
+            .clearWhitespacesAndNewlines()
+
+        if let modifiedContent =
+            cleanContent.replaceMatches(for: "ФОТ Бренд, логистика, бухгалтерия",
+                                        withString: "2. ФОТ Бренд, логистика, бухгалтерия") {
+            cleanContent = modifiedContent
         }
+
+        self.attributedText = NSAttributedString(string: cleanContent)
+        self.highlightText(pattern: String.groupPattern)
     }
 }

@@ -22,7 +22,7 @@ struct ParsedReportFooterView: View {
                     .foregroundColor(.secondary)
                     .font(.footnote)
             }
-
+            #warning("add simple check in model: всего остаток входящий / исходящий")
             Section(header: Text("Parsed (\(model.items.count))")) {
                 ForEach(model.items, id: \.self, content: itemView)
             }

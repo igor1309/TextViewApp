@@ -8,6 +8,8 @@
 import Foundation
 
 extension String {
+
+    // MARK: - Regular Expression Patterns
     #warning("move to seperate namespace enum?")
     //  (?m) - MULTILINE mode on
     static let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
@@ -17,6 +19,8 @@ extension String {
     static let itemTitlePattern = #"^[1-9][0-9]?\.[^\d\n]+"#
     static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+:"#
     static let matchingPercentagePattern = #"\d+(\.\d+)*%"#
+
+    // MARK: - Parsing
 
     func parseReportHeader() -> [ParsedReportHeaderViewModel.Token] {
 
@@ -64,7 +68,6 @@ extension String {
         var title: String = ""
         var remains: String = ""
         var number: Double?
-
         let itemTitlePatterns = [String.itemTitleWithPercentagePattern, String.itemTitleWithParenthesesPattern, String.itemTitlePattern]
         self.getFirstMatchAndRemains(patterns: itemTitlePatterns) { (match, remainsString) in
             guard let headString = match,
@@ -135,7 +138,7 @@ extension String {
                 return .expensesTotal("ИТОГ всех расходов за месяц", number)
             }
 
-            if line.firstMatch(for: #"[П\п]ереходит"#) != nil,
+            if line.firstMatch(for: #"[П\п]ереход"#) != nil,
                let number = line.getNumberNoRemains() {
                 return .openingBalance(line.trimmingCharacters(in: .whitespaces), number)
             }
