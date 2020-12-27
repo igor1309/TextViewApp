@@ -18,6 +18,8 @@ struct ParsedReportGroupView: View {
 
     var body: some View {
         List {
+            #warning("add errors or calc issues here")
+            
             Section(header: Text("Original Text")) {
                 Text(model.groupString)
                     .foregroundColor(.secondary)

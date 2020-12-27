@@ -48,7 +48,7 @@ extension String {
                 else { return nil }
 
                 let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title).trimmingCharacters(in: .whitespaces)
-
+#warning("error parsing month")
                 if let month = tail.firstMatch(for: headerItemMonthPattern) {
                     return .month(month.trimmingCharacters(in: .whitespaces))
                 }

@@ -22,8 +22,7 @@ struct ReportImportView: View {
                 NavigationLink(
                     "Report Structure",
                     destination: ReportStructureView(model: model),
-                    tag: true,
-                    selection: $model.showingReportStructure
+                    isActive: $model.showingReportStructure
                 )
                 .hidden()
 

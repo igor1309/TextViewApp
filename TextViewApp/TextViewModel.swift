@@ -11,7 +11,7 @@ import Combine
 final class TextViewModel: ObservableObject {
     @Published var attributedText = NSAttributedString()
     @Published var textStyle = UIFont.TextStyle.subheadline
-    @Published var showingReportStructure: Bool?
+    @Published var showingReportStructure: Bool = false
     @Published var reportContent: ReportContent?
 
     struct ReportContent {
@@ -113,8 +113,8 @@ final class TextViewModel: ObservableObject {
             .clearWhitespacesAndNewlines()
 
         if let modifiedContent =
-            cleanContent.replaceMatches(for: "ФОТ Бренд, логистика, бухгалтерия",
-                                        withString: "2. ФОТ Бренд, логистика, бухгалтерия") {
+            cleanContent.replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
+                                        withString: "\n2. ФОТ Бренд, логистика, бухгалтерия") {
             cleanContent = modifiedContent
         }
 
