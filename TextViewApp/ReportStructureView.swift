@@ -21,13 +21,13 @@ struct ReportStructureView: View {
                 }
 
                 Section(header: Text("header")) {
-                    reportHeader(reportContent.header)
+                    reportHeaderView(reportContent.header)
                 }
                 Section(header: Text("Groups (\(reportContent.groups.count))")) {
-                    reportGroups(reportContent.groups)
+                    reportGroupsView(reportContent.groups)
                 }
                 Section(header: Text("footer")) {
-                    reportFooter(reportContent.footer)
+                    reportFooterView(reportContent.footer)
                 }
             }
             .font(.subheadline)
@@ -39,13 +39,13 @@ struct ReportStructureView: View {
         }
     }
 
-    private func reportHeader(_ header: String) -> some View {
+    private func reportHeaderView(_ header: String) -> some View {
         NavigationLink(destination: ParsedReportHeaderView(headerString: header)) {
             Text(header)
         }
     }
 
-    private func reportGroups(_ groups: [String]) -> some View {
+    private func reportGroupsView(_ groups: [String]) -> some View {
         ForEach(groups, id: \.self) { group in
             NavigationLink(destination: ParsedReportGroupView(groupString: group)) {
                 Text(group)
@@ -53,7 +53,7 @@ struct ReportStructureView: View {
         }
     }
 
-    private func reportFooter(_ footer: String) -> some View {
+    private func reportFooterView(_ footer: String) -> some View {
         NavigationLink(destination: ParsedReportFooterView(footerString: footer)) {
             Text(footer)
         }
