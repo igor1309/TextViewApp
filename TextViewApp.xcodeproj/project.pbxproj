@@ -33,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A17F38C259A2BB3002F44F4 /* Ideas README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Ideas README.md"; sourceTree = "<group>"; };
+		2A17F38D259A2C51002F44F4 /* Regex.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Regex.md; sourceTree = "<group>"; };
 		2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportGroupViewModel.swift; sourceTree = "<group>"; };
 		2AE08B8E25957B54009DB6FC /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -108,8 +110,10 @@
 				2AE08BE42599E07D009DB6FC /* TokenizedReportFooterViewRows.swift */,
 				2AE08BBB2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift */,
 				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
+				2A17F38C259A2BB3002F44F4 /* Ideas README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
 				2AF21AAF259456A50057A5CD /* Regex String+Ext.swift */,
+				2A17F38D259A2C51002F44F4 /* Regex.md */,
 				2AE08B9925968563009DB6FC /* Conversion String+Ext.swift */,
 				2AE08B9525968402009DB6FC /* Tokenize String+Ext.swift */,
 				2AE08B8E25957B54009DB6FC /* View+Ext.swift */,
