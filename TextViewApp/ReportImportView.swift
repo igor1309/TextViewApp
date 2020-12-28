@@ -13,7 +13,7 @@ struct ReportImportView: View {
 
     @StateObject private var model = TextViewModel()
 
-    @State private var showingFileImporter = false
+    @State private var showingFileImporter = true
 
     var body: some View {
         NavigationView {
@@ -28,18 +28,18 @@ struct ReportImportView: View {
 
                 TextView(attributedText: $model.attributedText, textStyle: $model.textStyle, colorScheme: colorScheme)
 
-                // if model.hasError {
-                //    Text(model.errorMessage)
-                //        .font(.footnote)
-                //        .foregroundColor(Color(UIColor.systemRed))
-                //        .padding(.horizontal)
-                //        .padding(.vertical, 6)
-                //        .background(
-                //            Capsule()
-                //                .fill(Color(UIColor.secondarySystemBackground))
-                //                .shadow(radius: 6)
-                //        )
-                // }
+                 if model.hasError {
+                    Text(model.errorMessage)
+                        .font(.footnote)
+                        .foregroundColor(Color(UIColor.systemRed))
+                        .padding(.horizontal)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(Color(UIColor.secondarySystemBackground))
+                                .shadow(radius: 6)
+                        )
+                 }
             }
             .padding()
             .navigationTitle("Report")
@@ -95,7 +95,10 @@ struct ReportImportView: View {
 
         ToolbarItem(placement: .navigationBarTrailing) {
             Button("Next") {
-                Ory.withHapticsAndAnimation(action: model.splitReportContent)
+                // Ory.withHapticsAndAnimation(action: model.splitReportContent)
+                Ory.withHapticsAndAnimation {
+                    model.showingReportStructure = true
+                }
             }
         }
     }

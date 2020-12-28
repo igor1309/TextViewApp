@@ -75,7 +75,7 @@ final class TextViewModel: ObservableObject {
         }
 
         reportContent = ReportContent(header: header, groups: groups, footer: footer)
-        showingReportStructure = true
+        // showingReportStructure = true
     }
 
     func highlightText(pattern: String) {
@@ -120,5 +120,6 @@ final class TextViewModel: ObservableObject {
 
         self.attributedText = NSAttributedString(string: cleanContent)
         self.highlightText(pattern: String.groupPattern)
+        self.splitReportContent()
     }
 }
