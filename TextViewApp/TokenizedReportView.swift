@@ -1,5 +1,5 @@
 //
-//  ParsedReportView.swift
+//  TokenizedReportView.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 28.12.2020.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct ParsedReportView: View {
+struct TokenizedReportView: View {
 
     let reportContent: TextViewModel.ReportContent
 
-    @StateObject private var headerModel: ParsedReportHeaderViewModel
-    @StateObject private var footerModel: ParsedReportFooterViewModel
+    @StateObject private var headerModel: TokenizedReportHeaderViewModel
+    @StateObject private var footerModel: TokenizedReportFooterViewModel
 
     init(reportContent: TextViewModel.ReportContent) {
         self.reportContent = reportContent
 
-        let headerModel = ParsedReportHeaderViewModel(headerString: reportContent.headerString)
+        let headerModel = TokenizedReportHeaderViewModel(headerString: reportContent.headerString)
         _headerModel = StateObject(wrappedValue: headerModel)
 
-        let footerModel = ParsedReportFooterViewModel(footerString: reportContent.footerString)
+        let footerModel = TokenizedReportFooterViewModel(footerString: reportContent.footerString)
         _footerModel = StateObject(wrappedValue: footerModel)
     }
 
@@ -37,38 +37,38 @@ struct ParsedReportView: View {
             }
 
             Section(
-                header: Text("Parsed Header"),
+                header: Text("Tokenized Header"),
                 footer: NavigationLink(
-                    destination: ParsedReportHeaderView(model: headerModel)
+                    destination: TokenizedReportHeaderView(model: headerModel)
                 ) {
                     Text("Compare to source")
                 }
             ) {
-                ParsedReportHeaderViewRows(model: headerModel)
+                TokenizedReportHeaderViewRows(model: headerModel)
             }
 
             ForEach(reportContent.groups, id: \.self) { groupString in
-                ParsedReportGroupSectionView(groupString: groupString)
+                TokenizedReportGroupSectionView(groupString: groupString)
             }
 
             Section(
-                header: Text("Parsed Footer"),
+                header: Text("Tokenized Footer"),
                 footer: NavigationLink(
-                    destination: ParsedReportFooterView(model: footerModel)
+                    destination: TokenizedReportFooterView(model: footerModel)
                 ) {
                     Text("Compare to source")
                 }
             ) {
-                ParsedReportFooterViewRows(model: footerModel)
+                TokenizedReportFooterViewRows(model: footerModel)
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
-        .navigationTitle("Parsed Report")
+        .navigationTitle("Tokenized Report")
     }
 }
 
-struct ParsedReportView_Previews: PreviewProvider {
+struct TokenizedReportView_Previews: PreviewProvider {
     static let reportContent = TextViewModel.ReportContent(
         headerString: """
             Название объекта: Саперави Аминьевка
@@ -108,7 +108,7 @@ struct ParsedReportView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            ParsedReportView(reportContent: reportContent)
+            TokenizedReportView(reportContent: reportContent)
                 .navigationBarTitleDisplayMode(.inline)
         }
         .previewLayout(.fixed(width: 370, height: 1100))

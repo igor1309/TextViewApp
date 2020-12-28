@@ -1,5 +1,5 @@
 //
-//  ParsedReportFooterViewRows.swift
+//  TokenizedReportFooterViewRows.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 28.12.2020.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct ParsedReportFooterViewRows: View {
-    @ObservedObject var model: ParsedReportFooterViewModel
+struct TokenizedReportFooterViewRows: View {
+    @ObservedObject var model: TokenizedReportFooterViewModel
 
     var body: some View {
         ForEach(model.items, id: \.self, content: itemView)
     }
 
     @ViewBuilder
-    private func itemView(item: ParsedReportFooterViewModel.Token) -> some View {
+    private func itemView(item: TokenizedReportFooterViewModel.Token) -> some View {
         switch item {
             case let .total(title, number),
                  let .expensesTotal(title, number),
@@ -44,8 +44,8 @@ struct ParsedReportFooterViewRows: View {
     }
 }
 
-struct ParsedReportFooterViewRows_Previews: PreviewProvider {
-    static let model = ParsedReportFooterViewModel(
+struct TokenizedReportFooterViewRows_Previews: PreviewProvider {
+    static let model = TokenizedReportFooterViewModel(
         footerString: """
             ИТОГ всех расходов за месяц:    2.343.392р 37к
             Фактический остаток:    96.628р 63к    20%
@@ -57,7 +57,7 @@ struct ParsedReportFooterViewRows_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
-                ParsedReportFooterViewRows(model: model)
+                TokenizedReportFooterViewRows(model: model)
             }
         }
         .environment(\.colorScheme, .dark)

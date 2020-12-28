@@ -1,5 +1,5 @@
 //
-//  ParsedReportFooterView.swift
+//  TokenizedReportFooterView.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 24.12.2020.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ParsedReportFooterView: View {
+struct TokenizedReportFooterView: View {
 
-    @ObservedObject var model: ParsedReportFooterViewModel
+    @ObservedObject var model: TokenizedReportFooterViewModel
 
     var body: some View {
         List {
@@ -20,20 +20,20 @@ struct ParsedReportFooterView: View {
             }
 
             #warning("add simple check in model: всего остаток входящий / исходящий")
-            Section(header: Text("Parsed Footer (\(model.items.count))")) {
-                ParsedReportFooterViewRows(model: model)
+            Section(header: Text("Tokenized Footer (\(model.items.count))")) {
+                TokenizedReportFooterViewRows(model: model)
                 // ForEach(model.items, id: \.self, content: itemView)
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
-        .navigationTitle("Parsed Footer")
+        .navigationTitle("Tokenized Footer")
     }
 }
 
-struct ParsedReportFooterView_Previews: PreviewProvider {
+struct TokenizedReportFooterView_Previews: PreviewProvider {
     static var previews: some View {
-        ParsedReportFooterView(model: ParsedReportFooterViewModel(
+        TokenizedReportFooterView(model: TokenizedReportFooterViewModel(
             footerString: """
             ИТОГ всех расходов за месяц:    2.343.392р 37к
             Фактический остаток:    96.628р 63к    20%

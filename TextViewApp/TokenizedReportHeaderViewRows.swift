@@ -1,5 +1,5 @@
 //
-//  ParsedReportHeaderViewRows.swift
+//  TokenizedReportHeaderViewRows.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 28.12.2020.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct ParsedReportHeaderViewRows: View {
-    @ObservedObject var model: ParsedReportHeaderViewModel
+struct TokenizedReportHeaderViewRows: View {
+    @ObservedObject var model: TokenizedReportHeaderViewModel
 
     var body: some View {
         ForEach(model.items, id: \.self, content: itemView)
     }
 
     @ViewBuilder
-    private func itemView(item: ParsedReportHeaderViewModel.Token) -> some View {
+    private func itemView(item: TokenizedReportHeaderViewModel.Token) -> some View {
         switch item {
             case let .company(company):
                 HStack(alignment: .firstTextBaseline) {
@@ -40,8 +40,8 @@ struct ParsedReportHeaderViewRows: View {
         }
     }}
 
-struct ParsedReportHeaderViewRows_Previews: PreviewProvider {
-    static let model = ParsedReportHeaderViewModel(
+struct TokenizedReportHeaderViewRows_Previews: PreviewProvider {
+    static let model = TokenizedReportHeaderViewModel(
         headerString: """
             Название объекта: Саперави Аминьевка
             Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
@@ -53,7 +53,7 @@ struct ParsedReportHeaderViewRows_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
-                ParsedReportHeaderViewRows(model: model)
+                TokenizedReportHeaderViewRows(model: model)
             }
         }
         .environment(\.colorScheme, .dark)

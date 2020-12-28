@@ -1,5 +1,5 @@
 //
-//  ParsedReportHeaderView.swift
+//  TokenizedReportHeaderView.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 24.12.2020.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ParsedReportHeaderView: View {
+struct TokenizedReportHeaderView: View {
 
-    @ObservedObject var model: ParsedReportHeaderViewModel
+    @ObservedObject var model: TokenizedReportHeaderViewModel
 
     var body: some View {
         List {
@@ -25,21 +25,21 @@ struct ParsedReportHeaderView: View {
                     .font(.footnote)
             }
 
-            Section(header: Text("Parsed Header (\(model.items.count))")) {
-                ParsedReportHeaderViewRows(model: model)
+            Section(header: Text("Tokenized Header (\(model.items.count))")) {
+                TokenizedReportHeaderViewRows(model: model)
             }
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
-        .navigationTitle("Parsed Header")
+        .navigationTitle("Tokenized Header")
     }
 
 }
 
-struct ParsedReportHeaderView_Previews: PreviewProvider {
+struct TokenizedReportHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ParsedReportHeaderView(
-            model: ParsedReportHeaderViewModel(
+        TokenizedReportHeaderView(
+            model: TokenizedReportHeaderViewModel(
                 headerString: """
                 Название объекта: Саперави Аминьевка
                 Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334

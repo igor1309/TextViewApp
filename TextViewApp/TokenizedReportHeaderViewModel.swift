@@ -1,5 +1,5 @@
 //
-//  ParsedReportHeaderViewModel.swift
+//  TokenizedReportHeaderViewModel.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 25.12.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class ParsedReportHeaderViewModel: ObservableObject {
+final class TokenizedReportHeaderViewModel: ObservableObject {
 
     @Published var items: [Token]
 
@@ -18,7 +18,7 @@ final class ParsedReportHeaderViewModel: ObservableObject {
 
     init(headerString: String) {
         self.headerString = headerString
-        self.items = headerString.parseReportHeader()
+        self.items = headerString.tokenizeReportHeader()
     }
 
     enum Token: Hashable {

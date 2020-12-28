@@ -1,5 +1,5 @@
 //
-//  ParsedReportGroupSectionView.swift
+//  TokenizedReportGroupSectionView.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 28.12.2020.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-#warning("lots of partially repeating code below, see ParsedReportGroupView")
-struct ParsedReportGroupSectionView: View {
+#warning("lots of partially repeating code below, see TokenizedReportGroupView")
+struct TokenizedReportGroupSectionView: View {
 
-    @StateObject private var model: ParsedReportGroupViewModel
+    @StateObject private var model: TokenizedReportGroupViewModel
 
     init(groupString: String) {
-        _model = StateObject(wrappedValue: ParsedReportGroupViewModel(groupString: groupString))
+        _model = StateObject(wrappedValue: TokenizedReportGroupViewModel(groupString: groupString))
     }
 
     var body: some View {
@@ -48,7 +48,7 @@ struct ParsedReportGroupSectionView: View {
     }
 
     @ViewBuilder
-    private func tokenView(token: ParsedReportGroupViewModel.Token) -> some View {
+    private func tokenView(token: TokenizedReportGroupViewModel.Token) -> some View {
         if case let .item(title, number, comment) = token {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {
@@ -114,19 +114,19 @@ struct ParsedReportGroupSectionView: View {
 
     private func sectionFooterView() -> some View {
         NavigationLink(
-            destination: ParsedReportGroupView(groupString: model.groupString)
+            destination: TokenizedReportGroupView(groupString: model.groupString)
         ) {
             Text("Compare to source")
         }
     }
 }
 
-struct ParsedReportGroupSectionView_Previews: PreviewProvider {
+struct TokenizedReportGroupSectionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
                 List {
-                    ParsedReportGroupSectionView(groupString: """
+                    TokenizedReportGroupSectionView(groupString: """
             Прочие расходы:        15%    16.5%
             1.Налоговые платежи     26.964
             2.Банковское обслуживание    6.419
@@ -152,7 +152,7 @@ struct ParsedReportGroupSectionView_Previews: PreviewProvider {
 
             NavigationView {
                 List {
-                    ParsedReportGroupSectionView(groupString: """
+                    TokenizedReportGroupSectionView(groupString: """
             Прочие расходы:        15%    16.5%
             1.Налоговые платежи     26.964
             2.Банковское обслуживание    6.419

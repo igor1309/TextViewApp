@@ -76,7 +76,7 @@ final class TextViewModel: ObservableObject {
 
         switch components.count {
             case 2:      errorMessage = ""
-            case 3...20: errorMessage = "Error: some group(s) not parsed"
+            case 3...20: errorMessage = "Error: some group(s) not tokenized"
             default:     errorMessage = "Error: unknown parsing error"
         }
 

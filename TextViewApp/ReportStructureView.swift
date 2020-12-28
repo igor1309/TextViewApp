@@ -11,18 +11,18 @@ struct ReportStructureView: View {
 
     @ObservedObject var model: TextViewModel
 
-    @StateObject private var headerModel: ParsedReportHeaderViewModel
-    @StateObject private var footerModel: ParsedReportFooterViewModel
+    @StateObject private var headerModel: TokenizedReportHeaderViewModel
+    @StateObject private var footerModel: TokenizedReportFooterViewModel
 
     init(model: TextViewModel) {
         self.model = model
 
         let reportContent = model.reportContent ?? TextViewModel.ReportContent.empty
 
-        let headerModel = ParsedReportHeaderViewModel(headerString: reportContent.headerString)
+        let headerModel = TokenizedReportHeaderViewModel(headerString: reportContent.headerString)
         _headerModel = StateObject(wrappedValue: headerModel)
 
-        let footerModel = ParsedReportFooterViewModel(footerString: reportContent.footerString)
+        let footerModel = TokenizedReportFooterViewModel(footerString: reportContent.footerString)
         _footerModel = StateObject(wrappedValue: footerModel)
     }
 
@@ -55,21 +55,21 @@ struct ReportStructureView: View {
     }
 
     private func reportHeaderView(_ header: String) -> some View {
-        NavigationLink(destination: ParsedReportHeaderView(model: headerModel)) {
+        NavigationLink(destination: TokenizedReportHeaderView(model: headerModel)) {
             Text(header)
         }
     }
 
     private func reportGroupsView(_ groups: [String]) -> some View {
         ForEach(groups, id: \.self) { group in
-            NavigationLink(destination: ParsedReportGroupView(groupString: group)) {
+            NavigationLink(destination: TokenizedReportGroupView(groupString: group)) {
                 Text(group)
             }
         }
     }
 
     private func reportFooterView(_ footer: String) -> some View {
-        NavigationLink(destination: ParsedReportFooterView(model: footerModel)) {
+        NavigationLink(destination: TokenizedReportFooterView(model: footerModel)) {
             Text(footer)
         }
     }

@@ -1,5 +1,5 @@
 //
-//  ParsedReportGroupView.swift
+//  TokenizedReportGroupView.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 24.12.2020.
@@ -8,12 +8,12 @@
 import SwiftUI
 import Combine
 
-struct ParsedReportGroupView: View {
+struct TokenizedReportGroupView: View {
 
-    @StateObject private var model: ParsedReportGroupViewModel
+    @StateObject private var model: TokenizeReportGroupViewModel
 
     init(groupString: String) {
-        _model = StateObject(wrappedValue: ParsedReportGroupViewModel(groupString: groupString))
+        _model = StateObject(wrappedValue: TokenizedReportGroupViewModel(groupString: groupString))
     }
 
     var body: some View {
@@ -46,7 +46,7 @@ struct ParsedReportGroupView: View {
             }
 
             Section(
-                header: Text("Parsed rows (\(model.items.count))"),
+                header: Text("Tokenized rows (\(model.items.count))"),
                 footer: itemsSectionFooterView()
             ) {
                 // VStack(alignment: .leading, spacing: 8) {
@@ -61,7 +61,7 @@ struct ParsedReportGroupView: View {
         }
         .font(.subheadline)
         .listStyle(GroupedListStyle())
-        .navigationTitle("Parsed Group")
+        .navigationTitle("Tokenized Group")
     }
 
     private func headerView() -> some View {
@@ -96,7 +96,7 @@ struct ParsedReportGroupView: View {
     }
 
     @ViewBuilder
-    private func tokenView(token: ParsedReportGroupViewModel.Token) -> some View {
+    private func tokenView(token: TokenizedReportGroupViewModel.Token) -> some View {
         if case let .item(title, number, comment) = token {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {
@@ -154,9 +154,9 @@ struct ParsedReportGroupView: View {
     }
 }
 
-struct ParsedReportGroupView_Previews: PreviewProvider {
+struct TokenizedReportGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        ParsedReportGroupView(groupString: """
+        TokenizedReportGroupView(groupString: """
 Прочие расходы:        15%    16.5%
 1.Налоговые платежи     26.964
 2.Банковское обслуживание    6.419

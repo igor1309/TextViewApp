@@ -1,5 +1,5 @@
 //
-//  ParsedReportGroupViewModel.swift
+//  TokenizedReportGroupViewModel.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 25.12.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class ParsedReportGroupViewModel: ObservableObject {
+final class TokenizedReportGroupViewModel: ObservableObject {
 
     @Published var groupHeaderString: String = ""
     @Published var groupHeader: Token = .empty
