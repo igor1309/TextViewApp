@@ -17,6 +17,12 @@ struct ParsedReportHeaderView: View {
 
     var body: some View {
         List {
+            if model.hasError {
+                Text(model.errorMessage)
+                    .font(.headline)
+                    .foregroundColor(Color(UIColor.systemRed))
+            }
+
             Section(header: Text("Original Text")) {
                 Text(model.headerString)
                     .foregroundColor(.secondary)

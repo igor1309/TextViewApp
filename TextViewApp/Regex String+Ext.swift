@@ -28,7 +28,7 @@ extension String {
         return replaceMatches(for: regex, withString: replacementString)
     }
 
-    func replaceMatches(for regex: NSRegularExpression, withString replacementString: String) -> String? {
+    func replaceMatches(for regex: NSRegularExpression, withString replacementString: String) -> String {
         let range = NSRange(self.startIndex..., in: self)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
     }

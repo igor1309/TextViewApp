@@ -10,7 +10,7 @@ import Foundation
 extension String {
 
     // MARK: - Regular Expression Patterns
-    #warning("move to seperate namespace enum?")
+
     //  (?m) - MULTILINE mode on
     static let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
     static let itemFullLineWithDigitsPattern = #"(?m)^[1-9][0-9]?\.[^\d\n]+\d+.*"#
@@ -24,10 +24,10 @@ extension String {
 
     func parseReportHeader() -> [ParsedReportHeaderViewModel.Token] {
 
+        let headerItemCompanyPattern = #"Название объекта: (.*)"#
+        let headerItemMonthPattern = #"(?m)^(.*)?\d{4}"#
         let headerItemPatterns = #"[А-Яа-я ]+:[А-Яа-я ]*\d+(\.\d{3})*"#
         let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
-        let headerItemCompanyPattern = #"Название объекта: (.*)"#
-        let headerItemMonthPattern = #"(.*)?\d{4}"#
 
         let company: ParsedReportHeaderViewModel.Token? = {
             guard let companyString = self.firstMatch(for: headerItemCompanyPattern),
@@ -39,7 +39,17 @@ extension String {
             return .company(company)
         }()
 
-        let headerItems: [ParsedReportHeaderViewModel.Token] = self
+        let month: ParsedReportHeaderViewModel.Token? = {
+            guard let monthString = self.firstMatch(for: headerItemMonthPattern),
+                  let tail = monthString.replaceMatches(for: headerItemTitlePatterns,
+                                                        withString: "")
+            else { return nil }
+            return .month(tail.trimmingCharacters(in: .whitespaces))
+        }()
+
+        let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "") ?? self
+
+        let headerItems: [ParsedReportHeaderViewModel.Token] = tail
             .listMatches(for: headerItemPatterns)
             .compactMap {
                 guard let title = $0.firstMatch(for: headerItemTitlePatterns),
@@ -48,20 +58,12 @@ extension String {
                 else { return nil }
 
                 let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title).trimmingCharacters(in: .whitespaces)
-#warning("error parsing month")
-                if let month = tail.firstMatch(for: headerItemMonthPattern) {
-                    return .month(month.trimmingCharacters(in: .whitespaces))
-                }
 
                 guard let number = tail.extractNumber() else { return nil }
                 return .headerItem(cleanTitle, number)
             }
 
-        if let company = company {
-            return [company] + headerItems
-        } else {
-            return headerItems
-        }
+        return [company, month].compactMap { $0 } + headerItems
     }
 
     func transformLineToItem() -> ParsedReportGroupViewModel.Token? {
