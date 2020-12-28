@@ -9,13 +9,14 @@ import SwiftUI
 
 final class ParsedReportGroupViewModel: ObservableObject {
 
-    @Published var groupString: String
     @Published var groupHeaderString: String = ""
     @Published var groupHeader: Token = .empty
     @Published var listWithNumbers: [String]
     @Published var items: [Token] = []
     @Published var groupFooterString: String = ""
     @Published var groupFooter: Token = .empty
+
+    let groupString: String
 
     init(groupString: String) {
         self.groupString = groupString

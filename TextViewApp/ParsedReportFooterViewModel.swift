@@ -9,8 +9,9 @@ import Foundation
 
 final class ParsedReportFooterViewModel: ObservableObject {
 
-    @Published var footerString: String
     @Published var items: [Token]
+
+    let footerString: String
 
     init(footerString: String) {
         self.footerString = footerString

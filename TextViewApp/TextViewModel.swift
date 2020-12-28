@@ -9,8 +9,10 @@ import SwiftUI
 import Combine
 
 final class TextViewModel: ObservableObject {
+
     @Published var attributedText = NSAttributedString()
     @Published var textStyle = UIFont.TextStyle.subheadline
+
     @Published var showingReportStructure: Bool = false
     @Published var reportContent: ReportContent?
 
@@ -51,7 +53,8 @@ final class TextViewModel: ObservableObject {
         // replace extracted text with special delimiter
         // use delimiter to seperate header from footer
 
-        let groups = attributedText.string.listMatches(for: String.groupPattern)
+        let groups = attributedText.string
+            .listMatches(for: String.groupPattern)
 
         let delimiter = "#####"
         var header = ""
@@ -74,9 +77,7 @@ final class TextViewModel: ObservableObject {
             default:     errorMessage = "Error: unknown parsing error"
         }
 
-
         reportContent = ReportContent(header: header, groups: groups, footer: footer)
-        // showingReportStructure = true
     }
 
     func highlightText(pattern: String) {
@@ -103,13 +104,11 @@ final class TextViewModel: ObservableObject {
 
     func pasteClipboard() {
         guard let content = UIPasteboard.general.string else { return }
-
-        // clean whitespaces and empty lines
         changeText(to: content)
     }
 
     func changeText(to content: String) {
-        // make some file cleaning
+        // make some file cleaning & fixes
         let cleanContent = content
             .clearWhitespacesAndNewlines()
             .replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
