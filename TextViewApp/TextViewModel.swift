@@ -35,6 +35,7 @@ final class TextViewModel: ObservableObject {
             .sink { [weak self] _ in
                 if let self = self {
                     self.highlightText(pattern: String.groupPattern)
+                    self.splitReportContent()
                 }
             }
             .store(in: &cancellableSet)
