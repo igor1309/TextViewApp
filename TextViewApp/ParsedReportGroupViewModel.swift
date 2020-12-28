@@ -9,13 +9,34 @@ import SwiftUI
 
 final class ParsedReportGroupViewModel: ObservableObject {
 
-    @Published var groupString: String
     @Published var groupHeaderString: String = ""
     @Published var groupHeader: Token = .empty
     @Published var listWithNumbers: [String]
     @Published var items: [Token] = []
     @Published var groupFooterString: String = ""
     @Published var groupFooter: Token = .empty
+
+    let groupString: String
+
+    var errorMessage: String {
+        errorMessages.joined(separator: ", ")
+    }
+    var errorMessages: [String] {
+        var messages = [String]()
+
+        if groupHeaderString == "header error" {
+            messages.append("header error")
+        }
+        if groupFooterString == "footer error" {
+            messages.append("footer error")
+        }
+        if !isTotalsMatch {
+            messages.append("totals don't match")
+        }
+
+        return messages
+    }
+    var hasError: Bool { !errorMessage.isEmpty }
 
     init(groupString: String) {
         self.groupString = groupString

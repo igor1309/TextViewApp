@@ -9,8 +9,9 @@ import SwiftUI
 
 final class ParsedReportHeaderViewModel: ObservableObject {
 
-    @Published var headerString: String
     @Published var items: [Token]
+
+    let headerString: String
 
     let errorMessage = "Error parsing header"
     var hasError: Bool { items.count != 4 }
