@@ -30,35 +30,31 @@ extension String {
         let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
 
         let company: ParsedReportHeaderViewModel.Token? = {
-            guard let companyString = self.firstMatch(for: headerItemCompanyPattern),
-                  let company = companyString
-                    .replaceMatches(for: #"Название объекта:"#, withString: "")?
-                    .trimmingCharacters(in: .whitespaces)
-            else { return nil }
-
+            guard let companyString = self.firstMatch(for: headerItemCompanyPattern) else { return nil }
+            let company = companyString
+                .replaceMatches(for: #"Название объекта:"#, withString: "")
+                .trimmingCharacters(in: .whitespaces)
             return .company(company)
         }()
 
         let month: ParsedReportHeaderViewModel.Token? = {
-            guard let monthString = self.firstMatch(for: headerItemMonthPattern),
-                  let tail = monthString.replaceMatches(for: headerItemTitlePatterns,
-                                                        withString: "")
-            else { return nil }
+            guard let monthString = self.firstMatch(for: headerItemMonthPattern) else { return nil }
+            let tail = monthString.replaceMatches(for: headerItemTitlePatterns,
+                                                  withString: "")
             return .month(tail.trimmingCharacters(in: .whitespaces))
         }()
 
-        let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "") ?? self
+        let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "")
 
         let headerItems: [ParsedReportHeaderViewModel.Token] = tail
             .listMatches(for: headerItemPatterns)
             .compactMap {
-                guard let title = $0.firstMatch(for: headerItemTitlePatterns),
-                      let tail = $0.replaceMatches(for: headerItemTitlePatterns,
-                                                   withString: "")
-                else { return nil }
+                guard let title = $0.firstMatch(for: headerItemTitlePatterns) else { return nil }
+                let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title)
+                    .trimmingCharacters(in: .whitespaces)
 
-                let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title).trimmingCharacters(in: .whitespaces)
-
+                let tail = $0.replaceMatches(for: headerItemTitlePatterns,
+                                             withString: "")
                 guard let number = tail.extractNumber() else { return nil }
                 return .headerItem(cleanTitle, number)
             }
@@ -148,10 +144,10 @@ extension String {
             if line.firstMatch(for: #"Фактический остаток:"#) != nil {
                 // get percentage and remains (replace percentage with "")
                 guard let percentageString = line.firstMatch(for: String.matchingPercentagePattern),
-                      let percentage = percentageString.percentageStringToDouble(),
-                      let remains = line.replaceMatches(for: String.matchingPercentagePattern, withString: "")
+                      let percentage = percentageString.percentageStringToDouble()
                 else { return .error }
 
+                let remains = line.replaceMatches(for: String.matchingPercentagePattern, withString: "")
                 // get number
                 if let number = remains.getNumberNoRemains() {
                     return .balance("Фактический остаток", number, percentage)

@@ -21,10 +21,11 @@ extension String {
             sign = -1
         }
 
-        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern),
-           let rubliIKopeiki = numberString.rubliIKopeikiToDouble(),
-           let remains = self.replaceFirstMatch(for: String.rublesIKopeksPattern, withString: "") {
-            return (sign * rubliIKopeiki, remains)
+        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern) {
+            let rubliIKopeiki = numberString.rubliIKopeikiToDouble()
+            if let remains = self.replaceFirstMatch(for: String.rublesIKopeksPattern, withString: "") {
+                return (sign * rubliIKopeiki, remains)
+            }
         } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
                   let double = Double(numberString.replacingOccurrences(of: ".", with: "")),
                   let remains = self.replaceFirstMatch(for: String.itemNumberPattern, withString: "") {
@@ -40,8 +41,8 @@ extension String {
             sign = -1
         }
 
-        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern),
-           let rubliIKopeiki = numberString.rubliIKopeikiToDouble() {
+        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern) {
+            let rubliIKopeiki = numberString.rubliIKopeikiToDouble()
             return sign * rubliIKopeiki
         } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
                   let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
@@ -53,12 +54,13 @@ extension String {
 
     // MARK: - Conversion
 
-    func rubliIKopeikiToDouble() -> Double? {
-        guard let spacedDelete = self.replaceMatches(for: " *", withString: ""),
-              let dotDelete = spacedDelete.replaceMatches(for: #"\."#, withString: ""),
-              let kopekDelete = dotDelete.replaceMatches(for: "к", withString: "") else { return nil }
+    func rubliIKopeikiToDouble() -> Double {
+        let cleanString = self
+            .replaceMatches(for: " *", withString: "")
+            .replaceMatches(for: #"\."#, withString: "")
+            .replaceMatches(for: "к", withString: "")
 
-        let components = kopekDelete.split(separator: "р")
+        let components = cleanString.split(separator: "р")
         let integerPart = components.first ?? ""
         let integer = Double(integerPart) ?? 0
 

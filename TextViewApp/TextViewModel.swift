@@ -57,22 +57,23 @@ final class TextViewModel: ObservableObject {
         var header = ""
         var footer = ""
 
-        if let copy = attributedText.string.replaceMatches(for: String.groupPattern, withString: delimiter) {
-            let components = copy
-                .components(separatedBy: delimiter)
-                .compactMap { $0 == "\n" ? nil : $0 }
-                .compactMap { $0.isEmpty ? nil : $0 }
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        let copy = attributedText.string
+            .replaceMatches(for: String.groupPattern, withString: delimiter)
+        let components = copy
+            .components(separatedBy: delimiter)
+            .compactMap { $0 == "\n" ? nil : $0 }
+            .compactMap { $0.isEmpty ? nil : $0 }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
 
-            header = components.first ?? "error getting header"
-            footer = components.last ?? "error getting footer"
+        header = components.first ?? "error getting header"
+        footer = components.last ?? "error getting footer"
 
-            switch components.count {
-                case 2:      errorMessage = ""
-                case 3...20: errorMessage = "Error: some group(s) not parsed"
-                default:     errorMessage = "Error: unknown parsing error"
-            }
+        switch components.count {
+            case 2:      errorMessage = ""
+            case 3...20: errorMessage = "Error: some group(s) not parsed"
+            default:     errorMessage = "Error: unknown parsing error"
         }
+
 
         reportContent = ReportContent(header: header, groups: groups, footer: footer)
         // showingReportStructure = true
@@ -109,14 +110,10 @@ final class TextViewModel: ObservableObject {
 
     func changeText(to content: String) {
         // make some file cleaning
-        var cleanContent = content
+        let cleanContent = content
             .clearWhitespacesAndNewlines()
-
-        if let modifiedContent =
-            cleanContent.replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
-                                        withString: "\n2. ФОТ Бренд, логистика, бухгалтерия") {
-            cleanContent = modifiedContent
-        }
+            .replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
+                            withString: "\n2. ФОТ Бренд, логистика, бухгалтерия")
 
         self.attributedText = NSAttributedString(string: cleanContent)
         self.highlightText(pattern: String.groupPattern)

@@ -18,10 +18,10 @@ extension String {
             .joined(separator: "\n")
 
         let clean = cleanContent.replaceMatches(for: "\n\n", withString: "\n")
-        return clean ?? cleanContent
+        return clean
     }
 
-    func replaceMatches(for pattern: String, withString replacementString: String) -> String? {
+    func replaceMatches(for pattern: String, withString replacementString: String) -> String {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
             return self
         }
