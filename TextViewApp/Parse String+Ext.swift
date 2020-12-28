@@ -81,9 +81,9 @@ extension String {
         // special case when number after item title is not a number for item
         // for example in 1. Приход товара по накладным     946.056р (оплаты фактические: 475.228р 52к -переводы; 157.455р 85к-корпоративная карта; 0-наличные из кассы; Итого-632.684р 37к)
         let itemWithItogoPattern = #"(.*)?Итого"#
-        if let afterItogo = remains.replaceFirstMatch(for: itemWithItogoPattern, withString: "") {
-            number = afterItogo.getNumberNoRemains()
-        }
+        let afterItogo = remains.replaceFirstMatch(for: itemWithItogoPattern,
+                                                   withString: "")
+        number = afterItogo.getNumberNoRemains()
 
         let comment: String? = remains.isEmpty ? nil : remains
 
@@ -96,14 +96,14 @@ extension String {
 
         let firstTail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern,
                                                withString: "")
-        guard let firstPercentageString = firstTail?.firstMatch(for: String.matchingPercentagePattern),
+        guard let firstPercentageString = firstTail.firstMatch(for: String.matchingPercentagePattern),
               let firstPercentage = firstPercentageString.percentageStringToDouble() else {
             return .header(cleanTitle, nil, nil)
         }
 
-        let secondtail = firstTail?.replaceFirstMatch(for: String.matchingPercentagePattern,
+        let secondtail = firstTail.replaceFirstMatch(for: String.matchingPercentagePattern,
                                                       withString: "")
-        guard let secondPercentageString = secondtail?.firstMatch(for: String.matchingPercentagePattern),
+        guard let secondPercentageString = secondtail.firstMatch(for: String.matchingPercentagePattern),
               let secondPercentage = secondPercentageString.percentageStringToDouble() else {
             return .header(cleanTitle, firstPercentage, nil)
         }
@@ -115,8 +115,8 @@ extension String {
         guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
 
-        guard let tail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern, withString: ""),
-              let number = tail.getNumberNoRemains() else { return .footer(cleanTitle, nil) }
+        let tail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern, withString: "")
+        guard let number = tail.getNumberNoRemains() else { return .footer(cleanTitle, nil) }
 
         return .footer(cleanTitle, number)
     }

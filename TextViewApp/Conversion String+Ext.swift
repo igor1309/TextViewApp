@@ -23,12 +23,11 @@ extension String {
 
         if let numberString = self.firstMatch(for: String.rublesIKopeksPattern) {
             let rubliIKopeiki = numberString.rubliIKopeikiToDouble()
-            if let remains = self.replaceFirstMatch(for: String.rublesIKopeksPattern, withString: "") {
-                return (sign * rubliIKopeiki, remains)
-            }
+            let remains = self.replaceFirstMatch(for: String.rublesIKopeksPattern, withString: "")
+            return (sign * rubliIKopeiki, remains)
         } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
-                  let double = Double(numberString.replacingOccurrences(of: ".", with: "")),
-                  let remains = self.replaceFirstMatch(for: String.itemNumberPattern, withString: "") {
+                  let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
+            let remains = self.replaceFirstMatch(for: String.itemNumberPattern, withString: "")
             return (sign * double, remains)
         }
 

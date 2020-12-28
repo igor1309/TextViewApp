@@ -21,6 +21,11 @@ extension String {
         return clean
     }
 
+    /// Returns a new string containing matching regular expression replaced with provided string.
+    /// - Parameters:
+    ///   - pattern: string to create regular expression used for match
+    ///   - replacementString: replacement string
+    /// - Returns: string with replaced match or original string if no matches for match string were found
     func replaceMatches(for pattern: String, withString replacementString: String) -> String {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
             return self
@@ -28,6 +33,11 @@ extension String {
         return replaceMatches(for: regex, withString: replacementString)
     }
 
+    /// Returns a new string containing matching regular expression replaced with provided string.
+    /// - Parameters:
+    ///   - regex: regular expression used for match
+    ///   - replacementString: replacement string
+    /// - Returns: string with replaced match or original string if no matches for match string were found
     func replaceMatches(for regex: NSRegularExpression, withString replacementString: String) -> String {
         let range = NSRange(self.startIndex..., in: self)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
@@ -48,11 +58,17 @@ extension String {
         }
     }
 
+    /// Returns matching string or nil of no match
+    /// - Parameter pattern: pattern to create NSRegularExpression
+    /// - Returns: nil if no match
     func firstMatch(for pattern: String) -> String? {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
         return firstMatch(for: regex)
     }
 
+    /// Returns matching string or nil of no match
+    /// - Parameter regex: NSRegularExpression to match
+    /// - Returns: nil if no match
     func firstMatch(for regex: NSRegularExpression) -> String? {
         let range = NSRange(self.startIndex..., in: self)
         let match = regex.firstMatch(in: self, options: [], range: range)
@@ -65,12 +81,22 @@ extension String {
         }
     }
 
-    func replaceFirstMatch(for pattern: String, withString replacementString: String) -> String? {
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+    /// Returns a new string containing first matching regular expression replaced with provided string.
+    /// - Parameters:
+    ///   - pattern: string to create regular expression used for match
+    ///   - replacementString: replacement string
+    /// - Returns: string with replaced match or original string if no matches for match string were found
+    func replaceFirstMatch(for pattern: String, withString replacementString: String) -> String {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return self }
         return replaceFirstMatch(for: regex, withString: replacementString)
     }
 
-    func replaceFirstMatch(for regex: NSRegularExpression, withString replacementString: String) -> String? {
+    /// Returns a new string containing first matching regular expression replaced with provided string.
+    /// - Parameters:
+    ///   - regex: search string as NSRegularExpression
+    ///   - replacementString: replacement string
+    /// - Returns: string with replaced match or original string if no matches for match string were found
+    func replaceFirstMatch(for regex: NSRegularExpression, withString replacementString: String) -> String {
         let range = NSRange(self.startIndex..., in: self)
         let match = regex.firstMatch(in: self, options: [], range: range)
 
@@ -79,7 +105,7 @@ extension String {
             return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
 
         } else {
-            return nil
+            return self
         }
     }
 
@@ -94,9 +120,9 @@ extension String {
 
         for pattern in patterns {
             guard let regex = try? NSRegularExpression(pattern: pattern, options: []),
-                  let headString = self.firstMatch(for: regex),
-                  let tailString = self.replaceFirstMatch(for: regex, withString: "") else { continue }
+                  let headString = self.firstMatch(for: regex) else { continue }
 
+            let tailString = self.replaceFirstMatch(for: regex, withString: "")
             match = headString.trimmingCharacters(in: .whitespaces)
             remains = tailString.trimmingCharacters(in: .whitespaces)
             break

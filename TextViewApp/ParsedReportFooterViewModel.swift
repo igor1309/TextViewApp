@@ -17,6 +17,19 @@ final class ParsedReportFooterViewModel: ObservableObject {
         self.items = footerString.parseReportFooter()
     }
 
+    var expensesTotal: Double {
+        items
+            .compactMap { token -> Double? in
+                switch token {
+                    case let .expensesTotal(_, number):
+                        return number
+                    default:
+                        return nil
+                }
+            }
+            .reduce(0, +)
+    }
+
     enum Token: Hashable {
         case total(String, Double)
         case expensesTotal(String, Double)
