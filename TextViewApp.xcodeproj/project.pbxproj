@@ -13,6 +13,10 @@
 		2AE08B9625968402009DB6FC /* Parse String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9525968402009DB6FC /* Parse String+Ext.swift */; };
 		2AE08B9A25968563009DB6FC /* Conversion String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9925968563009DB6FC /* Conversion String+Ext.swift */; };
 		2AE08BBC2596F2DB009DB6FC /* ParsedReportFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BBB2596F2DB009DB6FC /* ParsedReportFooterViewModel.swift */; };
+		2AE08BDF2599D783009DB6FC /* ParsedReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BDE2599D783009DB6FC /* ParsedReportView.swift */; };
+		2AE08BE22599E008009DB6FC /* ParsedReportHeaderViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE12599E008009DB6FC /* ParsedReportHeaderViewRows.swift */; };
+		2AE08BE52599E07D009DB6FC /* ParsedReportFooterViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE42599E07D009DB6FC /* ParsedReportFooterViewRows.swift */; };
+		2AE08BE82599E5AE009DB6FC /* ParsedReportGroupSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE72599E5AE009DB6FC /* ParsedReportGroupSectionView.swift */; };
 		2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */; };
 		2AF21A902593CF020057A5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8F2593CF020057A5CD /* ContentView.swift */; };
 		2AF21A922593CF030057A5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF21A912593CF030057A5CD /* Assets.xcassets */; };
@@ -35,6 +39,10 @@
 		2AE08B9525968402009DB6FC /* Parse String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Parse String+Ext.swift"; sourceTree = "<group>"; };
 		2AE08B9925968563009DB6FC /* Conversion String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conversion String+Ext.swift"; sourceTree = "<group>"; };
 		2AE08BBB2596F2DB009DB6FC /* ParsedReportFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportFooterViewModel.swift; sourceTree = "<group>"; };
+		2AE08BDE2599D783009DB6FC /* ParsedReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportView.swift; sourceTree = "<group>"; };
+		2AE08BE12599E008009DB6FC /* ParsedReportHeaderViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportHeaderViewRows.swift; sourceTree = "<group>"; };
+		2AE08BE42599E07D009DB6FC /* ParsedReportFooterViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportFooterViewRows.swift; sourceTree = "<group>"; };
+		2AE08BE72599E5AE009DB6FC /* ParsedReportGroupSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedReportGroupSectionView.swift; sourceTree = "<group>"; };
 		2AF21A8A2593CF020057A5CD /* TextViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAppApp.swift; sourceTree = "<group>"; };
 		2AF21A8F2593CF020057A5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,11 +97,15 @@
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
 				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
+				2AE08BDE2599D783009DB6FC /* ParsedReportView.swift */,
 				2AF21AB525946EA50057A5CD /* ParsedReportHeaderView.swift */,
+				2AE08BE12599E008009DB6FC /* ParsedReportHeaderViewRows.swift */,
 				2AE08B9125964FD8009DB6FC /* ParsedReportHeaderViewModel.swift */,
 				2AF21AB825946EE10057A5CD /* ParsedReportGroupView.swift */,
+				2AE08BE72599E5AE009DB6FC /* ParsedReportGroupSectionView.swift */,
 				2A481FA525955DCF009C585F /* ParsedReportGroupViewModel.swift */,
 				2AF21ABB25946F4E0057A5CD /* ParsedReportFooterView.swift */,
+				2AE08BE42599E07D009DB6FC /* ParsedReportFooterViewRows.swift */,
 				2AE08BBB2596F2DB009DB6FC /* ParsedReportFooterViewModel.swift */,
 				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
@@ -188,7 +200,9 @@
 				2AE08BBC2596F2DB009DB6FC /* ParsedReportFooterViewModel.swift in Sources */,
 				2AF21ABC25946F4E0057A5CD /* ParsedReportFooterView.swift in Sources */,
 				2AF21AB625946EA50057A5CD /* ParsedReportHeaderView.swift in Sources */,
+				2AE08BDF2599D783009DB6FC /* ParsedReportView.swift in Sources */,
 				2AE08B9225964FD8009DB6FC /* ParsedReportHeaderViewModel.swift in Sources */,
+				2AE08BE22599E008009DB6FC /* ParsedReportHeaderViewRows.swift in Sources */,
 				2AF21A9E2593CF2D0057A5CD /* TextView.swift in Sources */,
 				2AF21AB0259456A50057A5CD /* Regex String+Ext.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
@@ -197,10 +211,12 @@
 				2A481FA625955DCF009C585F /* ParsedReportGroupViewModel.swift in Sources */,
 				2AF21AB925946EE10057A5CD /* ParsedReportGroupView.swift in Sources */,
 				2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */,
+				2AE08BE52599E07D009DB6FC /* ParsedReportFooterViewRows.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
 				2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */,
 				2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */,
 				2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */,
+				2AE08BE82599E5AE009DB6FC /* ParsedReportGroupSectionView.swift in Sources */,
 				2AE08B9A25968563009DB6FC /* Conversion String+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

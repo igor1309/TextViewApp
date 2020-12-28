@@ -13,6 +13,11 @@ final class ParsedReportFooterViewModel: ObservableObject {
 
     let footerString: String
 
+    var hasError: Bool {
+        //  FIXME: FINISH THIS:
+        false
+    }
+
     init(footerString: String) {
         self.footerString = footerString
         self.items = footerString.parseReportFooter()

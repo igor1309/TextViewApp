@@ -21,8 +21,8 @@ struct ReportImportView: View {
 
                 NavigationLink(
                     "Report Structure",
-                    destination: ReportStructureView(model: model),
-                    isActive: $model.showingReportStructure
+                    destination: destination(),
+                    isActive: $model.showingNextView
                 )
                 .hidden()
 
@@ -48,6 +48,15 @@ struct ReportImportView: View {
             // .onAppear(perform: testText)
             .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.plainText], onCompletion: handleFileImporter)
 
+        }
+    }
+
+    @ViewBuilder
+    private func destination() -> some View {
+        if let reportContent = model.reportContent {
+            ParsedReportView(reportContent: reportContent)
+        } else {
+            ReportStructureView(model: model)
         }
     }
 
@@ -97,7 +106,7 @@ struct ReportImportView: View {
             Button("Next") {
                 // Ory.withHapticsAndAnimation(action: model.splitReportContent)
                 Ory.withHapticsAndAnimation {
-                    model.showingReportStructure = true
+                    model.showingNextView = true
                 }
             }
         }

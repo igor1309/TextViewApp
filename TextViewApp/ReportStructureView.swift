@@ -11,6 +11,21 @@ struct ReportStructureView: View {
 
     @ObservedObject var model: TextViewModel
 
+    @StateObject private var headerModel: ParsedReportHeaderViewModel
+    @StateObject private var footerModel: ParsedReportFooterViewModel
+
+    init(model: TextViewModel) {
+        self.model = model
+
+        let reportContent = model.reportContent ?? TextViewModel.ReportContent.empty
+
+        let headerModel = ParsedReportHeaderViewModel(headerString: reportContent.headerString)
+        _headerModel = StateObject(wrappedValue: headerModel)
+
+        let footerModel = ParsedReportFooterViewModel(footerString: reportContent.footerString)
+        _footerModel = StateObject(wrappedValue: footerModel)
+    }
+
     var body: some View {
         if let reportContent = model.reportContent {
             List {
@@ -21,13 +36,13 @@ struct ReportStructureView: View {
                 }
 
                 Section(header: Text("header")) {
-                    reportHeaderView(reportContent.header)
+                    reportHeaderView(reportContent.headerString)
                 }
                 Section(header: Text("Groups (\(reportContent.groups.count))")) {
                     reportGroupsView(reportContent.groups)
                 }
                 Section(header: Text("footer")) {
-                    reportFooterView(reportContent.footer)
+                    reportFooterView(reportContent.footerString)
                 }
             }
             .font(.subheadline)
@@ -40,7 +55,7 @@ struct ReportStructureView: View {
     }
 
     private func reportHeaderView(_ header: String) -> some View {
-        NavigationLink(destination: ParsedReportHeaderView(headerString: header)) {
+        NavigationLink(destination: ParsedReportHeaderView(model: headerModel)) {
             Text(header)
         }
     }
@@ -54,7 +69,7 @@ struct ReportStructureView: View {
     }
 
     private func reportFooterView(_ footer: String) -> some View {
-        NavigationLink(destination: ParsedReportFooterView(footerString: footer)) {
+        NavigationLink(destination: ParsedReportFooterView(model: footerModel)) {
             Text(footer)
         }
     }

@@ -9,11 +9,7 @@ import SwiftUI
 
 struct ParsedReportHeaderView: View {
 
-    @StateObject private var model: ParsedReportHeaderViewModel
-
-    init(headerString: String) {
-        _model = StateObject(wrappedValue: ParsedReportHeaderViewModel(headerString: headerString))
-    }
+    @ObservedObject var model: ParsedReportHeaderViewModel
 
     var body: some View {
         List {
@@ -29,8 +25,8 @@ struct ParsedReportHeaderView: View {
                     .font(.footnote)
             }
 
-            Section(header: Text("Parsed Header")) {
-                ForEach(model.items, id: \.self, content: itemView)
+            Section(header: Text("Parsed Header (\(model.items.count))")) {
+                ParsedReportHeaderViewRows(model: model)
             }
         }
         .font(.subheadline)
@@ -38,41 +34,19 @@ struct ParsedReportHeaderView: View {
         .navigationTitle("Parsed Header")
     }
 
-    @ViewBuilder
-    private func itemView(item: ParsedReportHeaderViewModel.Token) -> some View {
-        switch item {
-            case let .company(company):
-                HStack(alignment: .firstTextBaseline) {
-                    Text("Company")
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Text(company)
-                }
-            case let .month(month):
-                HStack(alignment: .firstTextBaseline) {
-                    Text("Month")
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Text(month)
-                }
-            case let .headerItem(title, number):
-                HStack(alignment: .firstTextBaseline) {
-                    Text(title)
-                    Spacer()
-                    Text("\(number, specifier: "%.2f")")
-                }
-        }
-    }
 }
 
 struct ParsedReportHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ParsedReportHeaderView(headerString: """
-            Название объекта: Саперави Аминьевка
-            Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
+        ParsedReportHeaderView(
+            model: ParsedReportHeaderViewModel(
+                headerString: """
+                Название объекта: Саперави Аминьевка
+                Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
 
-            Статья расхода:    Сумма расхода:    План %     Факт %
-            """
+                Статья расхода:    Сумма расхода:    План %     Факт %
+                """
+            )
         )
     }
 }

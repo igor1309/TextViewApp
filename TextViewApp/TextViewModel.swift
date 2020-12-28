@@ -13,13 +13,15 @@ final class TextViewModel: ObservableObject {
     @Published var attributedText = NSAttributedString()
     @Published var textStyle = UIFont.TextStyle.subheadline
 
-    @Published var showingReportStructure: Bool = false
+    @Published var showingNextView: Bool = false
     @Published var reportContent: ReportContent?
 
     struct ReportContent {
-        var header: String
+        var headerString: String
         var groups: [String]
-        var footer: String
+        var footerString: String
+
+        static let empty = ReportContent(headerString: "", groups: [], footerString: "")
     }
 
     @Published var errorMessage = ""
@@ -78,7 +80,7 @@ final class TextViewModel: ObservableObject {
             default:     errorMessage = "Error: unknown parsing error"
         }
 
-        reportContent = ReportContent(header: header, groups: groups, footer: footer)
+        reportContent = ReportContent(headerString: header, groups: groups, footerString: footer)
     }
 
     func highlightText(pattern: String) {
@@ -118,5 +120,6 @@ final class TextViewModel: ObservableObject {
         self.attributedText = NSAttributedString(string: cleanContent)
         self.highlightText(pattern: String.groupPattern)
         self.splitReportContent()
+        self.showingNextView = true
     }
 }

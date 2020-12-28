@@ -24,7 +24,7 @@ struct ParsedReportGroupView: View {
                     .font(.headline)
                     .foregroundColor(Color(UIColor.systemRed))
             }
-            
+
             Section(header: Text("Original Text")) {
                 Text(model.groupString)
                     .foregroundColor(.secondary)
@@ -140,7 +140,7 @@ struct ParsedReportGroupView: View {
     }
 
     private func itemsSectionFooter() -> some View {
-        HStack {
+        HStack(alignment: .firstTextBaseline) {
             Text("Group Total".uppercased())
                 .font(.subheadline)
             Spacer()
