@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @StateObject private var model = TextViewModel()
+
     var body: some View {
-        ReportImportView()
+        ReportImportView(model: model)
     }
 }
 

@@ -47,7 +47,7 @@ struct ParsedReportGroupView: View {
 
             Section(
                 header: Text("Parsed rows (\(model.items.count))"),
-                footer: itemsSectionFooter()
+                footer: itemsSectionFooterView()
             ) {
                 // VStack(alignment: .leading, spacing: 8) {
                 ForEach(model.items, id: \.self, content: tokenView)
@@ -139,7 +139,7 @@ struct ParsedReportGroupView: View {
         .padding(.vertical, 3)
     }
 
-    private func itemsSectionFooter() -> some View {
+    private func itemsSectionFooterView() -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text("Group Total".uppercased())
                 .font(.subheadline)

@@ -33,7 +33,6 @@ struct ParsedReportView: View {
         List {
             if hasErrors {
                 Text("TBD: show if errors")
-                    .font(.headline)
                     .foregroundColor(Color(UIColor.systemRed))
             }
 

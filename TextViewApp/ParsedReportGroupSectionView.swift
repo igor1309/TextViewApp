@@ -30,7 +30,7 @@ struct ParsedReportGroupSectionView: View {
             ForEach(model.items, id: \.self, content: tokenView)
 
             if model.isTotalsMatch {
-                groupTotal()
+                groupTotalView()
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline) {
@@ -40,7 +40,7 @@ struct ParsedReportGroupSectionView: View {
                             .foregroundColor(Color(UIColor.systemRed))
                     }
 
-                    groupTotal()
+                    groupTotalView()
                 }
                 .padding(.vertical, 3)
             }
@@ -68,7 +68,7 @@ struct ParsedReportGroupSectionView: View {
     }
 
     @ViewBuilder
-    private func groupTotal() -> some View {
+    private func groupTotalView() -> some View {
         if case let .footer(title, total) = model.groupFooter {
             HStack(alignment: .firstTextBaseline) {
                 Text(title)

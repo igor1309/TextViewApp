@@ -11,7 +11,7 @@ struct ReportImportView: View {
 
     @Environment(\.colorScheme) private var colorScheme
 
-    @StateObject private var model = TextViewModel()
+    @ObservedObject var model: TextViewModel
 
     @State private var showingFileImporter = true
 
@@ -21,38 +21,41 @@ struct ReportImportView: View {
 
                 NavigationLink(
                     "Report Structure",
-                    destination: destination(),
+                    destination: destinationView(),
                     isActive: $model.showingNextView
                 )
                 .hidden()
 
                 TextView(attributedText: $model.attributedText, textStyle: $model.textStyle, colorScheme: colorScheme)
 
-                 if model.hasError {
-                    Text(model.errorMessage)
-                        .font(.footnote)
-                        .foregroundColor(Color(UIColor.systemRed))
-                        .padding(.horizontal)
-                        .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(Color(UIColor.secondarySystemBackground))
-                                .shadow(radius: 6)
-                        )
-                 }
+                errorMessageView()
             }
             .padding()
             .navigationTitle("Report")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: toolbar)
-            // .onAppear(perform: testText)
             .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.plainText], onCompletion: handleFileImporter)
-
         }
     }
 
     @ViewBuilder
-    private func destination() -> some View {
+    private func errorMessageView() -> some View {
+        if model.hasError {
+            Text(model.errorMessage)
+                .font(.footnote)
+                .foregroundColor(Color(UIColor.systemRed))
+                .padding(.horizontal)
+                .padding(.vertical, 6)
+                .background(
+                    Capsule()
+                        .fill(Color(UIColor.secondarySystemBackground))
+                        .shadow(radius: 6)
+                )
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView() -> some View {
         if let reportContent = model.reportContent {
             ParsedReportView(reportContent: reportContent)
         } else {
@@ -111,11 +114,11 @@ struct ReportImportView: View {
             }
         }
     }
+}
 
-    // swiftlint:disable function_body_length
-    // swiftlint:disable line_length
-    private func testText() {
-        let test = """
+struct ReportImportView_Previews: PreviewProvider {
+    static let model = TextViewModel()
+    static let testText = """
 Название объекта: Саперави Аминьевка
 Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
 
@@ -180,21 +183,15 @@ struct ReportImportView: View {
 
 """
 
-        UIPasteboard.general.string = test
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: model.pasteClipboard)
-
-        // model.attributedText = NSAttributedString(string: test)
-    }
-}
-
-struct ReportImportView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ReportImportView()
+        model.changeText(to: testText)
+
+        return Group {
+            ReportImportView(model: model)
                 .previewLayout(.fixed(width: 350, height: 400))
                 .environment(\.colorScheme, .light)
 
-            ReportImportView()
+            ReportImportView(model: model)
                 .previewLayout(.fixed(width: 350, height: 400))
                 .environment(\.colorScheme, .dark)
         }
