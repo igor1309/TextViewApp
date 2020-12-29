@@ -10,11 +10,7 @@ import Combine
 
 struct TokenizedReportGroupView: View {
 
-    @StateObject private var model: TokenizedReportGroupViewModel
-
-    init(groupString: String) {
-        _model = StateObject(wrappedValue: TokenizedReportGroupViewModel(groupString: groupString))
-    }
+    let model: TokenizedReportGroupModel
 
     var body: some View {
         List {
@@ -153,27 +149,27 @@ struct TokenizedReportGroupView: View {
         .foregroundColor(.primary)
     }
 }
-
-struct TokenizedReportGroupView_Previews: PreviewProvider {
-    static var previews: some View {
-        TokenizedReportGroupView(groupString: """
-Прочие расходы:        15%    16.5%
-1.Налоговые платежи     26.964
-2.Банковское обслуживание    6.419
-3.Юридическое сопровождение    40.000
-4.Банковская комиссия 1.6% за эквайринг    26.581
-5.Тайный гость    -----------------------------
-9.Реклама и IT поддержка    65.000 (не iiko)
-10.Обслуживание пожарной охраны    -----------------------------
-11.Вневедомственная охрана помещения    -----------------------------
-12.Интернет    9.000
-13.Дезобработка помещения    -----------------------------
-14. ----------------------------------    ----------------------------
-15.Аренда зарядных устройств и раций    ----------------------------
-27. Сервис Гуру (система аттестации, за 1 год)    12.655
-ИТОГ:    402.520
-"""
-        )
-        .previewLayout(.fixed(width: 350, height: 1000))
-    }
-}
+#warning("fix this preview")
+//struct TokenizedReportGroupView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TokenizedReportGroupView(groupString: """
+//            Прочие расходы:        15%    16.5%
+//            1.Налоговые платежи     26.964
+//            2.Банковское обслуживание    6.419
+//            3.Юридическое сопровождение    40.000
+//            4.Банковская комиссия 1.6% за эквайринг    26.581
+//            5.Тайный гость    -----------------------------
+//            9.Реклама и IT поддержка    65.000 (не iiko)
+//            10.Обслуживание пожарной охраны    -----------------------------
+//            11.Вневедомственная охрана помещения    -----------------------------
+//            12.Интернет    9.000
+//            13.Дезобработка помещения    -----------------------------
+//            14. ----------------------------------    ----------------------------
+//            15.Аренда зарядных устройств и раций    ----------------------------
+//            27. Сервис Гуру (система аттестации, за 1 год)    12.655
+//            ИТОГ:    402.520
+//            """
+//        )
+//        .previewLayout(.fixed(width: 350, height: 1000))
+//    }
+//}

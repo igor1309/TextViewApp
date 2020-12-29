@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TokenizedReportFooterViewRows: View {
-    @ObservedObject var model: TokenizedReportFooterViewModel
+
+    @ObservedObject var model: TokenizedReportViewModel
 
     var body: some View {
-        ForEach(model.items, id: \.self, content: itemView)
+        ForEach(model.footerModel.items, id: \.self, content: itemView)
     }
 
     @ViewBuilder
@@ -44,22 +45,23 @@ struct TokenizedReportFooterViewRows: View {
     }
 }
 
-struct TokenizedReportFooterViewRows_Previews: PreviewProvider {
-    static let model = TokenizedReportFooterViewModel(
-        footerString: """
-            ИТОГ всех расходов за месяц:    2.343.392р 37к
-            Фактический остаток:    96.628р 63к    20%
-                Минус с августа переходит 739.626р 06к
-            ИТОГ:    Минус 642.997р 43к
-            """
-    )
-
-    static var previews: some View {
-        List {
-            Section {
-                TokenizedReportFooterViewRows(model: model)
-            }
-        }
-        .environment(\.colorScheme, .dark)
-    }
-}
+#warning("Fix this preview")
+//struct TokenizedReportFooterViewRows_Previews: PreviewProvider {
+//    static let model = TokenizedReportFooterViewModel(
+//        footerString: """
+//            ИТОГ всех расходов за месяц:    2.343.392р 37к
+//            Фактический остаток:    96.628р 63к    20%
+//                Минус с августа переходит 739.626р 06к
+//            ИТОГ:    Минус 642.997р 43к
+//            """
+//    )
+//
+//    static var previews: some View {
+//        List {
+//            Section {
+//                TokenizedReportFooterViewRows(model: model)
+//            }
+//        }
+//        .environment(\.colorScheme, .dark)
+//    }
+//}

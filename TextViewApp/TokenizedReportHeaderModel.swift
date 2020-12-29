@@ -1,15 +1,15 @@
 //
-//  TokenizedReportHeaderViewModel.swift
+//  TokenizedReportHeaderModel.swift
 //  TextViewApp
 //
-//  Created by Igor Malyarov on 25.12.2020.
+//  Created by Igor Malyarov on 29.12.2020.
 //
 
-import SwiftUI
+import Foundation
 
-final class TokenizedReportHeaderViewModel: ObservableObject {
+struct TokenizedReportHeaderModel {
 
-    @Published var items: [Tokens.HeaderToken]
+    var items: [Tokens.HeaderToken]
 
     let headerString: String
 

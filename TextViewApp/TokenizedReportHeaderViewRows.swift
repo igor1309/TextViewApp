@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TokenizedReportHeaderViewRows: View {
-    @ObservedObject var model: TokenizedReportHeaderViewModel
+    @ObservedObject var model: TokenizedReportViewModel
 
     var body: some View {
-        ForEach(model.items, id: \.self, content: itemView)
+        ForEach(model.headerModel.items, id: \.self, content: itemView)
     }
 
     @ViewBuilder
@@ -40,22 +40,23 @@ struct TokenizedReportHeaderViewRows: View {
         }
     }}
 
-struct TokenizedReportHeaderViewRows_Previews: PreviewProvider {
-    static let model = TokenizedReportHeaderViewModel(
-        headerString: """
-            Название объекта: Саперави Аминьевка
-            Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
-
-            Статья расхода:    Сумма расхода:    План %     Факт %
-            """
-    )
-
-    static var previews: some View {
-        List {
-            Section {
-                TokenizedReportHeaderViewRows(model: model)
-            }
-        }
-        .environment(\.colorScheme, .dark)
-    }
-}
+#warning("fix this preview")
+//struct TokenizedReportHeaderViewRows_Previews: PreviewProvider {
+//    static let model = TokenizedReportHeaderViewModel(
+//        headerString: """
+//            Название объекта: Саперави Аминьевка
+//            Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
+//
+//            Статья расхода:    Сумма расхода:    План %     Факт %
+//            """
+//    )
+//
+//    static var previews: some View {
+//        List {
+//            Section {
+//                TokenizedReportHeaderViewRows(model: model)
+//            }
+//        }
+//        .environment(\.colorScheme, .dark)
+//    }
+//}

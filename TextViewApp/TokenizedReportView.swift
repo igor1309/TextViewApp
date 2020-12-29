@@ -11,22 +11,18 @@ struct TokenizedReportView: View {
 
     let reportContent: TextViewModel.ReportContent
 
-    @StateObject private var headerModel: TokenizedReportHeaderViewModel
-    @StateObject private var footerModel: TokenizedReportFooterViewModel
+    @StateObject private var model: TokenizedReportViewModel
 
     init(reportContent: TextViewModel.ReportContent) {
         self.reportContent = reportContent
 
-        let headerModel = TokenizedReportHeaderViewModel(headerString: reportContent.headerString)
-        _headerModel = StateObject(wrappedValue: headerModel)
-
-        let footerModel = TokenizedReportFooterViewModel(footerString: reportContent.footerString)
-        _footerModel = StateObject(wrappedValue: footerModel)
+        let model = TokenizedReportViewModel(reportContent: reportContent)
+        _model = StateObject(wrappedValue: model)
     }
 
     // MARK: - this var has no idea about errors in groups
     private var hasErrors: Bool {
-        headerModel.hasError || footerModel.hasError
+        model.headerModel.hasError || model.footerModel.hasError
     }
 
     var body: some View {
@@ -39,27 +35,27 @@ struct TokenizedReportView: View {
             Section(
                 header: Text("Tokenized Header"),
                 footer: NavigationLink(
-                    destination: TokenizedReportHeaderView(model: headerModel)
+                    destination: TokenizedReportHeaderView(model: model)
                 ) {
                     Text("Compare to source")
                 }
             ) {
-                TokenizedReportHeaderViewRows(model: headerModel)
+                TokenizedReportHeaderViewRows(model: model)
             }
 
-            ForEach(reportContent.groups, id: \.self) { groupString in
-                TokenizedReportGroupSectionView(groupString: groupString)
+            ForEach(model.groupModels, id: \.self) { models in
+                TokenizedReportGroupSectionView(model: models)
             }
 
             Section(
                 header: Text("Tokenized Footer"),
                 footer: NavigationLink(
-                    destination: TokenizedReportFooterView(model: footerModel)
+                    destination: TokenizedReportFooterView(model: model)
                 ) {
                     Text("Compare to source")
                 }
             ) {
-                TokenizedReportFooterViewRows(model: footerModel)
+                TokenizedReportFooterViewRows(model: model)
             }
         }
         .font(.subheadline)

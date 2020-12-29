@@ -1,15 +1,15 @@
 //
-//  TokenizedReportFooterViewModel.swift
+//  TokenizedReportFooterModel.swift
 //  TextViewApp
 //
-//  Created by Igor Malyarov on 26.12.2020.
+//  Created by Igor Malyarov on 29.12.2020.
 //
 
 import Foundation
 
-final class TokenizedReportFooterViewModel: ObservableObject {
+struct TokenizedReportFooterModel {
 
-    @Published var items: [Tokens.FooterToken]
+    var items: [Tokens.FooterToken]
 
     let footerString: String
 

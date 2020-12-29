@@ -11,19 +11,15 @@ struct ReportStructureView: View {
 
     @ObservedObject var model: TextViewModel
 
-    @StateObject private var headerModel: TokenizedReportHeaderViewModel
-    @StateObject private var footerModel: TokenizedReportFooterViewModel
+    @StateObject private var tokenizedReportViewModel: TokenizedReportViewModel
 
     init(model: TextViewModel) {
         self.model = model
 
         let reportContent = model.reportContent ?? TextViewModel.ReportContent.empty
 
-        let headerModel = TokenizedReportHeaderViewModel(headerString: reportContent.headerString)
-        _headerModel = StateObject(wrappedValue: headerModel)
-
-        let footerModel = TokenizedReportFooterViewModel(footerString: reportContent.footerString)
-        _footerModel = StateObject(wrappedValue: footerModel)
+        let tokenizedReportViewModel = TokenizedReportViewModel(reportContent: reportContent)
+        _tokenizedReportViewModel = StateObject(wrappedValue: tokenizedReportViewModel)
     }
 
     var body: some View {
@@ -38,9 +34,11 @@ struct ReportStructureView: View {
                 Section(header: Text("header")) {
                     reportHeaderView(reportContent.headerString)
                 }
-                Section(header: Text("Groups (\(reportContent.groups.count))")) {
-                    reportGroupsView(reportContent.groups)
+
+                Section(header: Text("Groups (\(tokenizedReportViewModel.groupModels.count))")) {
+                    reportGroupsView()
                 }
+                
                 Section(header: Text("footer")) {
                     reportFooterView(reportContent.footerString)
                 }
@@ -55,21 +53,21 @@ struct ReportStructureView: View {
     }
 
     private func reportHeaderView(_ header: String) -> some View {
-        NavigationLink(destination: TokenizedReportHeaderView(model: headerModel)) {
+        NavigationLink(destination: TokenizedReportHeaderView(model: tokenizedReportViewModel)) {
             Text(header)
         }
     }
 
-    private func reportGroupsView(_ groups: [String]) -> some View {
-        ForEach(groups, id: \.self) { group in
-            NavigationLink(destination: TokenizedReportGroupView(groupString: group)) {
-                Text(group)
+    private func reportGroupsView() -> some View {
+        ForEach(tokenizedReportViewModel.groupModels, id: \.self) { model in
+            NavigationLink(destination: TokenizedReportGroupView(model: model)) {
+                Text(model.groupString)
             }
         }
     }
 
     private func reportFooterView(_ footer: String) -> some View {
-        NavigationLink(destination: TokenizedReportFooterView(model: footerModel)) {
+        NavigationLink(destination: TokenizedReportFooterView(model: tokenizedReportViewModel)) {
             Text(footer)
         }
     }

@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		2A481FA625955DCF009C585F /* TokenizedReportGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */; };
 		2A606112259B183600BC97C8 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606111259B183600BC97C8 /* Tokens.swift */; };
+		2A606115259B1A8B00BC97C8 /* TokenizedReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */; };
+		2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */; };
+		2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */; };
+		2A60611E259B1AD700BC97C8 /* TokenizedReportFooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60611D259B1AD700BC97C8 /* TokenizedReportFooterModel.swift */; };
 		2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B8E25957B54009DB6FC /* View+Ext.swift */; };
-		2AE08B9225964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */; };
 		2AE08B9625968402009DB6FC /* Tokenize String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9525968402009DB6FC /* Tokenize String+Ext.swift */; };
 		2AE08B9A25968563009DB6FC /* Conversion String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9925968563009DB6FC /* Conversion String+Ext.swift */; };
-		2AE08BBC2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BBB2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift */; };
 		2AE08BDF2599D783009DB6FC /* TokenizedReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */; };
 		2AE08BE22599E008009DB6FC /* TokenizedReportHeaderViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE12599E008009DB6FC /* TokenizedReportHeaderViewRows.swift */; };
 		2AE08BE52599E07D009DB6FC /* TokenizedReportFooterViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE42599E07D009DB6FC /* TokenizedReportFooterViewRows.swift */; };
@@ -38,11 +40,13 @@
 		2A17F38D259A2C51002F44F4 /* Regex.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Regex.md; sourceTree = "<group>"; };
 		2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportGroupViewModel.swift; sourceTree = "<group>"; };
 		2A606111259B183600BC97C8 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportViewModel.swift; sourceTree = "<group>"; };
+		2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderModel.swift; sourceTree = "<group>"; };
+		2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportGroupModel.swift; sourceTree = "<group>"; };
+		2A60611D259B1AD700BC97C8 /* TokenizedReportFooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportFooterModel.swift; sourceTree = "<group>"; };
 		2AE08B8E25957B54009DB6FC /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
-		2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderViewModel.swift; sourceTree = "<group>"; };
 		2AE08B9525968402009DB6FC /* Tokenize String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tokenize String+Ext.swift"; sourceTree = "<group>"; };
 		2AE08B9925968563009DB6FC /* Conversion String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conversion String+Ext.swift"; sourceTree = "<group>"; };
-		2AE08BBB2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportFooterViewModel.swift; sourceTree = "<group>"; };
 		2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportView.swift; sourceTree = "<group>"; };
 		2AE08BE12599E008009DB6FC /* TokenizedReportHeaderViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderViewRows.swift; sourceTree = "<group>"; };
 		2AE08BE42599E07D009DB6FC /* TokenizedReportFooterViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportFooterViewRows.swift; sourceTree = "<group>"; };
@@ -100,18 +104,20 @@
 				2AF21AA32593D4690057A5CD /* ReportImportView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
 				2A606111259B183600BC97C8 /* Tokens.swift */,
+				2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */,
+				2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */,
+				2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */,
+				2A60611D259B1AD700BC97C8 /* TokenizedReportFooterModel.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
 				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
 				2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */,
 				2AF21AB525946EA50057A5CD /* TokenizedReportHeaderView.swift */,
 				2AE08BE12599E008009DB6FC /* TokenizedReportHeaderViewRows.swift */,
-				2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */,
 				2AF21AB825946EE10057A5CD /* TokenizedReportGroupView.swift */,
 				2AE08BE72599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift */,
 				2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */,
 				2AF21ABB25946F4E0057A5CD /* TokenizedReportFooterView.swift */,
 				2AE08BE42599E07D009DB6FC /* TokenizedReportFooterViewRows.swift */,
-				2AE08BBB2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift */,
 				2AF21AAC2593DE590057A5CD /* attributedString README.md */,
 				2A17F38C259A2BB3002F44F4 /* Ideas README.md */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
@@ -204,14 +210,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AE08BBC2596F2DB009DB6FC /* TokenizedReportFooterViewModel.swift in Sources */,
 				2AF21ABC25946F4E0057A5CD /* TokenizedReportFooterView.swift in Sources */,
 				2AF21AB625946EA50057A5CD /* TokenizedReportHeaderView.swift in Sources */,
 				2AE08BDF2599D783009DB6FC /* TokenizedReportView.swift in Sources */,
-				2AE08B9225964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift in Sources */,
 				2AE08BE22599E008009DB6FC /* TokenizedReportHeaderViewRows.swift in Sources */,
 				2AF21A9E2593CF2D0057A5CD /* TextView.swift in Sources */,
 				2AF21AB0259456A50057A5CD /* Regex String+Ext.swift in Sources */,
+				2A60611E259B1AD700BC97C8 /* TokenizedReportFooterModel.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
 				2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */,
 				2AE08B9625968402009DB6FC /* Tokenize String+Ext.swift in Sources */,
@@ -219,13 +224,16 @@
 				2AF21AB925946EE10057A5CD /* TokenizedReportGroupView.swift in Sources */,
 				2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */,
 				2AE08BE52599E07D009DB6FC /* TokenizedReportFooterViewRows.swift in Sources */,
+				2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
 				2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */,
 				2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */,
 				2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */,
 				2AE08BE82599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift in Sources */,
+				2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */,
 				2AE08B9A25968563009DB6FC /* Conversion String+Ext.swift in Sources */,
 				2A606112259B183600BC97C8 /* Tokens.swift in Sources */,
+				2A606115259B1A8B00BC97C8 /* TokenizedReportViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
