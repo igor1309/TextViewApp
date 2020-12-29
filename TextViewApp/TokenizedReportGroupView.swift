@@ -10,7 +10,7 @@ import Combine
 
 struct TokenizedReportGroupView: View {
 
-    @StateObject private var model: TokenizeReportGroupViewModel
+    @StateObject private var model: TokenizedReportGroupViewModel
 
     init(groupString: String) {
         _model = StateObject(wrappedValue: TokenizedReportGroupViewModel(groupString: groupString))
@@ -96,7 +96,7 @@ struct TokenizedReportGroupView: View {
     }
 
     @ViewBuilder
-    private func tokenView(token: TokenizedReportGroupViewModel.Token) -> some View {
+    private func tokenView(token: Tokens.GroupToken) -> some View {
         if case let .item(title, number, comment) = token {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {

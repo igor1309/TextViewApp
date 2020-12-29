@@ -22,14 +22,14 @@ extension String {
 
     // MARK: - Tokenize
 
-    func tokenizeReportHeader() -> [TokenizedReportHeaderViewModel.Token] {
+    func tokenizeReportHeader() -> [Tokens.HeaderToken] {
 
         let headerItemCompanyPattern = #"Название объекта: (.*)"#
         let headerItemMonthPattern = #"(?m)^(.*)?\d{4}"#
         let headerItemPatterns = #"[А-Яа-я ]+:[А-Яа-я ]*\d+(\.\d{3})*"#
         let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
 
-        let company: TokenizedReportHeaderViewModel.Token? = {
+        let company: Tokens.HeaderToken? = {
             guard let companyString = self.firstMatch(for: headerItemCompanyPattern) else { return nil }
             let company = companyString
                 .replaceMatches(for: #"Название объекта:"#, withString: "")
@@ -37,7 +37,7 @@ extension String {
             return .company(company)
         }()
 
-        let month: TokenizedReportHeaderViewModel.Token? = {
+        let month: Tokens.HeaderToken? = {
             guard let monthString = self.firstMatch(for: headerItemMonthPattern) else { return nil }
             let tail = monthString.replaceMatches(for: headerItemTitlePatterns,
                                                   withString: "")
@@ -46,7 +46,7 @@ extension String {
 
         let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "")
 
-        let headerItems: [TokenizedReportHeaderViewModel.Token] = tail
+        let headerItems: [Tokens.HeaderToken] = tail
             .listMatches(for: headerItemPatterns)
             .compactMap {
                 guard let title = $0.firstMatch(for: headerItemTitlePatterns) else { return nil }
@@ -62,7 +62,7 @@ extension String {
         return [company, month].compactMap { $0 } + headerItems
     }
 
-    func transformLineToItem() -> TokenizedReportGroupViewModel.Token? {
+    func transformLineToItem() -> Tokens.GroupToken? {
         var title: String = ""
         var remains: String = ""
         var number: Double?
@@ -90,7 +90,7 @@ extension String {
         return .item(title, number ?? 0, comment)
     }
 
-    func getGroupHeader() -> TokenizedReportGroupViewModel.Token? {
+    func getGroupHeader() -> Tokens.GroupToken? {
         guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
 
@@ -110,7 +110,7 @@ extension String {
         return .header(cleanTitle, firstPercentage, secondPercentage)
     }
 
-    func getGroupFooter() -> TokenizedReportGroupViewModel.Token? {
+    func getGroupFooter() -> Tokens.GroupToken? {
         guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil}
         let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
 
@@ -120,10 +120,10 @@ extension String {
         return .footer(cleanTitle, number)
     }
 
-    func tokenizeReportFooter() -> [TokenizedReportFooterViewModel.Token] {
+    func tokenizeReportFooter() -> [Tokens.FooterToken] {
         let lines = self.components(separatedBy: "\n").filter { !$0.isEmpty }
 
-        return lines.compactMap { line -> TokenizedReportFooterViewModel.Token? in
+        return lines.compactMap { line -> Tokens.FooterToken? in
 
             if line.firstMatch(for: #"ИТОГ:"#) != nil,
                let number = line.getNumberNoRemains() {

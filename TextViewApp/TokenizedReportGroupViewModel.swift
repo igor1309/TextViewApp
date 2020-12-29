@@ -10,11 +10,11 @@ import SwiftUI
 final class TokenizedReportGroupViewModel: ObservableObject {
 
     @Published var groupHeaderString: String = ""
-    @Published var groupHeader: Token = .empty
+    @Published var groupHeader: Tokens.GroupToken = .empty
     @Published var listWithNumbers: [String]
-    @Published var items: [Token] = []
+    @Published var items: [Tokens.GroupToken] = []
     @Published var groupFooterString: String = ""
-    @Published var groupFooter: Token = .empty
+    @Published var groupFooter: Tokens.GroupToken = .empty
 
     let groupString: String
 
@@ -50,13 +50,6 @@ final class TokenizedReportGroupViewModel: ObservableObject {
 
         self.groupHeader = groupHeaderString.getGroupHeader() ?? .empty
         self.groupFooter = groupFooterString.getGroupFooter() ?? .empty
-    }
-
-    enum Token: Hashable {
-        case item(String, Double, String?)
-        case header(String, Double?, Double?)
-        case footer(String, Double?)
-        case empty
     }
 
     var itemsTotal: Double {

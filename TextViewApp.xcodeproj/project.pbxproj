@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A481FA625955DCF009C585F /* TokenizedReportGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */; };
+		2A606112259B183600BC97C8 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606111259B183600BC97C8 /* Tokens.swift */; };
 		2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B8E25957B54009DB6FC /* View+Ext.swift */; };
 		2AE08B9225964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */; };
 		2AE08B9625968402009DB6FC /* Tokenize String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B9525968402009DB6FC /* Tokenize String+Ext.swift */; };
@@ -36,6 +37,7 @@
 		2A17F38C259A2BB3002F44F4 /* Ideas README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Ideas README.md"; sourceTree = "<group>"; };
 		2A17F38D259A2C51002F44F4 /* Regex.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Regex.md; sourceTree = "<group>"; };
 		2A481FA525955DCF009C585F /* TokenizedReportGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportGroupViewModel.swift; sourceTree = "<group>"; };
+		2A606111259B183600BC97C8 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		2AE08B8E25957B54009DB6FC /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		2AE08B9125964FD8009DB6FC /* TokenizedReportHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderViewModel.swift; sourceTree = "<group>"; };
 		2AE08B9525968402009DB6FC /* Tokenize String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tokenize String+Ext.swift"; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				2AF21A8F2593CF020057A5CD /* ContentView.swift */,
 				2AF21AA32593D4690057A5CD /* ReportImportView.swift */,
 				2AF21AA02593D4310057A5CD /* TextViewModel.swift */,
+				2A606111259B183600BC97C8 /* Tokens.swift */,
 				2AF21A9D2593CF2D0057A5CD /* TextView.swift */,
 				2AF21AB225946E690057A5CD /* ReportStructureView.swift */,
 				2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */,
@@ -222,6 +225,7 @@
 				2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */,
 				2AE08BE82599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift in Sources */,
 				2AE08B9A25968563009DB6FC /* Conversion String+Ext.swift in Sources */,
+				2A606112259B183600BC97C8 /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

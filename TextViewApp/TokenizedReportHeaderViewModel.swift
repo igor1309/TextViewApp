@@ -9,7 +9,7 @@ import SwiftUI
 
 final class TokenizedReportHeaderViewModel: ObservableObject {
 
-    @Published var items: [Token]
+    @Published var items: [Tokens.HeaderToken]
 
     let headerString: String
 
@@ -20,11 +20,4 @@ final class TokenizedReportHeaderViewModel: ObservableObject {
         self.headerString = headerString
         self.items = headerString.tokenizeReportHeader()
     }
-
-    enum Token: Hashable {
-        case company(String)
-        case month(String)
-        case headerItem(String, Double)
-    }
-
 }

@@ -48,7 +48,7 @@ struct TokenizedReportGroupSectionView: View {
     }
 
     @ViewBuilder
-    private func tokenView(token: TokenizedReportGroupViewModel.Token) -> some View {
+    private func tokenView(token: Tokens.GroupToken) -> some View {
         if case let .item(title, number, comment) = token {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {

@@ -15,7 +15,7 @@ struct TokenizedReportFooterViewRows: View {
     }
 
     @ViewBuilder
-    private func itemView(item: TokenizedReportFooterViewModel.Token) -> some View {
+    private func itemView(item: Tokens.FooterToken) -> some View {
         switch item {
             case let .total(title, number),
                  let .expensesTotal(title, number),

@@ -15,7 +15,7 @@ struct TokenizedReportHeaderViewRows: View {
     }
 
     @ViewBuilder
-    private func itemView(item: TokenizedReportHeaderViewModel.Token) -> some View {
+    private func itemView(item: Tokens.HeaderToken) -> some View {
         switch item {
             case let .company(company):
                 HStack(alignment: .firstTextBaseline) {

@@ -34,7 +34,7 @@ struct ReportImportView: View {
             .navigationTitle("Report")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: toolbar)
-            .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.plainText], onCompletion: handleFileImporter)
+            .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.plainText], onCompletion: model.handleFileImporter)
         }
     }
 

@@ -9,7 +9,7 @@ import Foundation
 
 final class TokenizedReportFooterViewModel: ObservableObject {
 
-    @Published var items: [Token]
+    @Published var items: [Tokens.FooterToken]
 
     let footerString: String
 
@@ -36,12 +36,4 @@ final class TokenizedReportFooterViewModel: ObservableObject {
             .reduce(0, +)
     }
 
-    enum Token: Hashable {
-        case total(String, Double)
-        case expensesTotal(String, Double)
-        case openingBalance(String, Double)
-        case balance(String, Double, Double)
-        case tbd(String)
-        case error
-    }
 }
