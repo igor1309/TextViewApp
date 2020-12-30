@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TokenizedReportViewModel: ObservableObject {
+final class TokenizedReportViewModel: ObservableObject {
 
     @Published var headerModel: TokenizedReportHeaderModel
     @Published var groupModels: [TokenizedReportGroupModel]

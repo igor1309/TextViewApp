@@ -149,27 +149,21 @@ struct TokenizedReportGroupView: View {
         .foregroundColor(.primary)
     }
 }
-#warning("fix this preview")
-//struct TokenizedReportGroupView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TokenizedReportGroupView(groupString: """
-//            Прочие расходы:        15%    16.5%
-//            1.Налоговые платежи     26.964
-//            2.Банковское обслуживание    6.419
-//            3.Юридическое сопровождение    40.000
-//            4.Банковская комиссия 1.6% за эквайринг    26.581
-//            5.Тайный гость    -----------------------------
-//            9.Реклама и IT поддержка    65.000 (не iiko)
-//            10.Обслуживание пожарной охраны    -----------------------------
-//            11.Вневедомственная охрана помещения    -----------------------------
-//            12.Интернет    9.000
-//            13.Дезобработка помещения    -----------------------------
-//            14. ----------------------------------    ----------------------------
-//            15.Аренда зарядных устройств и раций    ----------------------------
-//            27. Сервис Гуру (система аттестации, за 1 год)    12.655
-//            ИТОГ:    402.520
-//            """
-//        )
-//        .previewLayout(.fixed(width: 350, height: 1000))
-//    }
-//}
+struct TokenizedReportGroupView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NavigationView {
+                TokenizedReportGroupView(model: TokenizedReportGroupModel.sample)
+            }
+            .previewLayout(.fixed(width: 350, height: 1500))
+
+            NavigationView {
+                TokenizedReportGroupView(model: TokenizedReportGroupModel.sample2)
+            }
+            .previewLayout(.fixed(width: 350, height: 850))
+        }
+        .font(.subheadline)
+        .listStyle(GroupedListStyle())
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}

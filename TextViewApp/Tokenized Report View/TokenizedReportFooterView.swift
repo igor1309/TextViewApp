@@ -31,17 +31,13 @@ struct TokenizedReportFooterView: View {
     }
 }
 
-#warning("fix this model")
-//struct TokenizedReportFooterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TokenizedReportFooterView(model: TokenizedReportFooterViewModel(
-//            footerString: """
-//            ИТОГ всех расходов за месяц:    2.343.392р 37к
-//            Фактический остаток:    96.628р 63к    20%
-//                Минус с августа переходит 739.626р 06к
-//            ИТОГ:    Минус 642.997р 43к
-//            """
-//        )
-//        )
-//    }
-//}
+struct TokenizedReportFooterView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            TokenizedReportFooterView(model: TokenizedReportViewModel.sample)
+                .font(.subheadline)
+                .listStyle(GroupedListStyle())
+                .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}

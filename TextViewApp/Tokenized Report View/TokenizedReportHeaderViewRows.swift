@@ -38,25 +38,21 @@ struct TokenizedReportHeaderViewRows: View {
                     Text("\(number, specifier: "%.2f")")
                 }
         }
-    }}
+    }
+}
 
-#warning("fix this preview")
-//struct TokenizedReportHeaderViewRows_Previews: PreviewProvider {
-//    static let model = TokenizedReportHeaderViewModel(
-//        headerString: """
-//            Название объекта: Саперави Аминьевка
-//            Месяц: сентябрь2020     Оборот:2.440.021    Средний показатель: 81.334
-//
-//            Статья расхода:    Сумма расхода:    План %     Факт %
-//            """
-//    )
-//
-//    static var previews: some View {
-//        List {
-//            Section {
-//                TokenizedReportHeaderViewRows(model: model)
-//            }
-//        }
-//        .environment(\.colorScheme, .dark)
-//    }
-//}
+struct TokenizedReportHeaderViewRows_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            List {
+                Section {
+                    TokenizedReportHeaderViewRows(model: TokenizedReportViewModel.sample)
+                }
+            }
+            .font(.subheadline)
+            .listStyle(GroupedListStyle())
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .environment(\.colorScheme, .dark)
+    }
+}

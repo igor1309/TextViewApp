@@ -38,7 +38,7 @@ struct ReportStructureView: View {
                 Section(header: Text("Groups (\(tokenizedReportViewModel.groupModels.count))")) {
                     reportGroupsView()
                 }
-                
+
                 Section(header: Text("footer")) {
                     reportFooterView(reportContent.footerString)
                 }
