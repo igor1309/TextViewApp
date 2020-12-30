@@ -114,8 +114,11 @@ final class TextViewModel: ObservableObject {
         // make some file cleaning & fixes
         let cleanContent = content
             .clearWhitespacesAndNewlines()
+            // fix one special line
             .replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
                             withString: "\n2. ФОТ Бренд, логистика, бухгалтерия")
+            // fix no space after dot after line number
+            .replaceMatches(for: #"(?m)(^\d+.)([А-Я])"#, withString: #"$1 $2"#)
 
         self.attributedText = NSAttributedString(string: cleanContent)
         self.highlightText(pattern: String.groupPattern)
