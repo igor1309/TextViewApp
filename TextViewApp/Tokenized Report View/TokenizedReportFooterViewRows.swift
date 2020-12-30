@@ -47,16 +47,27 @@ struct TokenizedReportFooterViewRows: View {
 
 struct TokenizedReportFooterViewRows_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            List {
-                Section {
-                    TokenizedReportFooterViewRows(model: TokenizedReportViewModel.sample)
+        Group {
+            NavigationView {
+                List {
+                    Section {
+                        TokenizedReportFooterViewRows(model: TokenizedReportViewModel.sample)
+                    }
                 }
             }
-            .font(.subheadline)
-            .listStyle(GroupedListStyle())
-            .navigationBarTitleDisplayMode(.inline)
+
+            NavigationView {
+                List {
+                    Section {
+                        TokenizedReportFooterViewRows(model: TokenizedReportViewModel.sample2)
+                    }
+                }
+            }
         }
+        .font(.subheadline)
+        .listStyle(GroupedListStyle())
+        .navigationBarTitleDisplayMode(.inline)
         .environment(\.colorScheme, .dark)
+        .previewLayout(.fixed(width: 370, height: 400))
     }
 }
