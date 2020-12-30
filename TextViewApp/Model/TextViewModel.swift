@@ -114,9 +114,14 @@ final class TextViewModel: ObservableObject {
         // make some file cleaning & fixes
         let cleanContent = content
             .clearWhitespacesAndNewlines()
-            // fix one special line
+            // fix one special lines
             .replaceMatches(for: "\nФОТ Бренд, логистика, бухгалтерия",
                             withString: "\n2. ФОТ Бренд, логистика, бухгалтерия")
+            .replaceMatches(for: "Итого-",
+                            withString: "Итого ")
+            // remove optionality from rubli-kopeiki making rubliKopeikiPattern and kopeikiPatterm simpler
+            .replaceMatches(for: #"(\d{1,3}(?:\.\d{3})*) *р *(?:(\d\d?) *к\.?)?"#,
+                            withString: #"$1р $2к"#)
             // fix no space after dot after line number
             .replaceMatches(for: #"(?m)(^\d+.)([А-Я])"#, withString: #"$1 $2"#)
 

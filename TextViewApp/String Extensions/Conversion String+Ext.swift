@@ -9,21 +9,22 @@ import Foundation
 
 extension String {
 
-    static let rublesIKopeksPattern = #"\d+(\.\d+)*р( *\d+к)?"#
-    static let itemNumberPattern = #"\d+(\.\d{3})*"#
-    static let minusPattern = #"[М|м]инус"#
+    static let rubliKopeikiPattern = #"\d{1,3}(\.\d{3})*р( \d\d?к)?"#
+    static let itemNumberPattern =   #"\d{1,3}(\.\d{3})*"#
+    static let kopeikiPatterm = #"((?<=р )\d\d?(?=к))"#
+    static let minusPattern = #"(?:[М|м]инус\D*)|-"#
 
     // MARK: - helpers
 
     func getNumberAndRemains() -> (Double?, String) {
         var sign: Double = 1
-        if self.firstMatch(for: #"[М|м]инус"#) != nil {
+        if self.firstMatch(for: String.minusPattern) != nil {
             sign = -1
         }
 
-        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern) {
+        if let numberString = self.firstMatch(for: String.rubliKopeikiPattern) {
             let rubliIKopeiki = numberString.rubliIKopeikiToDouble()
-            if let remains = self.replaceFirstMatch(for: String.rublesIKopeksPattern, withString: "") {
+            if let remains = self.replaceFirstMatch(for: String.rubliKopeikiPattern, withString: "") {
                 return (sign * rubliIKopeiki, remains)
             }
         } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
@@ -41,7 +42,7 @@ extension String {
             sign = -1
         }
 
-        if let numberString = self.firstMatch(for: String.rublesIKopeksPattern) {
+        if let numberString = self.firstMatch(for: String.rubliKopeikiPattern) {
             let rubliIKopeiki = numberString.rubliIKopeikiToDouble()
             return sign * rubliIKopeiki
         } else if let numberString = self.firstMatch(for: String.itemNumberPattern),
@@ -54,25 +55,16 @@ extension String {
 
     // MARK: - Conversion
 
-    func rubliIKopeikiToDouble() -> Double {
-        let cleanString = self
-            .replaceMatches(for: " *", withString: "")
-            .replaceMatches(for: #"\."#, withString: "")
-            .replaceMatches(for: "к", withString: "")
+    private func rubliIKopeikiToDouble() -> Double {
+        guard let integerString = self.firstMatch(for: String.itemNumberPattern),
+              let integer = Double(integerString.replaceMatches(for: #"\."#, withString: ""))
+        else { return 0 }
 
-        let components = cleanString.split(separator: "р")
-        let integerPart = components.first ?? ""
-        let integer = Double(integerPart) ?? 0
+        guard let decimalString = self.firstMatch(for: String.kopeikiPatterm),
+              let decimal = Double(decimalString)
+        else { return integer }
 
-        let decimal: Double
-        if components.count == 2 {
-            let decimalPart = components[1]
-            decimal = (Double(decimalPart) ?? 0) / 100
-        } else {
-            decimal = 0
-        }
-
-        return integer + decimal
+        return integer + decimal / 100
     }
 
     func percentageStringToDouble() -> Double? {

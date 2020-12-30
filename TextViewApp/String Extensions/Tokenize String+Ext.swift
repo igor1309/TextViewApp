@@ -17,31 +17,26 @@ extension String {
     static let itemTitleWithPercentagePattern = #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
     static let itemTitleWithParenthesesPattern = #"^[1-9][0-9]?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
     static let itemTitlePattern = #"^[1-9][0-9]?\.[^\d\n]+"#
-    static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+:"#
+    static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+(?=:)"#
     static let matchingPercentagePattern = #"\d+(\.\d+)*%"#
 
     // MARK: - Tokenize
 
     func tokenizeReportHeader() -> [Tokens.HeaderToken] {
 
-        let headerItemCompanyPattern = #"Название объекта: (.*)"#
-        let headerItemMonthPattern = #"(?m)^(.*)?\d{4}"#
+        let headerItemCompanyPattern = #"(?<=Название объекта:\s).*"#
+        let headerItemMonthPattern = #"[А-Яа-я]+\d{4}"#
         let headerItemPatterns = #"[А-Яа-я ]+:[А-Яа-я ]*\d+(\.\d{3})*"#
         let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
 
         let company: Tokens.HeaderToken? = {
             guard let companyString = self.firstMatch(for: headerItemCompanyPattern) else { return nil }
-            let company = companyString
-                .replaceMatches(for: #"Название объекта:"#, withString: "")
-                .trimmingCharacters(in: .whitespaces)
-            return .company(company)
+            return .company(companyString)
         }()
 
         let month: Tokens.HeaderToken? = {
             guard let monthString = self.firstMatch(for: headerItemMonthPattern) else { return nil }
-            let tail = monthString.replaceMatches(for: headerItemTitlePatterns,
-                                                  withString: "")
-            return .month(tail.trimmingCharacters(in: .whitespaces))
+            return .month(monthString.trimmingCharacters(in: .whitespaces))
         }()
 
         let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "")
@@ -66,7 +61,11 @@ extension String {
         var title: String = ""
         var remains: String = ""
         var number: Double?
-        let itemTitlePatterns = [String.itemTitleWithPercentagePattern, String.itemTitleWithParenthesesPattern, String.itemTitlePattern]
+
+        let itemTitlePatterns = [String.itemTitleWithPercentagePattern,
+                                 String.itemTitleWithParenthesesPattern,
+                                 String.itemTitlePattern]
+
         self.getFirstMatchAndRemains(patterns: itemTitlePatterns) { (match, remainsString) in
             guard let headString = match,
                   let tailString = remainsString else { return }
@@ -91,33 +90,32 @@ extension String {
     }
 
     func getGroupHeader() -> Tokens.GroupToken? {
-        guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil}
-        let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
+        guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil }
 
         guard let firstTail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern, withString: ""),
               let firstPercentageString = firstTail.firstMatch(for: String.matchingPercentagePattern),
               let firstPercentage = firstPercentageString.percentageStringToDouble() else {
-            return .header(cleanTitle, nil, nil)
+            return .header(title, nil, nil)
         }
 
         let secondtail = firstTail.replaceFirstMatch(for: String.matchingPercentagePattern,
                                                       withString: "")
         guard let secondPercentageString = secondtail?.firstMatch(for: String.matchingPercentagePattern),
               let secondPercentage = secondPercentageString.percentageStringToDouble() else {
-            return .header(cleanTitle, firstPercentage, nil)
+            return .header(title, firstPercentage, nil)
         }
 
-        return .header(cleanTitle, firstPercentage, secondPercentage)
+        return .header(title, firstPercentage, secondPercentage)
     }
 
     func getGroupFooter() -> Tokens.GroupToken? {
-        guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil}
-        let cleanTitle = title.last == ":" ? String(title.dropLast()) : title
+        guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil }
 
         guard let tail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern, withString: ""),
-              let number = tail.getNumberNoRemains() else { return .footer(cleanTitle, nil) }
+              let number = tail.getNumberNoRemains()
+        else { return .footer(title, nil) }
 
-        return .footer(cleanTitle, number)
+        return .footer(title, number)
     }
 
     func tokenizeReportFooter() -> [Tokens.FooterToken] {
