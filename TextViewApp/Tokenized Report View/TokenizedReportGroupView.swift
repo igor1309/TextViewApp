@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import TengizRegex
 
 struct TokenizedReportGroupView: View {
 

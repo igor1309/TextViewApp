@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TengizRegex
 
 struct TokenizedReportFooterView: View {
 
