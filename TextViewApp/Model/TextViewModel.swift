@@ -31,6 +31,7 @@ final class TextViewModel: ObservableObject {
         // create subscription to update highlight if text was edited
         $attributedText
             .map { $0.string }
+            .filter { !$0.isEmpty }
             .delay(for: 0.3, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .receive(on: DispatchQueue.main)

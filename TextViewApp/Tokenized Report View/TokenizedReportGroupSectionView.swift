@@ -43,6 +43,15 @@ struct TokenizedReportGroupSectionView: View {
                     }
 
                     groupTotalView()
+
+                    if let difference = model.difference {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("Difference")
+                            Spacer()
+                            Text("\(difference, specifier: "%.2f")")
+                        }
+                        .foregroundColor(.secondary)
+                    }
                 }
                 .padding(.vertical, 3)
             }
@@ -134,7 +143,7 @@ struct TokenizedReportGroupSectionView_Previews: PreviewProvider {
                 .listStyle(GroupedListStyle())
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .previewLayout(.fixed(width: 370, height: 650))
+            .previewLayout(.fixed(width: 370, height: 720))
 
             NavigationView {
                 List {

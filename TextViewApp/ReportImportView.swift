@@ -57,7 +57,7 @@ struct ReportImportView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if let reportContent = model.reportContent {
-            TokenizedReportView(reportContent: reportContent)
+            TokenizedReportView(reportContent: reportContent, tokenizationErrorMessage: model.errorMessage)
         } else {
             ReportStructureView(model: model)
         }

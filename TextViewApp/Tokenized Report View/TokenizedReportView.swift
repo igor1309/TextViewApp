@@ -10,26 +10,33 @@ import SwiftUI
 struct TokenizedReportView: View {
 
     let reportContent: TextViewModel.ReportContent
+    let tokenizationErrorMessage: String
 
     @StateObject private var model: TokenizedReportViewModel
 
-    init(reportContent: TextViewModel.ReportContent) {
+    init(reportContent: TextViewModel.ReportContent, tokenizationErrorMessage: String) {
         self.reportContent = reportContent
+        self.tokenizationErrorMessage = tokenizationErrorMessage
 
         let model = TokenizedReportViewModel(reportContent: reportContent)
         _model = StateObject(wrappedValue: model)
     }
 
-    // MARK: - this var has no idea about errors in groups
     private var hasErrors: Bool {
         model.headerModel.hasError || model.footerModel.hasError
     }
 
     var body: some View {
         List {
-            if hasErrors {
-                Text("TBD: show if errors")
-                    .foregroundColor(Color(UIColor.systemRed))
+            if !tokenizationErrorMessage.isEmpty || hasErrors {
+                Section(header: Text("Tokenization Error")) {
+                    #warning("how to see what's missing?")
+                    Text(tokenizationErrorMessage)
+                        .foregroundColor(Color(UIColor.systemRed))
+
+                    Text("TBD: show if errors")
+                        .foregroundColor(Color(UIColor.systemRed))
+                }
             }
 
             Section(
@@ -74,7 +81,7 @@ struct TokenizedReportView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            TokenizedReportView(reportContent: reportContent)
+            TokenizedReportView(reportContent: reportContent, tokenizationErrorMessage: "Error (test)")
                 .navigationBarTitleDisplayMode(.inline)
         }
         .previewLayout(.fixed(width: 370, height: 1200))

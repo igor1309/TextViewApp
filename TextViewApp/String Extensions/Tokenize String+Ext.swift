@@ -13,10 +13,10 @@ extension String {
 
     //  (?m) - MULTILINE mode on
     static let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
-    static let itemFullLineWithDigitsPattern = #"(?m)^[1-9][0-9]?\.[^\d\n]+\d+.*"#
+    static let itemFullLineWithDigitsPattern = #"(?m)^[1-9]\d?\.[^\d\n]+\d+.*"#
     static let itemTitleWithPercentagePattern = #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
-    static let itemTitleWithParenthesesPattern = #"^[1-9][0-9]?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
-    static let itemTitlePattern = #"^[1-9][0-9]?\.[^\d\n]+"#
+    static let itemTitleWithParenthesesPattern = #"^[1-9]\d?\.[^\d\n]+\([^(]*\)[^\d\n]*"#
+    static let itemTitlePattern = #"^[1-9]\d?\.[^\d\n]+"#
     static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+(?=:)"#
     static let matchingPercentagePattern = #"\d+(\.\d+)*%"#
 

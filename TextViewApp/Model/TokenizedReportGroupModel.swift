@@ -65,10 +65,18 @@ struct TokenizedReportGroupModel: Hashable {
     }
 
     var isTotalsMatch: Bool {
-        if case let .footer(_, number) = groupFooter {
-            return itemsTotal == number
-        }
-        return false
+        return difference == 0
+//        if case let .footer(_, number) = groupFooter {
+//            return itemsTotal == number
+//        }
+//        return false
     }
 
+    var difference: Double? {
+        if case let .footer(_, number) = groupFooter,
+           let numberValue = number {
+            return itemsTotal - numberValue
+        }
+        return nil
+    }
 }
