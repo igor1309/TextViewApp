@@ -19,7 +19,7 @@ public extension String {
     static let itemFullLineWithDigitsPattern = #"(?m)"# + itemTitlePattern + #"\d+.*"#
     /// matching lines like "4.Банковская комиссия 1.6% за эквайринг    " (mind whitespace)
     static let itemTitleWithPercentagePattern =  itemTitlePattern + #"\d+(\.\d+)?%[\D]*"#
-    //static let itemTitleWithPercentagePattern =  #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
+    // static let itemTitleWithPercentagePattern =  #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
     /// matching lines like "22. Хэдхантер (подбор пероснала)    " (mind whitespace)
     static let itemTitleWithParenthesesPattern = itemTitlePattern + #"\([^(]*\)[^\d\n]*"#
     static let itemWithPlusPattern = itemTitlePattern + numbersWithPlusPattern
@@ -65,13 +65,14 @@ public extension String {
         return [company, month].compactMap { $0 } + headerItems
     }
 
+    // swiftlint:disable:next function_body_length
     func transformLineToItem() -> Tokens.GroupToken? {
         var title: String = ""
         var remains: String = ""
         var number: Double?
 
-        /// tokenize lines like "1. Аренда торгового помещения     200.000 (за август) +400.000 (за сентябрь)        " or "12.Интернет    7.701+4.500"
-        if let _ = self.firstMatch(for: String.itemWithPlusPattern),
+        /// tokenize lines like `"12.Интернет    7.701+4.500"` or `"1. Аренда торгового помещения     200.000 (за август) +400.000 (за сентябрь)        "`
+        if self.firstMatch(for: String.itemWithPlusPattern) != nil,
            let titleString = self.firstMatch(for: String.itemTitlePattern),
            let remains = self.firstMatch(for: String.numbersWithPlusPattern) {
             let sum = remains
@@ -82,6 +83,36 @@ public extension String {
             return .item(titleString.clearWhitespacesAndNewlines(),
                          sum,
                          remains.clearWhitespacesAndNewlines())
+        }
+
+        let itemWithItogoPattern = #".*?Итого"#
+        if self.firstMatch(for: itemWithItogoPattern) != nil {
+
+            let prihodPattern = #"1. Приход товара по накладным"#
+            if let titleString = self.firstMatch(for: prihodPattern),
+               let afterItogo = self.replaceFirstMatch(for: itemWithItogoPattern, withString: ""),
+               let number = afterItogo.getNumberNoRemains(),
+               let comment = self.replaceFirstMatch(for: prihodPattern, withString: "") {
+                return .item(titleString, number, comment.clearWhitespacesAndNewlines())
+            }
+
+            let prepayPattern = #"2. Предоплаченный товар, но не отраженный в приходе"#
+            if let titleString = self.firstMatch(for: prepayPattern),
+               let afterItogo = self.replaceFirstMatch(for: itemWithItogoPattern, withString: ""),
+               let number = afterItogo.getNumberNoRemains(),
+               let comment = self.replaceFirstMatch(for: prepayPattern, withString: "") {
+                return .item(titleString, number, comment.clearWhitespacesAndNewlines())
+            }
+
+        }
+
+        /// tokenize line like `"2. Предоплаченный товар, но не отраженный в приходе    Студиопак-12.500 (влажные салфетки);"`
+        let anotherPrepayPattern = #"2. Предоплаченный товар, но не отраженный в приходе(?=\s+[А-Яа-я])"#
+        if let titleString = self.firstMatch(for: anotherPrepayPattern) {
+            let comment = self.replaceMatches(for: anotherPrepayPattern, withString: "")
+            if let number = comment.extractNumber() {
+                return .item(titleString, number, comment.clearWhitespacesAndNewlines())
+            }
         }
 
         let itemTitlePatterns = [String.itemTitleWithPercentagePattern,
@@ -99,11 +130,18 @@ public extension String {
 
         (number, remains) = remains.getNumberAndRemains()
 
-        // special case when number after item title is not a number for item
-        // for example in 1. Приход товара по накладным     946.056р (оплаты фактические: 475.228р 52к -переводы; 157.455р 85к-корпоративная карта; 0-наличные из кассы; Итого-632.684р 37к)
-        let itemWithItogoPattern = #"(.*)?Итого"#
+        /// special case when number after item title is not a number for item
+        /// for example in `"1. Приход товара по накладным     946.056р (оплаты фактические: 475.228р 52к -переводы; 157.455р 85к-корпоративная карта; 0-наличные из кассы; Итого-632.684р 37к)"`
         if let afterItogo = remains.replaceFirstMatch(for: itemWithItogoPattern, withString: "") {
             number = afterItogo.getNumberNoRemains()
+        }
+
+        /// another special case when number after item title is not a number for item
+        /// for example in `"1. Приход товара по накладным    451.198р41к (из них у нас оплачено фактический 21.346р15к)"`
+        let factPattern = #".*?фактический"#
+        if let afterFact = remains.replaceFirstMatch(for: factPattern, withString: "") {
+            number = afterFact.getNumberNoRemains()
+            remains = self.replaceFirstMatch(for: String.itemTitlePattern + #""#, withString: "") ?? self
         }
 
         let dirtyComment = remains.clearWhitespacesAndNewlines()
@@ -111,7 +149,7 @@ public extension String {
 
         return .item(title, number ?? 0, comment)
     }
-    
+
     func getGroupHeader() -> Tokens.GroupToken? {
         guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil }
 
@@ -122,7 +160,7 @@ public extension String {
         }
 
         let secondtail = firstTail.replaceFirstMatch(for: String.matchingPercentagePattern,
-                                                      withString: "")
+                                                     withString: "")
         guard let secondPercentageString = secondtail?.firstMatch(for: String.matchingPercentagePattern),
               let secondPercentage = secondPercentageString.percentageStringToDouble() else {
             return .header(title, firstPercentage, nil)

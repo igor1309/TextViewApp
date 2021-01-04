@@ -124,9 +124,9 @@
 		2A17101025A32DA0002877A4 /* String Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */,
-				2A17101225A32DA0002877A4 /* Regex String+Ext.swift */,
 				2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */,
+				2A17101225A32DA0002877A4 /* Regex String+Ext.swift */,
+				2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */,
 			);
 			path = "String Extensions";
 			sourceTree = "<group>";

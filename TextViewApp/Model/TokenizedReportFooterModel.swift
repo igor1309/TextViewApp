@@ -13,8 +13,8 @@ struct TokenizedReportFooterModel {
 
     let footerString: String
 
+    #warning("FIXME: FINISH THIS:")
     var hasError: Bool {
-        //  FIXME: FINISH THIS:
         false
     }
 
