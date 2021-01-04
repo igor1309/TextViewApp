@@ -13,20 +13,26 @@ public extension String {
     // MARK: - Regular Expression Patterns
 
     ///  (?m) - MULTILINE mode on
-    static let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
+    // static let groupPattern = #"(?m)^[А-Яа-я][^\n]*\n(^\d\d?\..*\n+)+ИТОГ:.*"#
+    static let groupHeaderPattern = #"^[А-Яа-я][^\n]*\n"#
+    #warning("compare to itemFullLineWithDigitsPattern and other!!")
+    static let itemLine = #"(^\d\d?\..*\n+)"#
+    /// matching lines like `"-10.000 за перерасход питание персонала в июле"`
+    static let itemCorrectionLine = #"^-\d{1,3}(?:\.\d{3})*.*"#
+    static let groupPattern = #"(?m)"# + groupHeaderPattern + #"("# + itemLine + #"|("# + itemCorrectionLine + #"\n))+ИТОГ:.*"#
     /// matching lines starting like "3. Электричество" or "12.Интернет"
     static let itemTitlePattern = #"^[1-9]\d?\.[^\d\n]+"#
-    static let itemFullLineWithDigitsPattern = #"(?m)"# + itemTitlePattern + #"\d+.*"#
-    /// matching lines like "4.Банковская комиссия 1.6% за эквайринг    " (mind whitespace)
-    static let itemTitleWithPercentagePattern =  itemTitlePattern + #"\d+(\.\d+)?%[\D]*"#
+    static let itemFullLineWithDigitsPattern = #"(?m)"# + itemTitlePattern + #"\d+.*"# + #"|"# + String.itemCorrectionLine
+    /// matching lines like `"4.Банковская комиссия 1.6% за эквайринг    "` (mind whitespace)
+    static let itemTitleWithPercentagePattern =  itemTitlePattern + percentagePattern + #"[\D]*"#
     // static let itemTitleWithPercentagePattern =  #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
-    /// matching lines like "22. Хэдхантер (подбор пероснала)    " (mind whitespace)
+    /// matching lines like `"22. Хэдхантер (подбор пероснала)    "` (mind whitespace)
     static let itemTitleWithParenthesesPattern = itemTitlePattern + #"\([^(]*\)[^\d\n]*"#
     static let itemWithPlusPattern = itemTitlePattern + numbersWithPlusPattern
-    /// pattern to match "200.000 (за август) +400.000 (за сентябрь)" or "7.701+4.500"
+    /// pattern to match `"200.000 (за август) +400.000 (за сентябрь)"` or `"7.701+4.500"`
     static let numbersWithPlusPattern = itemNumberPattern + #"(?:\s*\([^\)]+\)\s*)?\+"# + itemNumberPattern + #"(?:\s*\([^\)]+\)\s*)?"#
     static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+(?=:)"#
-    static let matchingPercentagePattern = #"\d+(\.\d+)*%"#
+    static let percentagePattern = #"\d+(\.\d+)?%"#
 
     // MARK: - Tokenize
 
@@ -70,6 +76,12 @@ public extension String {
         var title: String = ""
         var remains: String = ""
         var number: Double?
+
+        /// tokenize lines like `"-10.000 за перерасход питание персонала в июле"`
+        if self.firstMatch(for: String.itemCorrectionLine) != nil,
+           let number = self.getNumberNoRemains() {
+            return .item("Correction", number, self)
+        }
 
         /// tokenize lines like `"12.Интернет    7.701+4.500"` or `"1. Аренда торгового помещения     200.000 (за август) +400.000 (за сентябрь)        "`
         if self.firstMatch(for: String.itemWithPlusPattern) != nil,
@@ -154,14 +166,14 @@ public extension String {
         guard let title = self.firstMatch(for: String.groupHeaderFooterTitlePattern) else { return nil }
 
         guard let firstTail = self.replaceFirstMatch(for: String.groupHeaderFooterTitlePattern, withString: ""),
-              let firstPercentageString = firstTail.firstMatch(for: String.matchingPercentagePattern),
+              let firstPercentageString = firstTail.firstMatch(for: String.percentagePattern),
               let firstPercentage = firstPercentageString.percentageStringToDouble() else {
             return .header(title, nil, nil)
         }
 
-        let secondtail = firstTail.replaceFirstMatch(for: String.matchingPercentagePattern,
+        let secondtail = firstTail.replaceFirstMatch(for: String.percentagePattern,
                                                      withString: "")
-        guard let secondPercentageString = secondtail?.firstMatch(for: String.matchingPercentagePattern),
+        guard let secondPercentageString = secondtail?.firstMatch(for: String.percentagePattern),
               let secondPercentage = secondPercentageString.percentageStringToDouble() else {
             return .header(title, firstPercentage, nil)
         }
@@ -201,11 +213,11 @@ public extension String {
 
             if line.firstMatch(for: #"Фактический остаток:"#) != nil {
                 // get percentage and remains (replace percentage with "")
-                guard let percentageString = line.firstMatch(for: String.matchingPercentagePattern),
+                guard let percentageString = line.firstMatch(for: String.percentagePattern),
                       let percentage = percentageString.percentageStringToDouble()
                 else { return .error }
 
-                let remains = line.replaceMatches(for: String.matchingPercentagePattern, withString: "")
+                let remains = line.replaceMatches(for: String.percentagePattern, withString: "")
                 // get number
                 if let number = remains.getNumberNoRemains() {
                     return .balance("Фактический остаток", number, percentage)

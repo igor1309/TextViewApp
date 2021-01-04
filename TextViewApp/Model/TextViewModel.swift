@@ -121,8 +121,11 @@ final class TextViewModel: ObservableObject {
             .replaceMatches(for: "Итого-",
                             withString: "Итого ")
             // remove optionality from rubli-kopeiki making rubliKopeikiPattern and kopeikiPatterm simpler
-            .replaceMatches(for: #"(\d{1,3}(?:\.\d{3})*) *р *(?:(\d\d?) *к\.?)?"#,
+            .replaceMatches(for: #"(\d{1,3}(?:\.\d{3})*) *р *(?:(\d\d?) *к\.?)"#,
                             withString: #"$1р $2к"#)
+            // rubli without kopeiki -> just number
+            .replaceMatches(for: #"(\d{1,3}(?:\.\d{3})*) *р(?= [^\dк)])"#,
+                            withString: #"$1"#)
             // fix no space after dot after line number
             .replaceMatches(for: #"(?m)(^\d+.)([А-Я])"#, withString: #"$1 $2"#)
 

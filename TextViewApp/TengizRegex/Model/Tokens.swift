@@ -8,6 +8,7 @@
 import Foundation
 
 public enum Tokens {
+
     public enum HeaderToken: Hashable {
         case company(String)
         case month(String)
