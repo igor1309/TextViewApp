@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A17101425A32DA0002877A4 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17100D25A32DA0002877A4 /* Tokens.swift */; };
+		2A17101525A32DA0002877A4 /* linesTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17100F25A32DA0002877A4 /* linesTokens.swift */; };
+		2A17101625A32DA0002877A4 /* Tokenize String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */; };
+		2A17101725A32DA0002877A4 /* Regex String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101225A32DA0002877A4 /* Regex String+Ext.swift */; };
+		2A17101825A32DA0002877A4 /* Conversion String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */; };
 		2A606115259B1A8B00BC97C8 /* TokenizedReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */; };
 		2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */; };
 		2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */; };
@@ -31,16 +36,6 @@
 		2AF21ABC25946F4E0057A5CD /* TokenizedReportFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21ABB25946F4E0057A5CD /* TokenizedReportFooterView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2A170FA825A329AE002877A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A170F9925A329AE002877A4 /* TengizRegex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A170F6B25A3271A002877A4;
-			remoteInfo = TengizRegex;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		2A170F2425A322B5002877A4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -55,7 +50,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2A170F9925A329AE002877A4 /* TengizRegex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TengizRegex.xcodeproj; sourceTree = "<group>"; };
+		2A17100D25A32DA0002877A4 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		2A17100F25A32DA0002877A4 /* linesTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = linesTokens.swift; sourceTree = "<group>"; };
+		2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tokenize String+Ext.swift"; sourceTree = "<group>"; };
+		2A17101225A32DA0002877A4 /* Regex String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Regex String+Ext.swift"; sourceTree = "<group>"; };
+		2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversion String+Ext.swift"; sourceTree = "<group>"; };
 		2A17F38C259A2BB3002F44F4 /* Ideas README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Ideas README.md"; sourceTree = "<group>"; };
 		2A17F38D259A2C51002F44F4 /* Regex README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Regex README.md"; sourceTree = "<group>"; };
 		2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportViewModel.swift; sourceTree = "<group>"; };
@@ -96,20 +95,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A170F9825A329AE002877A4 /* TengizRegex */ = {
+		2A17100B25A32D7C002877A4 /* TengizRegex */ = {
 			isa = PBXGroup;
 			children = (
-				2A170F9925A329AE002877A4 /* TengizRegex.xcodeproj */,
+				2A17100E25A32DA0002877A4 /* Data */,
+				2A17100C25A32DA0002877A4 /* Model */,
+				2A17101025A32DA0002877A4 /* String Extensions */,
 			);
 			path = TengizRegex;
 			sourceTree = "<group>";
 		};
-		2A170F9A25A329AE002877A4 /* Products */ = {
+		2A17100C25A32DA0002877A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A170FA925A329AE002877A4 /* TengizRegex.framework */,
+				2A17100D25A32DA0002877A4 /* Tokens.swift */,
 			);
-			name = Products;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2A17100E25A32DA0002877A4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2A17100F25A32DA0002877A4 /* linesTokens.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		2A17101025A32DA0002877A4 /* String Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */,
+				2A17101225A32DA0002877A4 /* Regex String+Ext.swift */,
+				2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */,
+			);
+			path = "String Extensions";
 			sourceTree = "<group>";
 		};
 		2AC4D0F9259C4C2100EE0A6F /* Readme */ = {
@@ -152,7 +171,6 @@
 		2AF21A812593CF020057A5CD = {
 			isa = PBXGroup;
 			children = (
-				2A170F9825A329AE002877A4 /* TengizRegex */,
 				2AF21A8C2593CF020057A5CD /* TextViewApp */,
 				2AF21A8B2593CF020057A5CD /* Products */,
 			);
@@ -179,6 +197,7 @@
 				2AC4D0F9259C4C2100EE0A6F /* Readme */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
 				2AE08B8E25957B54009DB6FC /* View+Ext.swift */,
+				2A17100B25A32D7C002877A4 /* TengizRegex */,
 				2AF21A912593CF030057A5CD /* Assets.xcassets */,
 				2AF21A962593CF030057A5CD /* Info.plist */,
 				2AF21A932593CF030057A5CD /* Preview Content */,
@@ -240,28 +259,12 @@
 			mainGroup = 2AF21A812593CF020057A5CD;
 			productRefGroup = 2AF21A8B2593CF020057A5CD /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 2A170F9A25A329AE002877A4 /* Products */;
-					ProjectRef = 2A170F9925A329AE002877A4 /* TengizRegex.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				2AF21A892593CF020057A5CD /* TextViewApp */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		2A170FA925A329AE002877A4 /* TengizRegex.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TengizRegex.framework;
-			remoteRef = 2A170FA825A329AE002877A4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2AF21A882593CF020057A5CD /* Resources */ = {
@@ -280,12 +283,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A17101625A32DA0002877A4 /* Tokenize String+Ext.swift in Sources */,
 				2AF21ABC25946F4E0057A5CD /* TokenizedReportFooterView.swift in Sources */,
 				2AF21AB625946EA50057A5CD /* TokenizedReportHeaderView.swift in Sources */,
 				2AE08BDF2599D783009DB6FC /* TokenizedReportView.swift in Sources */,
 				2AE08BE22599E008009DB6FC /* TokenizedReportHeaderViewRows.swift in Sources */,
 				2AF21A9E2593CF2D0057A5CD /* TextView.swift in Sources */,
 				2A60611E259B1AD700BC97C8 /* TokenizedReportFooterModel.swift in Sources */,
+				2A17101725A32DA0002877A4 /* Regex String+Ext.swift in Sources */,
 				2AC4D101259C526400EE0A6F /* Sample Data.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
 				2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */,
@@ -293,6 +298,7 @@
 				2AF21AB325946E690057A5CD /* ReportStructureView.swift in Sources */,
 				2AE08BE52599E07D009DB6FC /* TokenizedReportFooterViewRows.swift in Sources */,
 				2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */,
+				2A17101525A32DA0002877A4 /* linesTokens.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
 				2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */,
 				2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */,
@@ -300,6 +306,8 @@
 				2AE08BE82599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift in Sources */,
 				2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */,
 				2A606115259B1A8B00BC97C8 /* TokenizedReportViewModel.swift in Sources */,
+				2A17101825A32DA0002877A4 /* Conversion String+Ext.swift in Sources */,
+				2A17101425A32DA0002877A4 /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

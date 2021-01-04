@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import TengizRegex
 
 struct TokenizedReportHeaderModel {
 

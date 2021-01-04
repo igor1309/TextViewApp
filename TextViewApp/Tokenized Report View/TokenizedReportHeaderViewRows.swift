@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import TengizRegex
 
 struct TokenizedReportHeaderViewRows: View {
     @ObservedObject var model: TokenizedReportViewModel

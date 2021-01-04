@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import TengizRegex
 
 #warning("lots of partially repeating code below, see TokenizedReportGroupView")
 struct TokenizedReportGroupSectionView: View {
