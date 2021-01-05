@@ -98,7 +98,7 @@
 		2A17100B25A32D7C002877A4 /* TengizRegex */ = {
 			isa = PBXGroup;
 			children = (
-				2A17100E25A32DA0002877A4 /* Data */,
+				2A17100E25A32DA0002877A4 /* Test Data */,
 				2A17100C25A32DA0002877A4 /* Model */,
 				2A17101025A32DA0002877A4 /* String Extensions */,
 			);
@@ -113,12 +113,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2A17100E25A32DA0002877A4 /* Data */ = {
+		2A17100E25A32DA0002877A4 /* Test Data */ = {
 			isa = PBXGroup;
 			children = (
 				2A17100F25A32DA0002877A4 /* linesTokens.swift */,
 			);
-			path = Data;
+			path = "Test Data";
 			sourceTree = "<group>";
 		};
 		2A17101025A32DA0002877A4 /* String Extensions */ = {
