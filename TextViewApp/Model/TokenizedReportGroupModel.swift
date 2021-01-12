@@ -1,5 +1,5 @@
 //
-//  TokenizedReportGroupModel.swift
+//  TokenizedReportBodyModel.swift
 //  TextViewApp
 //
 //  Created by Igor Malyarov on 29.12.2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TokenizedReportGroupModel: Hashable {
+struct TokenizedReportBodyModel: Hashable {
 
     var groupHeaderString: String = ""
     var groupHeader: Tokens.GroupToken = .empty
@@ -41,8 +41,8 @@ struct TokenizedReportGroupModel: Hashable {
     init(groupString: String) {
         self.groupString = groupString
 
-        self.listWithNumbers = groupString.listMatches(for: String.itemFullLineWithDigitsPattern)
-        self.items = listWithNumbers.compactMap { $0.transformLineToItem() }
+        self.listWithNumbers = groupString.listMatches(for: String.itemFullLineWithDigitsPattern + #"|"# + String.itemCorrectionLine)
+        self.items = listWithNumbers.compactMap { $0.transformLineToGroupItem() }
 
         let components = groupString.components(separatedBy: "\n")
         self.groupHeaderString = components.first ?? "header error"

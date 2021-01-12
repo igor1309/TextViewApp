@@ -32,3 +32,5 @@ public enum Tokens {
     }
 
 }
+
+extension Tokens.HeaderToken: Equatable {}

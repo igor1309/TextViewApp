@@ -12,16 +12,34 @@
 		2A17101625A32DA0002877A4 /* Tokenize String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */; };
 		2A17101725A32DA0002877A4 /* Regex String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101225A32DA0002877A4 /* Regex String+Ext.swift */; };
 		2A17101825A32DA0002877A4 /* Conversion String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */; };
+		2A31CA3525A4A3B50005D6EA /* TextViewAppUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A31CA3425A4A3B50005D6EA /* TextViewAppUnitTests.swift */; };
+		2A31CA4425A4A7750005D6EA /* Саперави АМ 2020-06.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA3E25A4A7740005D6EA /* Саперави АМ 2020-06.txt */; };
+		2A31CA4525A4A7750005D6EA /* Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA3F25A4A7740005D6EA /* Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt */; };
+		2A31CA4625A4A7750005D6EA /* Саперави октябрь.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA4025A4A7740005D6EA /* Саперави октябрь.txt */; };
+		2A31CA4725A4A7750005D6EA /* Саперави АМ 2020-07.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA4125A4A7740005D6EA /* Саперави АМ 2020-07.txt */; };
+		2A31CA4825A4A7750005D6EA /* Саперави АМ ноябрь 2020 .txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA4225A4A7740005D6EA /* Саперави АМ ноябрь 2020 .txt */; };
+		2A31CA4925A4A7750005D6EA /* Саперави АМ сентябрь 2020 .txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A31CA4325A4A7750005D6EA /* Саперави АМ сентябрь 2020 .txt */; };
+		2A31CA5125A4AACC0005D6EA /* ReportContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7AC7FF25A429AB00826E53 /* ReportContent.swift */; };
+		2A487F2525A5ED95004C81DD /* sameAs+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A487F2425A5ED95004C81DD /* sameAs+Ext.swift */; };
 		2A606115259B1A8B00BC97C8 /* TokenizedReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */; };
 		2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */; };
 		2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */; };
 		2A60611E259B1AD700BC97C8 /* TokenizedReportFooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A60611D259B1AD700BC97C8 /* TokenizedReportFooterModel.swift */; };
+		2A7AC7FC25A41CF200826E53 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7AC7FB25A41CF200826E53 /* String+Ext.swift */; };
+		2A7AC7FE25A4297900826E53 /* NSAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7AC7FD25A4297900826E53 /* NSAttributedString+Ext.swift */; };
+		2A7AC80025A429AB00826E53 /* ReportContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7AC7FF25A429AB00826E53 /* ReportContent.swift */; };
 		2AC4D101259C526400EE0A6F /* Sample Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC4D100259C526400EE0A6F /* Sample Data.swift */; };
 		2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08B8E25957B54009DB6FC /* View+Ext.swift */; };
 		2AE08BDF2599D783009DB6FC /* TokenizedReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */; };
 		2AE08BE22599E008009DB6FC /* TokenizedReportHeaderViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE12599E008009DB6FC /* TokenizedReportHeaderViewRows.swift */; };
 		2AE08BE52599E07D009DB6FC /* TokenizedReportFooterViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE42599E07D009DB6FC /* TokenizedReportFooterViewRows.swift */; };
 		2AE08BE82599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE08BE72599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift */; };
+		2AECB9D125A4AFD500F78DDF /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7AC7FB25A41CF200826E53 /* String+Ext.swift */; };
+		2AECB9D325A4B07200F78DDF /* Tokenize String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */; };
+		2AECB9D525A4B07F00F78DDF /* Regex String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101225A32DA0002877A4 /* Regex String+Ext.swift */; };
+		2AECB9D725A4B08900F78DDF /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17100D25A32DA0002877A4 /* Tokens.swift */; };
+		2AECB9D825A4B08900F78DDF /* Conversion String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */; };
+		2AECB9DA25A4BD4D00F78DDF /* linesTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17100F25A32DA0002877A4 /* linesTokens.swift */; };
 		2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8D2593CF020057A5CD /* TextViewAppApp.swift */; };
 		2AF21A902593CF020057A5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21A8F2593CF020057A5CD /* ContentView.swift */; };
 		2AF21A922593CF030057A5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF21A912593CF030057A5CD /* Assets.xcassets */; };
@@ -35,6 +53,16 @@
 		2AF21AB925946EE10057A5CD /* TokenizedReportGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21AB825946EE10057A5CD /* TokenizedReportGroupView.swift */; };
 		2AF21ABC25946F4E0057A5CD /* TokenizedReportFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF21ABB25946F4E0057A5CD /* TokenizedReportFooterView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2A31CA3725A4A3B50005D6EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AF21A822593CF020057A5CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AF21A892593CF020057A5CD;
+			remoteInfo = TextViewApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2A170F2425A322B5002877A4 /* Embed Frameworks */ = {
@@ -57,10 +85,23 @@
 		2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversion String+Ext.swift"; sourceTree = "<group>"; };
 		2A17F38C259A2BB3002F44F4 /* Ideas README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Ideas README.md"; sourceTree = "<group>"; };
 		2A17F38D259A2C51002F44F4 /* Regex README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Regex README.md"; sourceTree = "<group>"; };
+		2A31CA3225A4A3B50005D6EA /* TextViewAppUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextViewAppUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A31CA3425A4A3B50005D6EA /* TextViewAppUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewAppUnitTests.swift; sourceTree = "<group>"; };
+		2A31CA3625A4A3B50005D6EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A31CA3E25A4A7740005D6EA /* Саперави АМ 2020-06.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави АМ 2020-06.txt"; sourceTree = "<group>"; };
+		2A31CA3F25A4A7740005D6EA /* Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt"; sourceTree = "<group>"; };
+		2A31CA4025A4A7740005D6EA /* Саперави октябрь.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави октябрь.txt"; sourceTree = "<group>"; };
+		2A31CA4125A4A7740005D6EA /* Саперави АМ 2020-07.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави АМ 2020-07.txt"; sourceTree = "<group>"; };
+		2A31CA4225A4A7740005D6EA /* Саперави АМ ноябрь 2020 .txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави АМ ноябрь 2020 .txt"; sourceTree = "<group>"; };
+		2A31CA4325A4A7750005D6EA /* Саперави АМ сентябрь 2020 .txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Саперави АМ сентябрь 2020 .txt"; sourceTree = "<group>"; };
+		2A487F2425A5ED95004C81DD /* sameAs+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "sameAs+Ext.swift"; sourceTree = "<group>"; };
 		2A606114259B1A8B00BC97C8 /* TokenizedReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportViewModel.swift; sourceTree = "<group>"; };
 		2A606117259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportHeaderModel.swift; sourceTree = "<group>"; };
 		2A60611A259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportGroupModel.swift; sourceTree = "<group>"; };
 		2A60611D259B1AD700BC97C8 /* TokenizedReportFooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportFooterModel.swift; sourceTree = "<group>"; };
+		2A7AC7FB25A41CF200826E53 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		2A7AC7FD25A4297900826E53 /* NSAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Ext.swift"; sourceTree = "<group>"; };
+		2A7AC7FF25A429AB00826E53 /* ReportContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportContent.swift; sourceTree = "<group>"; };
 		2AC4D100259C526400EE0A6F /* Sample Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sample Data.swift"; sourceTree = "<group>"; };
 		2AE08B8E25957B54009DB6FC /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		2AE08BDE2599D783009DB6FC /* TokenizedReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizedReportView.swift; sourceTree = "<group>"; };
@@ -85,6 +126,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2A31CA2F25A4A3B50005D6EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2AF21A872593CF020057A5CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17100D25A32DA0002877A4 /* Tokens.swift */,
+				2A7AC7FF25A429AB00826E53 /* ReportContent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -126,9 +175,34 @@
 			children = (
 				2A17101325A32DA0002877A4 /* Conversion String+Ext.swift */,
 				2A17101225A32DA0002877A4 /* Regex String+Ext.swift */,
+				2A7AC7FB25A41CF200826E53 /* String+Ext.swift */,
+				2A487F2425A5ED95004C81DD /* sameAs+Ext.swift */,
 				2A17101125A32DA0002877A4 /* Tokenize String+Ext.swift */,
 			);
 			path = "String Extensions";
+			sourceTree = "<group>";
+		};
+		2A31CA3325A4A3B50005D6EA /* TextViewAppUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				2A31CA3425A4A3B50005D6EA /* TextViewAppUnitTests.swift */,
+				2A31CA3D25A4A75B0005D6EA /* Text Reports */,
+				2A31CA3625A4A3B50005D6EA /* Info.plist */,
+			);
+			path = TextViewAppUnitTests;
+			sourceTree = "<group>";
+		};
+		2A31CA3D25A4A75B0005D6EA /* Text Reports */ = {
+			isa = PBXGroup;
+			children = (
+				2A31CA3E25A4A7740005D6EA /* Саперави АМ 2020-06.txt */,
+				2A31CA4125A4A7740005D6EA /* Саперави АМ 2020-07.txt */,
+				2A31CA3F25A4A7740005D6EA /* Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt */,
+				2A31CA4325A4A7750005D6EA /* Саперави АМ сентябрь 2020 .txt */,
+				2A31CA4025A4A7740005D6EA /* Саперави октябрь.txt */,
+				2A31CA4225A4A7740005D6EA /* Саперави АМ ноябрь 2020 .txt */,
+			);
+			path = "Text Reports";
 			sourceTree = "<group>";
 		};
 		2AC4D0F9259C4C2100EE0A6F /* Readme */ = {
@@ -172,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF21A8C2593CF020057A5CD /* TextViewApp */,
+				2A31CA3325A4A3B50005D6EA /* TextViewAppUnitTests */,
 				2AF21A8B2593CF020057A5CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -180,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF21A8A2593CF020057A5CD /* TextViewApp.app */,
+				2A31CA3225A4A3B50005D6EA /* TextViewAppUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +273,7 @@
 				2AC4D0F9259C4C2100EE0A6F /* Readme */,
 				2AF21AA62593D61A0057A5CD /* Ory.swift */,
 				2AE08B8E25957B54009DB6FC /* View+Ext.swift */,
+				2A7AC7FD25A4297900826E53 /* NSAttributedString+Ext.swift */,
 				2A17100B25A32D7C002877A4 /* TengizRegex */,
 				2AF21A912593CF030057A5CD /* Assets.xcassets */,
 				2AF21A962593CF030057A5CD /* Info.plist */,
@@ -216,6 +293,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2A31CA3125A4A3B50005D6EA /* TextViewAppUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A31CA3B25A4A3B50005D6EA /* Build configuration list for PBXNativeTarget "TextViewAppUnitTests" */;
+			buildPhases = (
+				2A31CA2E25A4A3B50005D6EA /* Sources */,
+				2A31CA2F25A4A3B50005D6EA /* Frameworks */,
+				2A31CA3025A4A3B50005D6EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A31CA3825A4A3B50005D6EA /* PBXTargetDependency */,
+			);
+			name = TextViewAppUnitTests;
+			productName = TextViewAppUnitTests;
+			productReference = 2A31CA3225A4A3B50005D6EA /* TextViewAppUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2AF21A892593CF020057A5CD /* TextViewApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2AF21A992593CF030057A5CD /* Build configuration list for PBXNativeTarget "TextViewApp" */;
@@ -243,6 +338,10 @@
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					2A31CA3125A4A3B50005D6EA = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 2AF21A892593CF020057A5CD;
+					};
 					2AF21A892593CF020057A5CD = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -262,11 +361,25 @@
 			projectRoot = "";
 			targets = (
 				2AF21A892593CF020057A5CD /* TextViewApp */,
+				2A31CA3125A4A3B50005D6EA /* TextViewAppUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2A31CA3025A4A3B50005D6EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A31CA4725A4A7750005D6EA /* Саперави АМ 2020-07.txt in Resources */,
+				2A31CA4525A4A7750005D6EA /* Саперави АМ август 2020 ИСПРАВЛЕННЫЙ.txt in Resources */,
+				2A31CA4925A4A7750005D6EA /* Саперави АМ сентябрь 2020 .txt in Resources */,
+				2A31CA4425A4A7750005D6EA /* Саперави АМ 2020-06.txt in Resources */,
+				2A31CA4825A4A7750005D6EA /* Саперави АМ ноябрь 2020 .txt in Resources */,
+				2A31CA4625A4A7750005D6EA /* Саперави октябрь.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2AF21A882593CF020057A5CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,6 +392,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2A31CA2E25A4A3B50005D6EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AECB9D825A4B08900F78DDF /* Conversion String+Ext.swift in Sources */,
+				2AECB9D125A4AFD500F78DDF /* String+Ext.swift in Sources */,
+				2AECB9D525A4B07F00F78DDF /* Regex String+Ext.swift in Sources */,
+				2AECB9DA25A4BD4D00F78DDF /* linesTokens.swift in Sources */,
+				2A31CA5125A4AACC0005D6EA /* ReportContent.swift in Sources */,
+				2A31CA3525A4A3B50005D6EA /* TextViewAppUnitTests.swift in Sources */,
+				2AECB9D325A4B07200F78DDF /* Tokenize String+Ext.swift in Sources */,
+				2AECB9D725A4B08900F78DDF /* Tokens.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2AF21A862593CF020057A5CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,6 +420,7 @@
 				2A60611E259B1AD700BC97C8 /* TokenizedReportFooterModel.swift in Sources */,
 				2A17101725A32DA0002877A4 /* Regex String+Ext.swift in Sources */,
 				2AC4D101259C526400EE0A6F /* Sample Data.swift in Sources */,
+				2A7AC7FE25A4297900826E53 /* NSAttributedString+Ext.swift in Sources */,
 				2AF21A902593CF020057A5CD /* ContentView.swift in Sources */,
 				2AF21AAA2593D6210057A5CD /* Ory.swift in Sources */,
 				2AF21AB925946EE10057A5CD /* TokenizedReportGroupView.swift in Sources */,
@@ -299,9 +428,12 @@
 				2AE08BE52599E07D009DB6FC /* TokenizedReportFooterViewRows.swift in Sources */,
 				2A60611B259B1ABE00BC97C8 /* TokenizedReportGroupModel.swift in Sources */,
 				2A17101525A32DA0002877A4 /* linesTokens.swift in Sources */,
+				2A7AC7FC25A41CF200826E53 /* String+Ext.swift in Sources */,
 				2AF21A8E2593CF020057A5CD /* TextViewAppApp.swift in Sources */,
+				2A487F2525A5ED95004C81DD /* sameAs+Ext.swift in Sources */,
 				2AF21AA12593D4310057A5CD /* TextViewModel.swift in Sources */,
 				2AE08B8F25957B54009DB6FC /* View+Ext.swift in Sources */,
+				2A7AC80025A429AB00826E53 /* ReportContent.swift in Sources */,
 				2AF21AA42593D4690057A5CD /* ReportImportView.swift in Sources */,
 				2AE08BE82599E5AE009DB6FC /* TokenizedReportGroupSectionView.swift in Sources */,
 				2A606118259B1AA900BC97C8 /* TokenizedReportHeaderModel.swift in Sources */,
@@ -313,7 +445,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2A31CA3825A4A3B50005D6EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2AF21A892593CF020057A5CD /* TextViewApp */;
+			targetProxy = 2A31CA3725A4A3B50005D6EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		2A31CA3925A4A3B50005D6EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VRVJ9YNRQU;
+				INFOPLIST_FILE = TextViewAppUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.TextViewAppUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TextViewApp.app/TextViewApp";
+			};
+			name = Debug;
+		};
+		2A31CA3A25A4A3B50005D6EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VRVJ9YNRQU;
+				INFOPLIST_FILE = TextViewAppUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.TextViewAppUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TextViewApp.app/TextViewApp";
+			};
+			name = Release;
+		};
 		2AF21A972593CF030057A5CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -477,6 +657,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2A31CA3B25A4A3B50005D6EA /* Build configuration list for PBXNativeTarget "TextViewAppUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A31CA3925A4A3B50005D6EA /* Debug */,
+				2A31CA3A25A4A3B50005D6EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2AF21A852593CF020057A5CD /* Build configuration list for PBXProject "TextViewApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

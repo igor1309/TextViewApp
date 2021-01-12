@@ -8,32 +8,32 @@
 import Foundation
 
 extension TokenizedReportViewModel {
-    static var sample = TokenizedReportViewModel(reportContent: TextViewModel.ReportContent.sample)
+    static var sample = TokenizedReportViewModel(reportContent: ReportContent.sample)
 
-    static var sample2 = TokenizedReportViewModel(reportContent: TextViewModel.ReportContent.sample2)
+    static var sample2 = TokenizedReportViewModel(reportContent: ReportContent.sample2)
 }
 
-extension TextViewModel.ReportContent {
-    static var sample: TextViewModel.ReportContent = {
+extension ReportContent {
+    static var sample: ReportContent = {
         let headerString = TokenizedReportHeaderModel.sampleString
 
-        let groups = [TokenizedReportGroupModel.sampleString,
-                      TokenizedReportGroupModel.sampleString2]
+        let groups = [TokenizedReportBodyModel.sampleString,
+                      TokenizedReportBodyModel.sampleString2]
 
         let footerString = TokenizedReportFooterModel.sampleString
 
-        return TextViewModel.ReportContent(headerString: headerString, groups: groups, footerString: footerString)
+        return ReportContent(headerString: headerString, groups: groups, footerString: footerString)
     }()
 
-    static var sample2: TextViewModel.ReportContent = {
+    static var sample2: ReportContent = {
         let headerString = TokenizedReportHeaderModel.sampleString
 
-        let groups = [TokenizedReportGroupModel.sampleString,
-                      TokenizedReportGroupModel.sampleString2]
+        let groups = [TokenizedReportBodyModel.sampleString,
+                      TokenizedReportBodyModel.sampleString2]
 
         let footerString = TokenizedReportFooterModel.sampleString2
 
-        return TextViewModel.ReportContent(headerString: headerString, groups: groups, footerString: footerString)
+        return ReportContent(headerString: headerString, groups: groups, footerString: footerString)
     }()
 }
 
@@ -47,8 +47,8 @@ extension TokenizedReportHeaderModel {
             """
 }
 
-extension TokenizedReportGroupModel {
-    static var sample = TokenizedReportGroupModel(groupString: sampleString)
+extension TokenizedReportBodyModel {
+    static var sample = TokenizedReportBodyModel(groupString: sampleString)
     static var sampleString = """
             Прочие расходы:        15%    16.5%
             1.Налоговые платежи     26.964
@@ -67,7 +67,7 @@ extension TokenizedReportGroupModel {
             ИТОГ:    402.520
             """
 
-    static var sample2 = TokenizedReportGroupModel(groupString: sampleString2)
+    static var sample2 = TokenizedReportBodyModel(groupString: sampleString2)
     static var sampleString2 = """
             Прочие расходы:        15%    16.5%
             1.Налоговые платежи     26.964

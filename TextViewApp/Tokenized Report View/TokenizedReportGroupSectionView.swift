@@ -16,7 +16,7 @@ struct TokenizedReportGroupSectionView: View {
     //        _model = StateObject(wrappedValue: TokenizedReportGroupViewModel(groupString: groupString))
     //    }
 
-    let model: TokenizedReportGroupModel
+    let model: TokenizedReportBodyModel
 
     var body: some View {
         Section(
@@ -137,7 +137,7 @@ struct TokenizedReportGroupSectionView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 List {
-                    TokenizedReportGroupSectionView(model: TokenizedReportGroupModel.sample)
+                    TokenizedReportGroupSectionView(model: TokenizedReportBodyModel.sample)
                 }
                 .font(.subheadline)
                 .listStyle(GroupedListStyle())
@@ -147,7 +147,7 @@ struct TokenizedReportGroupSectionView_Previews: PreviewProvider {
 
             NavigationView {
                 List {
-                    TokenizedReportGroupSectionView(model: TokenizedReportGroupModel.sample2)
+                    TokenizedReportGroupSectionView(model: TokenizedReportBodyModel.sample2)
                 }
                 .font(.subheadline)
                 .listStyle(GroupedListStyle())

@@ -16,7 +16,7 @@ struct ReportStructureView: View {
     init(model: TextViewModel) {
         self.model = model
 
-        let reportContent = model.reportContent ?? TextViewModel.ReportContent.empty
+        let reportContent = model.reportContent ?? ReportContent.empty
 
         let tokenizedReportViewModel = TokenizedReportViewModel(reportContent: reportContent)
         _tokenizedReportViewModel = StateObject(wrappedValue: tokenizedReportViewModel)
@@ -25,8 +25,8 @@ struct ReportStructureView: View {
     var body: some View {
         if let reportContent = model.reportContent {
             List {
-                if model.hasError {
-                    Text(model.errorMessage)
+                if reportContent.hasError {
+                    Text(reportContent.errorMessage)
                         .font(.headline)
                         .foregroundColor(Color(UIColor.systemRed))
                 }

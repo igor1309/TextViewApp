@@ -40,8 +40,9 @@ struct ReportImportView: View {
 
     @ViewBuilder
     private func errorMessageView() -> some View {
-        if model.hasError {
-            Text(model.errorMessage)
+        if let reportContent = model.reportContent,
+           reportContent.hasError {
+            Text(reportContent.errorMessage)
                 .font(.footnote)
                 .foregroundColor(Color(UIColor.systemRed))
                 .padding(.horizontal)
@@ -57,7 +58,7 @@ struct ReportImportView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if let reportContent = model.reportContent {
-            TokenizedReportView(reportContent: reportContent, tokenizationErrorMessage: model.errorMessage)
+            TokenizedReportView(reportContent: reportContent, tokenizationErrorMessage: reportContent.errorMessage)
         } else {
             ReportStructureView(model: model)
         }

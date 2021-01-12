@@ -22,7 +22,7 @@ public extension String {
     static let groupPattern = #"(?m)"# + groupHeaderPattern + #"("# + itemLine + #"|("# + itemCorrectionLine + #"\n))+ИТОГ:.*"#
     /// matching lines starting like "3. Электричество" or "12.Интернет"
     static let itemTitlePattern = #"^[1-9]\d?\.[^\d\n]+"#
-    static let itemFullLineWithDigitsPattern = #"(?m)"# + itemTitlePattern + #"\d+.*"# + #"|"# + String.itemCorrectionLine
+    static let itemFullLineWithDigitsPattern = #"(?m)"# + itemTitlePattern + #"\d+.*"#
     /// matching lines like `"4.Банковская комиссия 1.6% за эквайринг    "` (mind whitespace)
     static let itemTitleWithPercentagePattern =  itemTitlePattern + percentagePattern + #"[\D]*"#
     // static let itemTitleWithPercentagePattern =  #"^[1-9]\d?\.[\D]*\d+(\.\d+)?%[\D]*"#
@@ -34,45 +34,43 @@ public extension String {
     static let groupHeaderFooterTitlePattern = #"^[А-Яа-я][А-Яа-я ]+(?=:)"#
     static let percentagePattern = #"\d+(\.\d+)?%"#
 
-    // MARK: - Tokenize
+    // MARK: - Tokenize Report Header
 
     func tokenizeReportHeader() -> [Tokens.HeaderToken] {
 
-        let headerItemCompanyPattern = #"(?<=Название объекта:\s).*"#
-        let headerItemMonthPattern = #"[А-Яа-я]+\d{4}"#
-        let headerItemPatterns = #"[А-Яа-я ]+:[А-Яа-я ]*\d+(\.\d{3})*"#
-        let headerItemTitlePatterns = #"[А-Яа-я ]+:"#
+        let headerCompanyPattern = #"(?<=Название объекта:\s).*"#
+        let headerMonthPattern = #"[А-Яа-я]+\d{4}"#
+        let headerItemTitlePattern = #"[А-Яа-я ]+(?=:)"#
+        let headerItemPattern = headerItemTitlePattern + #":[А-Яа-я ]*\d+(\.\d{3})*"#
 
         let company: Tokens.HeaderToken? = {
-            guard let companyString = self.firstMatch(for: headerItemCompanyPattern) else { return nil }
+            guard let companyString = self.firstMatch(for: headerCompanyPattern) else { return nil }
             return .company(companyString)
         }()
 
         let month: Tokens.HeaderToken? = {
-            guard let monthString = self.firstMatch(for: headerItemMonthPattern) else { return nil }
+            guard let monthString = self.firstMatch(for: headerMonthPattern) else { return nil }
             return .month(monthString.trimmingCharacters(in: .whitespaces))
         }()
 
-        let tail: String = self.replaceMatches(for: headerItemMonthPattern, withString: "")
+        let tail: String = self.replaceMatches(for: headerMonthPattern, withString: "")
 
         let headerItems: [Tokens.HeaderToken] = tail
-            .listMatches(for: headerItemPatterns)
+            .listMatches(for: headerItemPattern)
             .compactMap {
-                guard let title = $0.firstMatch(for: headerItemTitlePatterns) else { return nil }
-                let cleanTitle = (title.last == ":" ? String(title.dropLast()) : title)
-                    .trimmingCharacters(in: .whitespaces)
-
-                let tail = $0.replaceMatches(for: headerItemTitlePatterns,
-                                             withString: "")
-                guard let number = tail.extractNumber() else { return nil }
+                guard let title = $0.firstMatch(for: headerItemTitlePattern) else { return nil }
+                let cleanTitle = title.trimmingCharacters(in: .whitespaces)
+                guard let number = $0.extractNumber() else { return nil }
                 return .headerItem(cleanTitle, number)
             }
 
         return [company, month].compactMap { $0 } + headerItems
     }
 
+    // MARK: - Tokenize Report Group
+
     // swiftlint:disable:next function_body_length
-    func transformLineToItem() -> Tokens.GroupToken? {
+    func transformLineToGroupItem() -> Tokens.GroupToken? {
         var title: String = ""
         var remains: String = ""
         var number: Double?
@@ -191,6 +189,8 @@ public extension String {
         return .footer(title, number)
     }
 
+    // MARK: - Tokenize Report Footer
+
     func tokenizeReportFooter() -> [Tokens.FooterToken] {
         let lines = self.components(separatedBy: "\n").filter { !$0.isEmpty }
 
@@ -198,7 +198,7 @@ public extension String {
 
             if line.firstMatch(for: #"ИТОГ:"#) != nil,
                let number = line.getNumberNoRemains() {
-                return .total("ИТОГ:", number)
+                return .total("ИТОГ", number)
             }
 
             if line.firstMatch(for: #"ИТОГ всех расходов за месяц"#) != nil,

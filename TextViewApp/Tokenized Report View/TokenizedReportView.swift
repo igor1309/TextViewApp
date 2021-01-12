@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TokenizedReportView: View {
 
-    let reportContent: TextViewModel.ReportContent
+    let reportContent: ReportContent
     let tokenizationErrorMessage: String
 
     @StateObject private var model: TokenizedReportViewModel
 
-    init(reportContent: TextViewModel.ReportContent, tokenizationErrorMessage: String) {
+    init(reportContent: ReportContent, tokenizationErrorMessage: String) {
         self.reportContent = reportContent
         self.tokenizationErrorMessage = tokenizationErrorMessage
 
@@ -72,10 +72,10 @@ struct TokenizedReportView: View {
 }
 
 struct TokenizedReportView_Previews: PreviewProvider {
-    static let reportContent = TextViewModel.ReportContent(
+    static let reportContent = ReportContent(
         headerString: TokenizedReportHeaderModel.sampleString,
-        groups: [TokenizedReportGroupModel.sampleString,
-                 TokenizedReportGroupModel.sampleString2],
+        groups: [TokenizedReportBodyModel.sampleString,
+                 TokenizedReportBodyModel.sampleString2],
         footerString: TokenizedReportFooterModel.sampleString
     )
 

@@ -13,7 +13,7 @@ public extension String {
     static let itemNumberPattern =   #"\d{1,3}(?:\.\d{3})*"#
     static let rubliKopeikiPattern = #"\d{1,3}(\.\d{3})*р( \d\d?к)?"#
     static let kopeikiPatterm = #"((?<=р )\d\d?(?=к))"#
-    static let minusPattern = #"(?:[М|м]инус\D*)|-"#
+    static let minusPattern = #"(?:[М|м]инус\D*)|-(?=\d)"#
 
     // MARK: - helpers
 
@@ -75,8 +75,7 @@ public extension String {
     }
 
     func extractNumber() -> Double? {
-        let itemNumberPattern = #"\d+(\.\d{3})*"#
-        if let numberString = self.firstMatch(for: itemNumberPattern),
+        if let numberString = self.firstMatch(for: String.itemNumberPattern),
            let double = Double(numberString.replacingOccurrences(of: ".", with: "")) {
             return double
         }

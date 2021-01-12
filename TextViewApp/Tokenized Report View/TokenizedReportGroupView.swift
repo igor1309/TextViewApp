@@ -10,7 +10,7 @@ import Combine
 
 struct TokenizedReportGroupView: View {
 
-    let model: TokenizedReportGroupModel
+    let model: TokenizedReportBodyModel
 
     var body: some View {
         List {
@@ -153,12 +153,12 @@ struct TokenizedReportGroupView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                TokenizedReportGroupView(model: TokenizedReportGroupModel.sample)
+                TokenizedReportGroupView(model: TokenizedReportBodyModel.sample)
             }
             .previewLayout(.fixed(width: 350, height: 1500))
 
             NavigationView {
-                TokenizedReportGroupView(model: TokenizedReportGroupModel.sample2)
+                TokenizedReportGroupView(model: TokenizedReportBodyModel.sample2)
             }
             .previewLayout(.fixed(width: 350, height: 850))
         }

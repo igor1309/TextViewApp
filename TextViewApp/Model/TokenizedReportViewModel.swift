@@ -10,15 +10,15 @@ import SwiftUI
 final class TokenizedReportViewModel: ObservableObject {
 
     @Published var headerModel: TokenizedReportHeaderModel
-    @Published var groupModels: [TokenizedReportGroupModel]
+    @Published var groupModels: [TokenizedReportBodyModel]
     @Published var footerModel: TokenizedReportFooterModel
 
-    init(reportContent: TextViewModel.ReportContent) {
+    init(reportContent: ReportContent) {
         headerModel = TokenizedReportHeaderModel(headerString: reportContent.headerString)
 
         groupModels = reportContent.groups
             .map {
-                TokenizedReportGroupModel(groupString: $0)
+                TokenizedReportBodyModel(groupString: $0)
             }
         footerModel = TokenizedReportFooterModel(footerString: reportContent.footerString)
     }
